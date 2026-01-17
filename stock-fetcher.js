@@ -26,6 +26,38 @@ const stockFetcher = {
   },
 
   /**
+   * 단일 종목 데이터 수집 (현재가 + 일봉 + 주봉) - Phase 2
+   * @param {string} stockCode - 종목코드
+   */
+  async fetchStockWithWeekly(stockCode) {
+    try {
+      const currentPrice = await kisApi.getStockPrice(stockCode);
+      await this.delay(300);
+      const dailyHistory = await kisApi.getStockHistory(stockCode, config.analysis.historyDays);
+      await this.delay(300);
+
+      // 주봉 데이터 (MTF 분석용)
+      let weeklyHistory = [];
+      if (config.mtf?.enabled) {
+        const weeks = config.mtf?.weeklyWeeks || 52;
+        weeklyHistory = await kisApi.getWeeklyHistory(stockCode, weeks);
+      }
+
+      return {
+        code: stockCode,
+        current: currentPrice,
+        history: dailyHistory,          // 일봉 (기존 호환성)
+        dailyHistory: dailyHistory,     // 일봉 (명시적)
+        weeklyHistory: weeklyHistory,   // 주봉 (Phase 2)
+        fetchedAt: new Date().toISOString(),
+      };
+    } catch (error) {
+      console.error(`[Fetcher] 종목 데이터 수집 실패 (${stockCode}):`, error.message);
+      return null;
+    }
+  },
+
+  /**
    * 여러 종목 데이터 수집 (API 호출 제한 고려)
    * @param {Array} stockCodes - 종목코드 배열
    * @param {number} delayMs - 호출 간 지연 시간 (ms)
@@ -47,13 +79,26 @@ const stockFetcher = {
 
   /**
    * watchList 종목 전체 데이터 수집
+   * @param {boolean} includeWeekly - 주봉 데이터 포함 여부 (Phase 2)
    */
-  async fetchWatchList() {
+  async fetchWatchList(includeWeekly = false) {
+    const mtfEnabled = config.mtf?.enabled && includeWeekly;
     console.log(`[Fetcher] watchList ${config.watchList.length}개 종목 데이터 수집 시작...`);
-    const startTime = Date.now();
+    if (mtfEnabled) console.log('[Fetcher] Phase 2: 주봉 데이터 포함');
 
-    const codes = config.watchList.map(s => s.code);
-    const results = await this.fetchMultipleStocks(codes);
+    const startTime = Date.now();
+    const results = [];
+
+    for (const stock of config.watchList) {
+      const data = mtfEnabled
+        ? await this.fetchStockWithWeekly(stock.code)
+        : await this.fetchStock(stock.code);
+
+      if (data) {
+        results.push(data);
+      }
+      await this.delay(500);
+    }
 
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
     console.log(`[Fetcher] 수집 완료: ${results.length}개 종목, ${elapsed}초 소요`);

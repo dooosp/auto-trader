@@ -41,6 +41,43 @@ const config = {
     historyDays: 60,          // 조회할 일봉 수
   },
 
+  // Phase 2: 다중 타임프레임 설정
+  mtf: {
+    enabled: true,            // MTF 분석 활성화
+    weeklyWeeks: 52,          // 주봉 조회 기간 (52주 = 1년)
+    // MTF 매수 허용 신호
+    allowedBuySignals: ['STRONG_BUY', 'BUY'],
+    // MTF 필수 적용 여부 (false면 참고용으로만 사용)
+    strictMode: true,
+  },
+
+  // Phase 2: 시장/섹터 커플링 설정
+  coupling: {
+    enabled: true,            // 커플링 분석 활성화
+    // 매수 차단 시장 상태
+    blockMarketConditions: ['STRONG_BEARISH'],
+    // 매수 경고 시장 상태
+    warnMarketConditions: ['BEARISH'],
+    // 커플링 필수 적용 여부
+    strictMode: false,        // false면 경고만, true면 차단
+    // 캐시 유효 시간 (분)
+    cacheMinutes: 5,
+  },
+
+  // 섹터 매핑 (종목코드 -> 섹터)
+  sectorMap: {
+    '005930': 'TECH',      // 삼성전자
+    '035720': 'TECH',      // 카카오
+    '000270': 'AUTO',      // 기아
+    '105560': 'FINANCE',   // KB금융
+    '055550': 'FINANCE',   // 신한지주
+    '066570': 'TECH',      // LG전자
+    '086790': 'FINANCE',   // 하나금융지주
+    '032830': 'FINANCE',   // 삼성생명
+    '316140': 'FINANCE',   // 우리금융지주
+    '024110': 'FINANCE',   // 기업은행
+  },
+
   // 감시 종목 (10만원 이하 매수 가능한 대형주 10개)
   watchList: [
     { code: '005930', name: '삼성전자' },      // ~5만원대

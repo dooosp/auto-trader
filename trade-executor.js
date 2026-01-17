@@ -3,6 +3,7 @@ const path = require('path');
 const kisApi = require('./kis-api');
 const stockFetcher = require('./stock-fetcher');
 const technicalAnalyzer = require('./technical-analyzer');
+const marketAnalyzer = require('./market-analyzer');
 const config = require('./config');
 
 const tradeExecutor = {
@@ -207,12 +208,13 @@ const tradeExecutor = {
   },
 
   /**
-   * 전체 매매 프로세스 실행
+   * 전체 매매 프로세스 실행 (Phase 2: MTF + 커플링 포함)
    */
   async checkAndTrade() {
     console.log('\n=== 자동매매 프로세스 시작 ===');
     console.log(`시간: ${new Date().toLocaleString('ko-KR')}`);
     console.log(`환경: ${config.kis.useMock ? '모의투자' : '실전투자'}`);
+    console.log(`Phase 2: MTF=${config.mtf?.enabled ? '활성' : '비활성'}, 커플링=${config.coupling?.enabled ? '활성' : '비활성'}`);
 
     // 장 운영 시간 체크 (모의투자는 항상 허용)
     if (!config.kis.useMock && !stockFetcher.isMarketOpen()) {
@@ -224,6 +226,7 @@ const tradeExecutor = {
       buys: [],
       sells: [],
       timestamp: new Date().toISOString(),
+      marketAnalysis: null,
     };
 
     try {
@@ -231,8 +234,37 @@ const tradeExecutor = {
       const portfolio = this.loadPortfolio();
       console.log(`\n[포트폴리오] 보유 종목: ${portfolio.holdings.length}개`);
 
-      // 2. watchList 데이터 수집
-      const stockDataList = await stockFetcher.fetchWatchList();
+      // Phase 2: 시장 지수 분석
+      let marketData = null;
+      let sectorData = null;
+
+      if (config.coupling?.enabled) {
+        console.log('\n[Phase 2: 시장 분석]');
+        marketData = await marketAnalyzer.analyzeMarket();
+        results.marketAnalysis = {
+          condition: marketData.marketCondition,
+          score: marketData.marketScore,
+          recommendation: marketData.recommendation.action,
+        };
+
+        // 시장이 강한 약세면 매수 건너뛰기 경고
+        if (config.coupling?.blockMarketConditions?.includes(marketData.marketCondition)) {
+          console.log(`[Executor] 시장 강한 약세 (${marketData.marketCondition}) - 신규 매수 제한`);
+        }
+      }
+
+      // 2. watchList 데이터 수집 (Phase 2: 주봉 포함)
+      const includeWeekly = config.mtf?.enabled;
+      const stockDataList = await stockFetcher.fetchWatchList(includeWeekly);
+
+      // Phase 2: 섹터 강도 분석
+      if (config.coupling?.enabled) {
+        console.log('\n[Phase 2: 섹터 분석]');
+        sectorData = marketAnalyzer.analyzeSectorStrength(stockDataList);
+        for (const [sector, data] of Object.entries(sectorData)) {
+          console.log(`  - ${data.name}: ${data.strength} (${data.avgChangeRate > 0 ? '+' : ''}${data.avgChangeRate}%)`);
+        }
+      }
 
       // 3. 뉴스 감정 분석
       console.log('\n[뉴스 분석]');
@@ -246,12 +278,20 @@ const tradeExecutor = {
         // 보유 종목 데이터도 수집 (watchList에 없을 수 있음)
         for (const holding of portfolio.holdings) {
           if (!stockDataList.find(s => s.code === holding.code)) {
-            const data = await stockFetcher.fetchStock(holding.code);
+            const data = includeWeekly
+              ? await stockFetcher.fetchStockWithWeekly(holding.code)
+              : await stockFetcher.fetchStock(holding.code);
             if (data) stockDataList.push(data);
           }
         }
 
-        const sellSignals = technicalAnalyzer.checkSellSignals(portfolio.holdings, stockDataList, newsDataList);
+        const sellSignals = technicalAnalyzer.checkSellSignals(
+          portfolio.holdings,
+          stockDataList,
+          newsDataList,
+          marketData,
+          sectorData
+        );
 
         for (const signal of sellSignals) {
           console.log(`  - ${signal.name}: ${signal.signal.reason}`);
@@ -270,30 +310,58 @@ const tradeExecutor = {
 
       // 5. 매수 후보 스캔
       console.log('\n[매수 신호 체크]');
+
+      // Phase 2: 시장 상태에 따른 매수 제한
       const updatedPortfolio = this.loadPortfolio();
-      const buyCandidates = technicalAnalyzer.scanForBuyCandidates(stockDataList, updatedPortfolio.holdings, newsDataList);
+      let skipBuying = false;
 
-      if (buyCandidates.length === 0) {
-        console.log('  매수 조건 충족 종목 없음');
-      } else {
-        // 최대 보유 종목 수까지만 매수
-        const availableSlots = config.trading.maxHoldings - updatedPortfolio.holdings.length;
-        const candidatesToBuy = buyCandidates.slice(0, availableSlots);
-
-        for (const candidate of candidatesToBuy) {
-          console.log(`  - ${candidate.name}: ${candidate.signal.reason}`);
-          const result = await this.executeBuy(
-            candidate.code,
-            candidate.signal.analysis.currentPrice
-          );
-          if (result) {
-            results.buys.push({ ...candidate, result });
-          }
-          await stockFetcher.delay(500);
+      if (config.coupling?.enabled && marketData) {
+        if (config.coupling?.blockMarketConditions?.includes(marketData.marketCondition)) {
+          console.log(`  시장 약세 (${marketData.marketCondition}) - 신규 매수 건너뜀`);
+          skipBuying = true;
         }
       }
 
-      // 5. 일별 수익률 기록
+      if (!skipBuying) {
+        const buyCandidates = technicalAnalyzer.scanForBuyCandidates(
+          stockDataList,
+          updatedPortfolio.holdings,
+          newsDataList,
+          marketData,
+          sectorData
+        );
+
+        if (buyCandidates.length === 0) {
+          console.log('  매수 조건 충족 종목 없음');
+        } else {
+          // 최대 보유 종목 수까지만 매수
+          const availableSlots = config.trading.maxHoldings - updatedPortfolio.holdings.length;
+          const candidatesToBuy = buyCandidates.slice(0, availableSlots);
+
+          for (const candidate of candidatesToBuy) {
+            // Phase 2: MTF/커플링 정보 포함 출력
+            let extraInfo = '';
+            if (candidate.signal.analysis?.mtf) {
+              extraInfo += ` [MTF: ${candidate.signal.analysis.mtf.mtfSignal}]`;
+            }
+            if (candidate.signal.analysis?.coupling) {
+              extraInfo += ` [커플링: ${candidate.signal.analysis.coupling.couplingSignal}]`;
+            }
+
+            console.log(`  - ${candidate.name}: ${candidate.signal.reason}${extraInfo}`);
+            const result = await this.executeBuy(
+              candidate.code,
+              candidate.signal.analysis.currentPrice
+            );
+            if (result) {
+              results.buys.push({ ...candidate, result });
+            }
+            await stockFetcher.delay(500);
+          }
+        }
+      }
+
+      // 6. 일별 수익률 기록
       const finalPortfolio = this.loadPortfolio();
       const balance = await kisApi.getBalance();
 
@@ -304,10 +372,14 @@ const tradeExecutor = {
         holdingsCount: finalPortfolio.holdings.length,
         buys: results.buys.length,
         sells: results.sells.length,
+        marketCondition: marketData?.marketCondition || null,
       });
 
       console.log('\n=== 프로세스 완료 ===');
       console.log(`매수: ${results.buys.length}건, 매도: ${results.sells.length}건`);
+      if (marketData) {
+        console.log(`시장 상태: ${marketData.marketCondition}`);
+      }
 
       return {
         executed: true,

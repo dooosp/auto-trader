@@ -2,6 +2,8 @@ const config = require('./config');
 const stockFetcher = require('./stock-fetcher');
 const newsAnalyzer = require('./news-analyzer');
 const indicators = require('./indicators');
+const mtfAnalyzer = require('./mtf-analyzer');
+const marketAnalyzer = require('./market-analyzer');
 
 const technicalAnalyzer = {
   /**
@@ -113,8 +115,8 @@ const technicalAnalyzer = {
   },
 
   /**
-   * 종합 기술적 분석 (Phase 1: 확장된 지표 포함)
-   * @param {Object} stockData - { current, history }
+   * 종합 기술적 분석 (Phase 1: 확장된 지표 포함, Phase 2: MTF 추가)
+   * @param {Object} stockData - { current, history, weeklyHistory }
    */
   analyze(stockData) {
     const prices = stockFetcher.extractClosePrices(stockData.history);
@@ -143,6 +145,12 @@ const technicalAnalyzer = {
     const confluenceScore = this.calculateConfluence({
       rsi, macd, bollinger, volume, mas, currentPrice, goldenCross
     });
+
+    // Phase 2: 다중 타임프레임 분석
+    let mtf = null;
+    if (config.mtf?.enabled && stockData.weeklyHistory && stockData.weeklyHistory.length >= 20) {
+      mtf = mtfAnalyzer.analyze(candles, stockData.weeklyHistory);
+    }
 
     return {
       code: stockData.code,
@@ -184,6 +192,8 @@ const technicalAnalyzer = {
       fibPosition: fibonacci.position,
       // 다중 확인 점수
       confluenceScore,
+      // Phase 2: MTF 분석 결과
+      mtf,
     };
   },
 
@@ -239,12 +249,14 @@ const technicalAnalyzer = {
   },
 
   /**
-   * 매매 신호 생성 (Phase 1: 다중 지표 기반)
-   * @param {Object} stockData - { current, history }
+   * 매매 신호 생성 (Phase 1: 다중 지표 기반, Phase 2: MTF + 커플링)
+   * @param {Object} stockData - { current, history, weeklyHistory }
    * @param {Object} holding - 보유 정보 (없으면 null)
    * @param {Object} newsSentiment - 뉴스 감정 분석 결과 (선택)
+   * @param {Object} marketData - 시장 분석 결과 (Phase 2, 선택)
+   * @param {Object} sectorData - 섹터 분석 결과 (Phase 2, 선택)
    */
-  generateSignal(stockData, holding = null, newsSentiment = null) {
+  generateSignal(stockData, holding = null, newsSentiment = null, marketData = null, sectorData = null) {
     const analysis = this.analyze(stockData);
     const { trading } = config;
 
@@ -332,6 +344,26 @@ const technicalAnalyzer = {
         };
       }
 
+      // Phase 2: MTF 강한 매도 신호
+      if (analysis.mtf?.mtfSignal === 'STRONG_SELL') {
+        return {
+          action: 'SELL',
+          reason: `MTF 강한 매도 (주봉+일봉 하락 정렬)`,
+          analysis,
+          priority: 2,
+        };
+      }
+
+      // Phase 2: MTF 매도 + 손실
+      if (analysis.mtf?.mtfSignal === 'SELL' && profitRate < 0) {
+        return {
+          action: 'SELL',
+          reason: `MTF 매도 + 손실 (${(profitRate * 100).toFixed(2)}%)`,
+          analysis,
+          priority: 3,
+        };
+      }
+
       return {
         action: 'HOLD',
         reason: '매도 조건 미충족',
@@ -342,6 +374,37 @@ const technicalAnalyzer = {
     // ========================================
     // 미보유 - 매수 조건 체크
     // ========================================
+
+    // Phase 2: MTF 필터 (주봉 추세 확인)
+    if (config.mtf?.enabled && config.mtf?.strictMode && analysis.mtf) {
+      const mtfCheck = mtfAnalyzer.canBuy(analysis.mtf);
+      if (!mtfCheck.allowed) {
+        return {
+          action: 'HOLD',
+          reason: `MTF 필터: ${mtfCheck.reason} (${analysis.mtf.weekly.trend})`,
+          analysis,
+        };
+      }
+    }
+
+    // Phase 2: 시장/섹터 커플링 필터
+    if (config.coupling?.enabled && marketData) {
+      const coupling = marketAnalyzer.analyzeCoupling(stockData, marketData, sectorData || {});
+      analysis.coupling = coupling;
+
+      const couplingCheck = marketAnalyzer.canBuyByCoupling(coupling);
+      if (config.coupling?.strictMode && !couplingCheck.allowed) {
+        return {
+          action: 'HOLD',
+          reason: `커플링 필터: ${couplingCheck.reason}`,
+          analysis,
+        };
+      }
+      // 경고만 (strictMode가 false일 때)
+      if (couplingCheck.warning) {
+        analysis.couplingWarning = couplingCheck.reason;
+      }
+    }
 
     // 악재 뉴스면 매수 보류
     if (analysis.newsSentiment === 'NEGATIVE') {
@@ -385,9 +448,24 @@ const technicalAnalyzer = {
 
     // 1. 강한 매수 신호 (다중 확인 점수 4점 이상)
     if (analysis.confluenceScore.signal === 'STRONG_BUY') {
+      // Phase 2: MTF 보너스
+      let mtfBonus = '';
+      if (analysis.mtf?.mtfSignal === 'STRONG_BUY') {
+        mtfBonus = ', MTF 정렬';
+      }
       return {
         action: 'BUY',
-        reason: `강한 매수 신호 (점수: ${analysis.confluenceScore.buy}, RR: ${rrRatio.toFixed(1)})`,
+        reason: `강한 매수 신호 (점수: ${analysis.confluenceScore.buy}, RR: ${rrRatio.toFixed(1)}${mtfBonus})`,
+        analysis,
+        priority: 1,
+      };
+    }
+
+    // Phase 2: MTF 강한 매수 + 일봉 조건 충족
+    if (analysis.mtf?.mtfSignal === 'STRONG_BUY' && analysis.confluenceScore.buy >= 2) {
+      return {
+        action: 'BUY',
+        reason: `MTF 강한 매수 (주봉+일봉 상승 정렬, 점수: ${analysis.confluenceScore.buy})`,
         analysis,
         priority: 1,
       };
@@ -515,12 +593,14 @@ const technicalAnalyzer = {
   },
 
   /**
-   * watchList 전체 스캔하여 매수 후보 추출
+   * watchList 전체 스캔하여 매수 후보 추출 (Phase 2: MTF + 커플링)
    * @param {Array} stockDataList - fetchWatchList 결과
    * @param {Array} currentHoldings - 현재 보유 종목
    * @param {Array} newsDataList - 뉴스 감정 분석 결과 배열
+   * @param {Object} marketData - 시장 분석 결과 (Phase 2)
+   * @param {Object} sectorData - 섹터 분석 결과 (Phase 2)
    */
-  scanForBuyCandidates(stockDataList, currentHoldings = [], newsDataList = []) {
+  scanForBuyCandidates(stockDataList, currentHoldings = [], newsDataList = [], marketData = null, sectorData = null) {
     const holdingCodes = currentHoldings.map(h => h.code);
     const candidates = [];
 
@@ -532,7 +612,7 @@ const technicalAnalyzer = {
 
       // 해당 종목의 뉴스 감정 찾기
       const newsSentiment = newsDataList.find(n => n.code === stockData.code);
-      const signal = this.generateSignal(stockData, null, newsSentiment);
+      const signal = this.generateSignal(stockData, null, newsSentiment, marketData, sectorData);
 
       if (signal.action === 'BUY') {
         candidates.push({
@@ -543,19 +623,27 @@ const technicalAnalyzer = {
       }
     }
 
-    // 우선순위 순으로 정렬
-    candidates.sort((a, b) => a.signal.priority - b.signal.priority);
+    // 우선순위 순으로 정렬 (Phase 2: MTF 정렬된 종목 우선)
+    candidates.sort((a, b) => {
+      // MTF STRONG_BUY가 있으면 최우선
+      const aMtfBonus = a.signal.analysis?.mtf?.mtfSignal === 'STRONG_BUY' ? -10 : 0;
+      const bMtfBonus = b.signal.analysis?.mtf?.mtfSignal === 'STRONG_BUY' ? -10 : 0;
+
+      return (a.signal.priority + aMtfBonus) - (b.signal.priority + bMtfBonus);
+    });
 
     return candidates;
   },
 
   /**
-   * 보유 종목 매도 신호 체크
+   * 보유 종목 매도 신호 체크 (Phase 2: MTF + 커플링)
    * @param {Array} holdings - 보유 종목 배열
    * @param {Array} stockDataList - 시세 데이터
    * @param {Array} newsDataList - 뉴스 감정 분석 결과 배열
+   * @param {Object} marketData - 시장 분석 결과 (Phase 2)
+   * @param {Object} sectorData - 섹터 분석 결과 (Phase 2)
    */
-  checkSellSignals(holdings, stockDataList, newsDataList = []) {
+  checkSellSignals(holdings, stockDataList, newsDataList = [], marketData = null, sectorData = null) {
     const sellSignals = [];
 
     for (const holding of holdings) {
@@ -568,7 +656,7 @@ const technicalAnalyzer = {
 
       // 해당 종목의 뉴스 감정 찾기
       const newsSentiment = newsDataList.find(n => n.code === holding.code);
-      const signal = this.generateSignal(stockData, holding, newsSentiment);
+      const signal = this.generateSignal(stockData, holding, newsSentiment, marketData, sectorData);
 
       if (signal.action === 'SELL') {
         sellSignals.push({

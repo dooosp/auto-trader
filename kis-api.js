@@ -323,6 +323,164 @@ const kisApi = {
   },
 
   /**
+   * 주봉 데이터 조회 (다중 타임프레임 분석용)
+   * @param {string} stockCode - 종목코드
+   * @param {number} weeks - 조회 주 수 (기본 52주)
+   */
+  async getWeeklyHistory(stockCode, weeks = 52) {
+    const trId = config.kis.useMock ? 'FHKST03010100' : 'FHKST03010100';
+    const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice`;
+
+    // 날짜 계산 (주봉은 더 긴 기간 필요)
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - weeks * 7 * 1.2); // 여유 있게 설정
+
+    const formatDate = (d) => d.toISOString().slice(0, 10).replace(/-/g, '');
+
+    try {
+      const response = await axios.get(url, {
+        headers: await this.getHeaders(trId),
+        params: {
+          FID_COND_MRKT_DIV_CODE: 'J',
+          FID_INPUT_ISCD: stockCode,
+          FID_INPUT_DATE_1: formatDate(startDate),
+          FID_INPUT_DATE_2: formatDate(endDate),
+          FID_PERIOD_DIV_CODE: 'W',  // 주봉
+          FID_ORG_ADJ_PRC: '0',
+        }
+      });
+
+      const output = response.data.output2 || [];
+
+      return output
+        .slice(0, weeks)
+        .reverse()
+        .map(item => ({
+          date: item.stck_bsop_date,
+          open: parseInt(item.stck_oprc),
+          high: parseInt(item.stck_hgpr),
+          low: parseInt(item.stck_lwpr),
+          close: parseInt(item.stck_clpr),
+          volume: parseInt(item.acml_vol),
+        }));
+    } catch (error) {
+      console.error(`[KIS] 주봉 조회 실패 (${stockCode}):`, error.response?.data || error.message);
+      throw error;
+    }
+  },
+
+  /**
+   * 지수 현재가 조회 (KOSPI, KOSDAQ)
+   * @param {string} indexCode - 지수코드 ('0001': KOSPI, '1001': KOSDAQ)
+   */
+  async getIndexPrice(indexCode) {
+    const trId = 'FHPUP02100000';
+    const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/quotations/inquire-index-price`;
+
+    try {
+      const response = await axios.get(url, {
+        headers: await this.getHeaders(trId),
+        params: {
+          FID_COND_MRKT_DIV_CODE: 'U',
+          FID_INPUT_ISCD: indexCode,
+        }
+      });
+
+      const data = response.data.output;
+      return {
+        code: indexCode,
+        name: indexCode === '0001' ? 'KOSPI' : 'KOSDAQ',
+        price: parseFloat(data.bstp_nmix_prpr),           // 현재 지수
+        change: parseFloat(data.bstp_nmix_prdy_vrss),     // 전일 대비
+        changeRate: parseFloat(data.bstp_nmix_prdy_ctrt), // 전일 대비율
+        volume: parseInt(data.acml_vol || 0),             // 누적 거래량
+        high: parseFloat(data.bstp_nmix_hgpr),            // 고가
+        low: parseFloat(data.bstp_nmix_lwpr),             // 저가
+      };
+    } catch (error) {
+      console.error(`[KIS] 지수 조회 실패 (${indexCode}):`, error.response?.data || error.message);
+      throw error;
+    }
+  },
+
+  /**
+   * 지수 일봉 데이터 조회
+   * @param {string} indexCode - 지수코드
+   * @param {number} days - 조회 일수
+   */
+  async getIndexHistory(indexCode, days = 60) {
+    const trId = 'FHPUP02110000';
+    const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/quotations/inquire-index-daily-price`;
+
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - days * 1.5);
+
+    const formatDate = (d) => d.toISOString().slice(0, 10).replace(/-/g, '');
+
+    try {
+      const response = await axios.get(url, {
+        headers: await this.getHeaders(trId),
+        params: {
+          FID_COND_MRKT_DIV_CODE: 'U',
+          FID_INPUT_ISCD: indexCode,
+          FID_INPUT_DATE_1: formatDate(startDate),
+          FID_INPUT_DATE_2: formatDate(endDate),
+          FID_PERIOD_DIV_CODE: 'D',
+        }
+      });
+
+      const output = response.data.output2 || [];
+
+      return output
+        .slice(0, days)
+        .reverse()
+        .map(item => ({
+          date: item.stck_bsop_date,
+          open: parseFloat(item.bstp_nmix_oprc),
+          high: parseFloat(item.bstp_nmix_hgpr),
+          low: parseFloat(item.bstp_nmix_lwpr),
+          close: parseFloat(item.bstp_nmix_prpr),
+          volume: parseInt(item.acml_vol || 0),
+        }));
+    } catch (error) {
+      console.error(`[KIS] 지수 일봉 조회 실패 (${indexCode}):`, error.response?.data || error.message);
+      throw error;
+    }
+  },
+
+  /**
+   * 업종별 현재가 조회 (섹터 분석용)
+   * @param {string} sectorCode - 업종코드
+   */
+  async getSectorPrice(sectorCode) {
+    const trId = 'FHPUP02100000';
+    const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/quotations/inquire-index-price`;
+
+    try {
+      const response = await axios.get(url, {
+        headers: await this.getHeaders(trId),
+        params: {
+          FID_COND_MRKT_DIV_CODE: 'U',
+          FID_INPUT_ISCD: sectorCode,
+        }
+      });
+
+      const data = response.data.output;
+      return {
+        code: sectorCode,
+        price: parseFloat(data.bstp_nmix_prpr),
+        change: parseFloat(data.bstp_nmix_prdy_vrss),
+        changeRate: parseFloat(data.bstp_nmix_prdy_ctrt),
+      };
+    } catch (error) {
+      console.error(`[KIS] 업종 조회 실패 (${sectorCode}):`, error.response?.data || error.message);
+      return null; // 섹터 조회 실패는 무시
+    }
+  },
+
+  /**
    * API 연결 테스트
    */
   async testConnection() {
