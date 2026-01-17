@@ -1,5 +1,6 @@
 const config = require('./config');
 const stockFetcher = require('./stock-fetcher');
+const newsAnalyzer = require('./news-analyzer');
 
 const technicalAnalyzer = {
   /**
@@ -141,10 +142,15 @@ const technicalAnalyzer = {
    * 매매 신호 생성
    * @param {Object} stockData - { current, history }
    * @param {Object} holding - 보유 정보 (없으면 null)
+   * @param {Object} newsSentiment - 뉴스 감정 분석 결과 (선택)
    */
-  generateSignal(stockData, holding = null) {
+  generateSignal(stockData, holding = null, newsSentiment = null) {
     const analysis = this.analyze(stockData);
     const { trading } = config;
+
+    // 뉴스 감정 정보 추가
+    analysis.newsSentiment = newsSentiment?.sentiment || 'NEUTRAL';
+    analysis.newsScore = newsSentiment?.totalScore || 0;
 
     // 보유 중인 경우 - 매도 조건 체크
     if (holding) {
@@ -155,6 +161,16 @@ const technicalAnalyzer = {
         return {
           action: 'SELL',
           reason: `손절 (${(profitRate * 100).toFixed(2)}%)`,
+          analysis,
+          priority: 1,
+        };
+      }
+
+      // 뉴스가 매우 부정적이면 손절 기준 완화 (-1%에도 매도)
+      if (analysis.newsSentiment === 'NEGATIVE' && profitRate <= -0.01) {
+        return {
+          action: 'SELL',
+          reason: `악재 뉴스 + 손실 (${(profitRate * 100).toFixed(2)}%, 뉴스: ${analysis.newsScore})`,
           analysis,
           priority: 1,
         };
@@ -198,8 +214,19 @@ const technicalAnalyzer = {
     }
 
     // 미보유 - 매수 조건 체크
-    // 조건 1: RSI < 30 (과매도)
-    const rsiCondition = analysis.rsi && analysis.rsi < trading.buy.rsiBelow;
+
+    // 뉴스가 부정적이면 매수 보류
+    if (analysis.newsSentiment === 'NEGATIVE') {
+      return {
+        action: 'HOLD',
+        reason: `악재 뉴스로 매수 보류 (뉴스점수: ${analysis.newsScore})`,
+        analysis,
+      };
+    }
+
+    // 조건 1: RSI < 30 (과매도) - 뉴스 긍정적이면 RSI < 40으로 완화
+    const rsiThreshold = analysis.newsSentiment === 'POSITIVE' ? 40 : trading.buy.rsiBelow;
+    const rsiCondition = analysis.rsi && analysis.rsi < rsiThreshold;
 
     // 조건 2: 현재가 > 5일 이평선
     const aboveMA5 = analysis.aboveMA5;
@@ -209,9 +236,10 @@ const technicalAnalyzer = {
 
     // 모든 조건 충족 시 매수
     if (rsiCondition && aboveMA5 && maCondition) {
+      const newsInfo = analysis.newsSentiment === 'POSITIVE' ? ', 호재 뉴스' : '';
       return {
         action: 'BUY',
-        reason: `매수 조건 충족 (RSI: ${analysis.rsi}, 골든크로스 상태)`,
+        reason: `매수 조건 충족 (RSI: ${analysis.rsi}${newsInfo})`,
         analysis,
         priority: 1,
       };
@@ -227,9 +255,19 @@ const technicalAnalyzer = {
       };
     }
 
+    // 뉴스가 매우 긍정적이면 (점수 3 이상) 기술적 조건 일부 완화
+    if (analysis.newsScore >= 3 && aboveMA5 && analysis.rsi < 50) {
+      return {
+        action: 'BUY',
+        reason: `강한 호재 뉴스 (뉴스점수: ${analysis.newsScore}, RSI: ${analysis.rsi})`,
+        analysis,
+        priority: 3,
+      };
+    }
+
     // 조건 미충족
     const reasons = [];
-    if (!rsiCondition) reasons.push(`RSI ${analysis.rsi || 'N/A'} (< ${trading.buy.rsiBelow} 필요)`);
+    if (!rsiCondition) reasons.push(`RSI ${analysis.rsi || 'N/A'}`);
     if (!aboveMA5) reasons.push('5일선 하회');
     if (!maCondition) reasons.push('5일선 < 20일선');
 
@@ -244,8 +282,9 @@ const technicalAnalyzer = {
    * watchList 전체 스캔하여 매수 후보 추출
    * @param {Array} stockDataList - fetchWatchList 결과
    * @param {Array} currentHoldings - 현재 보유 종목
+   * @param {Array} newsDataList - 뉴스 감정 분석 결과 배열
    */
-  scanForBuyCandidates(stockDataList, currentHoldings = []) {
+  scanForBuyCandidates(stockDataList, currentHoldings = [], newsDataList = []) {
     const holdingCodes = currentHoldings.map(h => h.code);
     const candidates = [];
 
@@ -255,7 +294,9 @@ const technicalAnalyzer = {
         continue;
       }
 
-      const signal = this.generateSignal(stockData, null);
+      // 해당 종목의 뉴스 감정 찾기
+      const newsSentiment = newsDataList.find(n => n.code === stockData.code);
+      const signal = this.generateSignal(stockData, null, newsSentiment);
 
       if (signal.action === 'BUY') {
         candidates.push({
@@ -276,8 +317,9 @@ const technicalAnalyzer = {
    * 보유 종목 매도 신호 체크
    * @param {Array} holdings - 보유 종목 배열
    * @param {Array} stockDataList - 시세 데이터
+   * @param {Array} newsDataList - 뉴스 감정 분석 결과 배열
    */
-  checkSellSignals(holdings, stockDataList) {
+  checkSellSignals(holdings, stockDataList, newsDataList = []) {
     const sellSignals = [];
 
     for (const holding of holdings) {
@@ -288,7 +330,9 @@ const technicalAnalyzer = {
         continue;
       }
 
-      const signal = this.generateSignal(stockData, holding);
+      // 해당 종목의 뉴스 감정 찾기
+      const newsSentiment = newsDataList.find(n => n.code === holding.code);
+      const signal = this.generateSignal(stockData, holding, newsSentiment);
 
       if (signal.action === 'SELL') {
         sellSignals.push({
@@ -304,6 +348,25 @@ const technicalAnalyzer = {
     sellSignals.sort((a, b) => a.signal.priority - b.signal.priority);
 
     return sellSignals;
+  },
+
+  /**
+   * 뉴스 분석 수행
+   * @param {Array} stockCodes - 종목코드 배열
+   */
+  async analyzeNews(stockCodes) {
+    console.log(`[Analyzer] ${stockCodes.length}개 종목 뉴스 분석 중...`);
+    const newsDataList = await newsAnalyzer.analyzeMultipleStocks(stockCodes);
+
+    // 뉴스 요약 출력
+    for (const news of newsDataList) {
+      if (news.sentiment !== 'NEUTRAL') {
+        const stockName = stockFetcher.getStockName(news.code);
+        console.log(`  - ${stockName}: ${news.sentiment} (점수: ${news.totalScore})`);
+      }
+    }
+
+    return newsDataList;
   }
 };
 

@@ -234,7 +234,12 @@ const tradeExecutor = {
       // 2. watchList 데이터 수집
       const stockDataList = await stockFetcher.fetchWatchList();
 
-      // 3. 보유 종목 매도 신호 체크
+      // 3. 뉴스 감정 분석
+      console.log('\n[뉴스 분석]');
+      const stockCodes = stockDataList.map(s => s.code);
+      const newsDataList = await technicalAnalyzer.analyzeNews(stockCodes);
+
+      // 4. 보유 종목 매도 신호 체크
       if (portfolio.holdings.length > 0) {
         console.log('\n[매도 신호 체크]');
 
@@ -246,7 +251,7 @@ const tradeExecutor = {
           }
         }
 
-        const sellSignals = technicalAnalyzer.checkSellSignals(portfolio.holdings, stockDataList);
+        const sellSignals = technicalAnalyzer.checkSellSignals(portfolio.holdings, stockDataList, newsDataList);
 
         for (const signal of sellSignals) {
           console.log(`  - ${signal.name}: ${signal.signal.reason}`);
@@ -263,10 +268,10 @@ const tradeExecutor = {
         }
       }
 
-      // 4. 매수 후보 스캔
+      // 5. 매수 후보 스캔
       console.log('\n[매수 신호 체크]');
       const updatedPortfolio = this.loadPortfolio();
-      const buyCandidates = technicalAnalyzer.scanForBuyCandidates(stockDataList, updatedPortfolio.holdings);
+      const buyCandidates = technicalAnalyzer.scanForBuyCandidates(stockDataList, updatedPortfolio.holdings, newsDataList);
 
       if (buyCandidates.length === 0) {
         console.log('  매수 조건 충족 종목 없음');
