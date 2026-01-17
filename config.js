@@ -29,7 +29,7 @@ const config = {
     // 매도 조건
     sell: {
       rsiAbove: 70,           // RSI > 70 (과매수)
-      stopLoss: -0.05,        // 손절: -5%
+      stopLoss: -0.02,        // 손절: -2%
       takeProfit: 0.10,       // 익절: +10%
     }
   },
