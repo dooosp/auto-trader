@@ -8,10 +8,10 @@ const stockFetcher = {
    */
   async fetchStock(stockCode) {
     try {
-      const [currentPrice, history] = await Promise.all([
-        kisApi.getStockPrice(stockCode),
-        kisApi.getStockHistory(stockCode, config.analysis.historyDays),
-      ]);
+      // API 호출 제한으로 순차 호출 + 간격 추가
+      const currentPrice = await kisApi.getStockPrice(stockCode);
+      await this.delay(300);
+      const history = await kisApi.getStockHistory(stockCode, config.analysis.historyDays);
 
       return {
         code: stockCode,
@@ -30,7 +30,7 @@ const stockFetcher = {
    * @param {Array} stockCodes - 종목코드 배열
    * @param {number} delayMs - 호출 간 지연 시간 (ms)
    */
-  async fetchMultipleStocks(stockCodes, delayMs = 200) {
+  async fetchMultipleStocks(stockCodes, delayMs = 500) {
     const results = [];
 
     for (const code of stockCodes) {
