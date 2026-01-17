@@ -1,4 +1,9 @@
 {
   "holdings": [],
-  "lastUpdated": null
+  "summary": {
+    "totalDeposit": 10000000,
+    "totalEvaluation": 10000000,
+    "totalProfit": 0
+  },
+  "lastUpdated": "2026-01-17T13:28:15.234Z"
 }
