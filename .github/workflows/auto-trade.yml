@@ -1,0 +1,61 @@
+name: Auto Trade
+
+on:
+  schedule:
+    # 평일 9시~15시 KST (UTC 0시~6시) 매시간 실행
+    - cron: '0 0-6 * * 1-5'
+  workflow_dispatch:  # 수동 실행
+
+jobs:
+  trade:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run auto trader
+        run: node github-action-trader.js
+        env:
+          KIS_APP_KEY: ${{ secrets.KIS_APP_KEY }}
+          KIS_APP_SECRET: ${{ secrets.KIS_APP_SECRET }}
+          KIS_ACCOUNT: ${{ secrets.KIS_ACCOUNT }}
+          USE_MOCK: ${{ secrets.USE_MOCK }}
+
+      - name: Commit trade data
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/*.json || true
+          git diff --staged --quiet || git commit -m "Update trade data [skip ci]"
+          git push || true
+
+  # 긴급 매도 워크플로우
+  emergency-sell:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.emergency == 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - name: Emergency sell all
+        run: node emergency-sell.js --force
+        env:
+          KIS_APP_KEY: ${{ secrets.KIS_APP_KEY }}
+          KIS_APP_SECRET: ${{ secrets.KIS_APP_SECRET }}
+          KIS_ACCOUNT: ${{ secrets.KIS_ACCOUNT }}
+          USE_MOCK: ${{ secrets.USE_MOCK }}

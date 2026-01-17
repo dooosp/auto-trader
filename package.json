@@ -1,0 +1,22 @@
+{
+  "name": "auto-trader",
+  "version": "1.0.0",
+  "description": "한국투자증권 API 기반 자동매매 시스템",
+  "main": "github-action-trader.js",
+  "scripts": {
+    "trade": "node github-action-trader.js",
+    "scheduler": "node trade-scheduler.js",
+    "dashboard": "node dashboard-server.js",
+    "emergency": "node emergency-sell.js",
+    "test-api": "node -e \"require('./kis-api.js').testConnection()\""
+  },
+  "keywords": ["stock", "trading", "automation", "kis"],
+  "author": "Taeho",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.0",
+    "node-cron": "^3.0.0"
+  }
+}

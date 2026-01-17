@@ -1,0 +1,20 @@
+# 환경변수
+.env
+
+# 데이터 파일은 GitHub에 커밋하여 Actions 간 유지
+# data/*.json  <- 주석 처리 (커밋 허용)
+
+# Node
+node_modules/
+npm-debug.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 로그
+*.log
