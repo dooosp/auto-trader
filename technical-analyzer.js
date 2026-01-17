@@ -1,6 +1,7 @@
 const config = require('./config');
 const stockFetcher = require('./stock-fetcher');
 const newsAnalyzer = require('./news-analyzer');
+const indicators = require('./indicators');
 
 const technicalAnalyzer = {
   /**
@@ -112,34 +113,133 @@ const technicalAnalyzer = {
   },
 
   /**
-   * 종합 기술적 분석
+   * 종합 기술적 분석 (Phase 1: 확장된 지표 포함)
    * @param {Object} stockData - { current, history }
    */
   analyze(stockData) {
     const prices = stockFetcher.extractClosePrices(stockData.history);
     const currentPrice = stockData.current.price;
+    const candles = stockData.history;  // [{open, high, low, close, volume}, ...]
 
+    // 기본 이평선
     const mas = this.calculateAllMAs(prices);
     const rsi = this.calculateRSI(prices);
     const goldenCross = this.isGoldenCross(prices);
     const deadCross = this.isDeadCross(prices);
 
+    // Phase 1: 새로운 지표들
+    const macd = indicators.MACD(prices);
+    const bollinger = indicators.BollingerBands(prices);
+    const atr = indicators.ATR(candles);
+    const volume = indicators.VolumeAnalysis(candles);
+
+    // 피보나치 (최근 20일 고점/저점 기준)
+    const recent20 = candles.slice(-20);
+    const high20 = Math.max(...recent20.map(c => c.high));
+    const low20 = Math.min(...recent20.map(c => c.low));
+    const fibonacci = indicators.FibonacciPosition(currentPrice, high20, low20);
+
+    // 다중 확인 (Confluence) 점수 계산
+    const confluenceScore = this.calculateConfluence({
+      rsi, macd, bollinger, volume, mas, currentPrice, goldenCross
+    });
+
     return {
       code: stockData.code,
       currentPrice,
+      // 기본 이평선
       ma5: mas.ma5,
       ma20: mas.ma20,
       ma60: mas.ma60,
+      aboveMA5: currentPrice > mas.ma5,
+      aboveMA20: currentPrice > mas.ma20,
+      aboveMA60: mas.ma60 ? currentPrice > mas.ma60 : null,
+      ma5AboveMA20: mas.ma5 > mas.ma20,
+      // RSI
       rsi,
       goldenCross,
       deadCross,
-      aboveMA5: currentPrice > mas.ma5,
-      ma5AboveMA20: mas.ma5 > mas.ma20,
+      // MACD
+      macd: macd.macd,
+      macdSignal: macd.signal,
+      macdHistogram: macd.histogram,
+      macdTrend: macd.trend,
+      macdCrossover: macd.crossover,
+      // 볼린저 밴드
+      bbUpper: bollinger.upper,
+      bbMiddle: bollinger.middle,
+      bbLower: bollinger.lower,
+      bbPercentB: bollinger.percentB,
+      bbSignal: bollinger.signal,
+      bbWidth: bollinger.width,
+      // ATR (변동성)
+      atr: atr.atr,
+      atrPercent: atr.atrPercent,
+      // 거래량
+      volumeRatio: volume.volumeRatio,
+      volumeSignal: volume.signal,
+      vsaPattern: volume.vsaPattern,
+      // 피보나치
+      fibZone: fibonacci.zone,
+      fibPosition: fibonacci.position,
+      // 다중 확인 점수
+      confluenceScore,
     };
   },
 
   /**
-   * 매매 신호 생성
+   * 다중 확인 (Confluence) 점수 계산
+   * 여러 지표가 같은 방향을 가리킬 때 점수 부여
+   */
+  calculateConfluence({ rsi, macd, bollinger, volume, mas, currentPrice, goldenCross }) {
+    let buyScore = 0;
+    let sellScore = 0;
+
+    // RSI 신호
+    if (rsi < 30) buyScore += 2;
+    else if (rsi < 40) buyScore += 1;
+    else if (rsi > 70) sellScore += 2;
+    else if (rsi > 60) sellScore += 1;
+
+    // MACD 신호
+    if (macd.crossover === 'GOLDEN_CROSS') buyScore += 2;
+    else if (macd.trend === 'BULLISH') buyScore += 1;
+    else if (macd.crossover === 'DEAD_CROSS') sellScore += 2;
+    else if (macd.trend === 'BEARISH') sellScore += 1;
+
+    // 볼린저 밴드 신호
+    if (bollinger.signal === 'OVERSOLD') buyScore += 2;
+    else if (bollinger.signal === 'LOWER_ZONE') buyScore += 1;
+    else if (bollinger.signal === 'OVERBOUGHT') sellScore += 2;
+    else if (bollinger.signal === 'UPPER_ZONE') sellScore += 1;
+
+    // 거래량 신호
+    if (volume.signal === 'STRONG_BUYING') buyScore += 2;
+    else if (volume.signal === 'BUYING_PRESSURE') buyScore += 1;
+    else if (volume.signal === 'STRONG_SELLING') sellScore += 2;
+    else if (volume.signal === 'SELLING_PRESSURE') sellScore += 1;
+
+    // 이평선 정배열
+    if (mas.ma5 > mas.ma20 && mas.ma20 > (mas.ma60 || 0)) buyScore += 1;
+    if (goldenCross) buyScore += 1;
+
+    // 가격 위치
+    if (currentPrice > mas.ma5 && currentPrice > mas.ma20) buyScore += 1;
+    else if (currentPrice < mas.ma5 && currentPrice < mas.ma20) sellScore += 1;
+
+    return {
+      buy: buyScore,
+      sell: sellScore,
+      net: buyScore - sellScore,
+      signal: buyScore >= 4 ? 'STRONG_BUY' :
+              buyScore >= 2 ? 'BUY' :
+              sellScore >= 4 ? 'STRONG_SELL' :
+              sellScore >= 2 ? 'SELL' : 'NEUTRAL'
+    };
+  },
+
+  /**
+   * 매매 신호 생성 (Phase 1: 다중 지표 기반)
    * @param {Object} stockData - { current, history }
    * @param {Object} holding - 보유 정보 (없으면 null)
    * @param {Object} newsSentiment - 뉴스 감정 분석 결과 (선택)
@@ -152,31 +252,47 @@ const technicalAnalyzer = {
     analysis.newsSentiment = newsSentiment?.sentiment || 'NEUTRAL';
     analysis.newsScore = newsSentiment?.totalScore || 0;
 
+    // ATR 기반 동적 손절선 계산 (변동성의 2배)
+    const atrStopLoss = analysis.atrPercent ? -(analysis.atrPercent * 2) / 100 : trading.sell.stopLoss;
+    const dynamicStopLoss = Math.max(atrStopLoss, trading.sell.stopLoss);  // 최소 -2%
+
+    // ========================================
     // 보유 중인 경우 - 매도 조건 체크
+    // ========================================
     if (holding) {
       const profitRate = (analysis.currentPrice - holding.avgPrice) / holding.avgPrice;
 
-      // 손절 조건
-      if (profitRate <= trading.sell.stopLoss) {
+      // 1. ATR 기반 동적 손절
+      if (profitRate <= dynamicStopLoss) {
         return {
           action: 'SELL',
-          reason: `손절 (${(profitRate * 100).toFixed(2)}%)`,
+          reason: `ATR 손절 (${(profitRate * 100).toFixed(2)}%, ATR: ${analysis.atrPercent}%)`,
           analysis,
           priority: 1,
         };
       }
 
-      // 뉴스가 매우 부정적이면 손절 기준 완화 (-1%에도 매도)
+      // 2. 악재 뉴스 + 손실 시 빠른 탈출
       if (analysis.newsSentiment === 'NEGATIVE' && profitRate <= -0.01) {
         return {
           action: 'SELL',
-          reason: `악재 뉴스 + 손실 (${(profitRate * 100).toFixed(2)}%, 뉴스: ${analysis.newsScore})`,
+          reason: `악재 + 손실 (${(profitRate * 100).toFixed(2)}%)`,
           analysis,
           priority: 1,
         };
       }
 
-      // 익절 조건
+      // 3. 다중 지표 강한 매도 신호
+      if (analysis.confluenceScore.signal === 'STRONG_SELL') {
+        return {
+          action: 'SELL',
+          reason: `다중 매도 신호 (점수: ${analysis.confluenceScore.sell})`,
+          analysis,
+          priority: 2,
+        };
+      }
+
+      // 4. 익절 (1차 목표)
       if (profitRate >= trading.sell.takeProfit) {
         return {
           action: 'SELL',
@@ -186,21 +302,31 @@ const technicalAnalyzer = {
         };
       }
 
-      // RSI 과매수
-      if (analysis.rsi && analysis.rsi >= trading.sell.rsiAbove) {
+      // 5. MACD 데드크로스
+      if (analysis.macdCrossover === 'DEAD_CROSS' && profitRate > 0) {
         return {
           action: 'SELL',
-          reason: `RSI 과매수 (${analysis.rsi})`,
+          reason: `MACD 데드크로스 + 이익 (${(profitRate * 100).toFixed(2)}%)`,
           analysis,
           priority: 3,
         };
       }
 
-      // 이평선 이탈
-      if (!analysis.aboveMA5) {
+      // 6. RSI 과매수 + 볼린저 상단
+      if (analysis.rsi >= 70 && analysis.bbSignal === 'OVERBOUGHT') {
         return {
           action: 'SELL',
-          reason: '5일 이평선 하향 이탈',
+          reason: `RSI 과매수 + BB 상단 (RSI: ${analysis.rsi})`,
+          analysis,
+          priority: 3,
+        };
+      }
+
+      // 7. 5일선 이탈 + 거래량 급증 (매도세)
+      if (!analysis.aboveMA5 && analysis.volumeSignal === 'STRONG_SELLING') {
+        return {
+          action: 'SELL',
+          reason: '5일선 이탈 + 강한 매도세',
           analysis,
           priority: 4,
         };
@@ -213,19 +339,129 @@ const technicalAnalyzer = {
       };
     }
 
+    // ========================================
     // 미보유 - 매수 조건 체크
+    // ========================================
 
-    // 뉴스가 부정적이면 매수 보류
+    // 악재 뉴스면 매수 보류
     if (analysis.newsSentiment === 'NEGATIVE') {
       return {
         action: 'HOLD',
-        reason: `악재 뉴스로 매수 보류 (뉴스점수: ${analysis.newsScore})`,
+        reason: `악재 뉴스 (점수: ${analysis.newsScore})`,
         analysis,
       };
     }
 
-    // 조건 1: RSI < 30 (과매도) - 뉴스 긍정적이면 RSI < 40으로 완화
-    const rsiThreshold = analysis.newsSentiment === 'POSITIVE' ? 40 : trading.buy.rsiBelow;
+    // 다중 지표 강한 매도 신호면 매수 보류
+    if (analysis.confluenceScore.signal === 'STRONG_SELL' || analysis.confluenceScore.signal === 'SELL') {
+      return {
+        action: 'HOLD',
+        reason: `하락 신호 (매도점수: ${analysis.confluenceScore.sell})`,
+        analysis,
+      };
+    }
+
+    // RR Ratio 체크 (손익비 2:1 이상)
+    // 예상 수익: 익절선(10%), 예상 손실: ATR 기반 손절선
+    const expectedProfit = trading.sell.takeProfit;
+    const expectedLoss = Math.abs(dynamicStopLoss);
+    const rrRatio = expectedProfit / expectedLoss;
+
+    if (rrRatio < 2) {
+      // 손익비가 2:1 미만이면 매수 보류 (변동성 큰 종목)
+      // 단, 다중 확인 점수가 높으면 예외
+      if (analysis.confluenceScore.buy < 4) {
+        return {
+          action: 'HOLD',
+          reason: `손익비 부족 (RR: ${rrRatio.toFixed(1)}, ATR: ${analysis.atrPercent}%)`,
+          analysis,
+        };
+      }
+    }
+
+    // ========================================
+    // 매수 조건 체크 (다중 확인 기반)
+    // ========================================
+
+    // 1. 강한 매수 신호 (다중 확인 점수 4점 이상)
+    if (analysis.confluenceScore.signal === 'STRONG_BUY') {
+      return {
+        action: 'BUY',
+        reason: `강한 매수 신호 (점수: ${analysis.confluenceScore.buy}, RR: ${rrRatio.toFixed(1)})`,
+        analysis,
+        priority: 1,
+      };
+    }
+
+    // 2. 피보나치 황금구간 + MACD 골든크로스
+    if (analysis.fibZone === 'GOLDEN_ZONE' && analysis.macdCrossover === 'GOLDEN_CROSS') {
+      return {
+        action: 'BUY',
+        reason: `피보나치 황금구간 + MACD 골든크로스`,
+        analysis,
+        priority: 1,
+      };
+    }
+
+    // 3. 볼린저 하단 + RSI 과매도 + 거래량 급증 (반등 신호)
+    if (analysis.bbSignal === 'OVERSOLD' && analysis.rsi < 30 && analysis.volumeRatio >= 1.5) {
+      return {
+        action: 'BUY',
+        reason: `BB 하단 + RSI 과매도 + 거래량 (RSI: ${analysis.rsi})`,
+        analysis,
+        priority: 1,
+      };
+    }
+
+    // 4. 일반 매수 신호 (다중 확인 점수 2점 이상 + 추가 조건)
+    if (analysis.confluenceScore.signal === 'BUY') {
+      // 추가 필터: 상승 추세 + 뉴스 긍정적
+      if (analysis.ma5AboveMA20 && analysis.newsSentiment !== 'NEGATIVE') {
+        return {
+          action: 'BUY',
+          reason: `매수 신호 (점수: ${analysis.confluenceScore.buy})`,
+          analysis,
+          priority: 2,
+        };
+      }
+    }
+
+    // 5. MACD 골든크로스 + RSI 적정 (기존 로직 유지)
+    if (analysis.macdCrossover === 'GOLDEN_CROSS' && analysis.rsi < 50 && analysis.aboveMA5) {
+      return {
+        action: 'BUY',
+        reason: `MACD 골든크로스 (RSI: ${analysis.rsi})`,
+        analysis,
+        priority: 2,
+      };
+    }
+
+    // 6. 강한 호재 뉴스 + 기본 조건 충족
+    if (analysis.newsScore >= 3 && analysis.aboveMA5 && analysis.rsi < 60) {
+      return {
+        action: 'BUY',
+        reason: `강한 호재 뉴스 (점수: ${analysis.newsScore})`,
+        analysis,
+        priority: 3,
+      };
+    }
+
+    // 조건 미충족
+    const reasons = [];
+    if (analysis.confluenceScore.buy < 2) reasons.push(`매수점수 ${analysis.confluenceScore.buy}`);
+    if (analysis.rsi >= 50) reasons.push(`RSI ${analysis.rsi}`);
+    if (!analysis.aboveMA5) reasons.push('5일선 하회');
+
+    return {
+      action: 'HOLD',
+      reason: reasons.join(', ') || '매수 조건 미충족',
+      analysis,
+    };
+  },
+
+  // 기존 호환성 유지 (사용 안함)
+  _legacyBuyCondition(analysis, trading, newsSentiment) {
+    const rsiThreshold = newsSentiment === 'POSITIVE' ? 40 : trading.buy.rsiBelow;
     const rsiCondition = analysis.rsi && analysis.rsi < rsiThreshold;
 
     // 조건 2: 현재가 > 5일 이평선
