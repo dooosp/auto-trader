@@ -4,6 +4,7 @@ const kisApi = require('./kis-api');
 const stockFetcher = require('./stock-fetcher');
 const technicalAnalyzer = require('./technical-analyzer');
 const marketAnalyzer = require('./market-analyzer');
+const exitManager = require('./exit-manager');
 const config = require('./config');
 
 const tradeExecutor = {
@@ -208,13 +209,87 @@ const tradeExecutor = {
   },
 
   /**
-   * 전체 매매 프로세스 실행 (Phase 2: MTF + 커플링 포함)
+   * 분할 매도 실행 (Phase 4)
+   * @param {string} stockCode - 종목코드
+   * @param {number} quantity - 매도 수량
+   * @param {number} currentPrice - 현재가
+   * @param {string} reason - 매도 사유
+   * @param {string} levelId - 분할 매도 레벨 ID
+   */
+  async executePartialSell(stockCode, quantity, currentPrice, reason, levelId) {
+    const portfolio = this.loadPortfolio();
+    const holdingIndex = portfolio.holdings.findIndex(h => h.code === stockCode);
+
+    if (holdingIndex === -1) {
+      console.log(`[Executor] 보유하지 않은 종목: ${stockCode}`);
+      return null;
+    }
+
+    const holding = portfolio.holdings[holdingIndex];
+
+    // 매도 수량이 보유 수량보다 많으면 조정
+    const sellQuantity = Math.min(quantity, holding.quantity);
+
+    try {
+      const result = await kisApi.sellStock(stockCode, sellQuantity, 0);
+
+      if (result.success) {
+        const profitRate = ((currentPrice - holding.avgPrice) / holding.avgPrice * 100).toFixed(2);
+        const profit = (currentPrice - holding.avgPrice) * sellQuantity;
+
+        // 분할 매도 기록
+        if (!holding.partialSells) holding.partialSells = [];
+        holding.partialSells.push(levelId);
+
+        // 수량 업데이트
+        holding.quantity -= sellQuantity;
+
+        // 수량이 0이면 제거, 아니면 업데이트
+        if (holding.quantity <= 0) {
+          portfolio.holdings.splice(holdingIndex, 1);
+        } else {
+          portfolio.holdings[holdingIndex] = holding;
+        }
+
+        this.savePortfolio(portfolio);
+
+        // 매매 기록 저장
+        this.saveTrade({
+          type: 'PARTIAL_SELL',
+          code: stockCode,
+          name: holding.name,
+          quantity: sellQuantity,
+          price: currentPrice,
+          amount: sellQuantity * currentPrice,
+          avgPrice: holding.avgPrice,
+          profit,
+          profitRate: parseFloat(profitRate),
+          reason,
+          levelId,
+          remainingQuantity: holding.quantity,
+          orderNo: result.orderNo,
+        });
+
+        console.log(`[Executor] 분할 매도 완료: ${holding.name} ${sellQuantity}주 @ ${currentPrice.toLocaleString()}원 (${levelId}, 잔여: ${holding.quantity}주)`);
+        return { success: true, quantity: sellQuantity, price: currentPrice, profitRate, profit };
+      }
+    } catch (error) {
+      console.error(`[Executor] 분할 매도 실패 (${stockCode}):`, error.message);
+    }
+
+    return null;
+  },
+
+  /**
+   * 전체 매매 프로세스 실행 (Phase 2: MTF + 커플링, Phase 3: S/R, Phase 4: 분할매도/트레일링)
    */
   async checkAndTrade() {
     console.log('\n=== 자동매매 프로세스 시작 ===');
     console.log(`시간: ${new Date().toLocaleString('ko-KR')}`);
     console.log(`환경: ${config.kis.useMock ? '모의투자' : '실전투자'}`);
     console.log(`Phase 2: MTF=${config.mtf?.enabled ? '활성' : '비활성'}, 커플링=${config.coupling?.enabled ? '활성' : '비활성'}`);
+    console.log(`Phase 3: S/R=${config.sr?.enabled ? '활성' : '비활성'}`);
+    console.log(`Phase 4: Exit=${config.exit?.enabled ? '활성' : '비활성'}`);
 
     // 장 운영 시간 체크 (모의투자는 항상 허용)
     if (!config.kis.useMock && !stockFetcher.isMarketOpen()) {
@@ -285,8 +360,62 @@ const tradeExecutor = {
           }
         }
 
+        // Phase 4: 분할 매도 / 트레일링 스톱 체크 (기존 매도 신호보다 먼저)
+        if (config.exit?.enabled) {
+          console.log('\n[Phase 4: 청산 전략 체크]');
+
+          for (const holding of portfolio.holdings) {
+            const stockData = stockDataList.find(s => s.code === holding.code);
+            if (!stockData) continue;
+
+            const currentPrice = stockData.current.price;
+            const exitSignal = exitManager.checkExitSignal(holding, currentPrice);
+
+            // highestPrice 업데이트 (트레일링 스톱용)
+            if (exitSignal.trailingStop.highestPrice > (holding.highestPrice || 0)) {
+              const updatedPortfolio = this.loadPortfolio();
+              const idx = updatedPortfolio.holdings.findIndex(h => h.code === holding.code);
+              if (idx !== -1) {
+                updatedPortfolio.holdings[idx].highestPrice = exitSignal.trailingStop.highestPrice;
+                this.savePortfolio(updatedPortfolio);
+              }
+            }
+
+            if (exitSignal.action === 'PARTIAL_SELL') {
+              // 분할 매도
+              console.log(`  - ${holding.name}: ${exitSignal.reason}`);
+              const result = await this.executePartialSell(
+                holding.code,
+                exitSignal.quantity,
+                currentPrice,
+                exitSignal.reason,
+                exitSignal.partialPlan.nextSell.levelId
+              );
+              if (result) {
+                results.sells.push({ code: holding.code, name: holding.name, result, type: 'PARTIAL_SELL' });
+              }
+              await stockFetcher.delay(500);
+            } else if (exitSignal.action === 'SELL' && exitSignal.exitType === 'TRAILING_STOP') {
+              // 트레일링 스톱 (전량 매도)
+              console.log(`  - ${holding.name}: ${exitSignal.reason}`);
+              const result = await this.executeSell(
+                holding.code,
+                holding.quantity,
+                currentPrice,
+                exitSignal.reason
+              );
+              if (result) {
+                results.sells.push({ code: holding.code, name: holding.name, result, type: 'TRAILING_STOP' });
+              }
+              await stockFetcher.delay(500);
+            }
+          }
+        }
+
+        // 기존 기술적 분석 기반 매도 신호
+        const updatedHoldings = this.loadPortfolio().holdings;
         const sellSignals = technicalAnalyzer.checkSellSignals(
-          portfolio.holdings,
+          updatedHoldings,
           stockDataList,
           newsDataList,
           marketData,

@@ -64,6 +64,33 @@ const config = {
     cacheMinutes: 5,
   },
 
+  // Phase 3: 지지/저항선 + 유동성 스윕 설정
+  sr: {
+    enabled: true,              // 지지/저항 분석 활성화
+    pivotLookback: 3,           // 피벗 판단 기간 (좌우 캔들 수)
+    clusterTolerance: 0.01,     // 클러스터링 허용 오차 (1%)
+    proximityPercent: 0.01,     // 근접 판단 % (1%)
+    liquiditySweepLookback: 10, // 유동성 스윕 탐색 기간
+    strictMode: false,          // true면 저항선 근처 매수 차단
+  },
+
+  // Phase 4: 청산 전략 설정
+  exit: {
+    enabled: true,              // 분할 매도/트레일링 활성화
+    // 분할 매도 레벨
+    partialSellLevels: [
+      { profitRate: 0.05, sellRatio: 0.3 },   // +5%에서 30% 매도
+      { profitRate: 0.10, sellRatio: 0.3 },   // +10%에서 30% 매도
+      { profitRate: 0.15, sellRatio: 0.4 },   // +15%에서 나머지 40% 매도
+    ],
+    // 트레일링 스톱
+    trailingStop: {
+      activationProfit: 0.05,   // 트레일링 활성화 수익률 (+5%)
+      trailingPercent: 0.03,    // 고점 대비 하락 허용 % (3%)
+      minProfit: 0.02,          // 최소 보존 수익률 (+2%)
+    },
+  },
+
   // 섹터 매핑 (종목코드 -> 섹터)
   sectorMap: {
     '005930': 'TECH',      // 삼성전자

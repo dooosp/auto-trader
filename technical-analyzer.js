@@ -4,6 +4,7 @@ const newsAnalyzer = require('./news-analyzer');
 const indicators = require('./indicators');
 const mtfAnalyzer = require('./mtf-analyzer');
 const marketAnalyzer = require('./market-analyzer');
+const srAnalyzer = require('./sr-analyzer');
 
 const technicalAnalyzer = {
   /**
@@ -152,6 +153,12 @@ const technicalAnalyzer = {
       mtf = mtfAnalyzer.analyze(candles, stockData.weeklyHistory);
     }
 
+    // Phase 3: 지지/저항선 + 유동성 스윕 분석
+    let sr = null;
+    if (config.sr?.enabled) {
+      sr = srAnalyzer.analyze(candles);
+    }
+
     return {
       code: stockData.code,
       currentPrice,
@@ -194,6 +201,8 @@ const technicalAnalyzer = {
       confluenceScore,
       // Phase 2: MTF 분석 결과
       mtf,
+      // Phase 3: 지지/저항 분석 결과
+      sr,
     };
   },
 
@@ -364,6 +373,27 @@ const technicalAnalyzer = {
         };
       }
 
+      // Phase 3: 유동성 스윕 매도 신호
+      if (analysis.sr?.liquiditySweep?.detected && analysis.sr.liquiditySweep.type === 'BEARISH_SWEEP') {
+        return {
+          action: 'SELL',
+          reason: `유동성 스윕 매도 (고점 스윕 후 하락)`,
+          analysis,
+          priority: 2,
+        };
+      }
+
+      // Phase 3: 저항선 근처 + 이익 시 매도
+      if (analysis.sr?.proximity?.zone === 'RESISTANCE_ZONE' && profitRate > 0.03) {
+        const resistance = analysis.sr.proximity.nearResistance;
+        return {
+          action: 'SELL',
+          reason: `저항선 익절 (${resistance.price.toLocaleString()}원, +${(profitRate * 100).toFixed(1)}%)`,
+          analysis,
+          priority: 3,
+        };
+      }
+
       return {
         action: 'HOLD',
         reason: '매도 조건 미충족',
@@ -424,6 +454,18 @@ const technicalAnalyzer = {
       };
     }
 
+    // Phase 3: 지지/저항 필터
+    if (config.sr?.enabled && config.sr?.strictMode && analysis.sr) {
+      const srCheck = srAnalyzer.canBuy(analysis.sr);
+      if (!srCheck.allowed) {
+        return {
+          action: 'HOLD',
+          reason: `S/R 필터: ${srCheck.reason}`,
+          analysis,
+        };
+      }
+    }
+
     // RR Ratio 체크 (손익비 2:1 이상)
     // 예상 수익: 익절선(10%), 예상 손실: ATR 기반 손절선
     const expectedProfit = trading.sell.takeProfit;
@@ -466,6 +508,27 @@ const technicalAnalyzer = {
       return {
         action: 'BUY',
         reason: `MTF 강한 매수 (주봉+일봉 상승 정렬, 점수: ${analysis.confluenceScore.buy})`,
+        analysis,
+        priority: 1,
+      };
+    }
+
+    // Phase 3: 유동성 스윕 매수 신호 (최우선)
+    if (analysis.sr?.liquiditySweep?.detected && analysis.sr.liquiditySweep.type === 'BULLISH_SWEEP') {
+      return {
+        action: 'BUY',
+        reason: `유동성 스윕 매수 (저점 스윕 후 반등)`,
+        analysis,
+        priority: 1,
+      };
+    }
+
+    // Phase 3: 지지선 근처 + 매수 조건
+    if (analysis.sr?.proximity?.zone === 'SUPPORT_ZONE' && analysis.confluenceScore.buy >= 2) {
+      const support = analysis.sr.proximity.nearSupport;
+      return {
+        action: 'BUY',
+        reason: `지지선 매수 (${support.price.toLocaleString()}원, 터치 ${support.touches}회)`,
         analysis,
         priority: 1,
       };
