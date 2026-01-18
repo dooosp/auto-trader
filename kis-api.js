@@ -481,6 +481,132 @@ const kisApi = {
   },
 
   /**
+   * 거래량 상위 종목 조회 (스크리닝용)
+   * @param {string} market - 시장 ('J': 전체, '0': 코스피, '1': 코스닥)
+   * @param {number} count - 조회 개수
+   */
+  async getVolumeRanking(market = 'J', count = 50) {
+    const trId = 'FHPST01710000';
+    const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/quotations/volume-rank`;
+
+    try {
+      const response = await axios.get(url, {
+        headers: await this.getHeaders(trId),
+        params: {
+          FID_COND_MRKT_DIV_CODE: market,
+          FID_COND_SCR_DIV_CODE: '20101',  // 거래량
+          FID_INPUT_ISCD: '0000',          // 전체
+          FID_DIV_CLS_CODE: '0',           // 전체
+          FID_BLNG_CLS_CODE: '0',          // 전체
+          FID_TRGT_CLS_CODE: '111111111',  // 전체
+          FID_TRGT_EXLS_CLS_CODE: '000000', // 제외 없음
+          FID_INPUT_PRICE_1: '0',          // 최소 가격
+          FID_INPUT_PRICE_2: '0',          // 최대 가격
+          FID_VOL_CNT: '0',                // 최소 거래량
+          FID_INPUT_DATE_1: '',
+        }
+      });
+
+      const output = response.data.output || [];
+
+      return output.slice(0, count).map(item => ({
+        code: item.mksc_shrn_iscd,           // 종목코드
+        name: item.hts_kor_isnm,             // 종목명
+        price: parseInt(item.stck_prpr),     // 현재가
+        changeRate: parseFloat(item.prdy_ctrt), // 등락률
+        volume: parseInt(item.acml_vol),     // 거래량
+        tradingValue: parseInt(item.acml_tr_pbmn), // 거래대금
+      }));
+    } catch (error) {
+      console.error(`[KIS] 거래량 상위 조회 실패:`, error.response?.data || error.message);
+      return [];
+    }
+  },
+
+  /**
+   * 등락률 상위 종목 조회 (스크리닝용)
+   * @param {string} market - 시장
+   * @param {string} type - '0': 상승률, '1': 하락률
+   * @param {number} count - 조회 개수
+   */
+  async getChangeRateRanking(market = 'J', type = '0', count = 50) {
+    const trId = 'FHPST01700000';
+    const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/ranking/fluctuation`;
+
+    try {
+      const response = await axios.get(url, {
+        headers: await this.getHeaders(trId),
+        params: {
+          FID_COND_MRKT_DIV_CODE: market,
+          FID_COND_SCR_DIV_CODE: '20170',
+          FID_INPUT_ISCD: '0000',
+          FID_DIV_CLS_CODE: type,          // 0: 상승, 1: 하락
+          FID_BLNG_CLS_CODE: '0',
+          FID_TRGT_CLS_CODE: '111111111',
+          FID_TRGT_EXLS_CLS_CODE: '000000',
+          FID_INPUT_PRICE_1: '0',
+          FID_INPUT_PRICE_2: '0',
+          FID_VOL_CNT: '0',
+        }
+      });
+
+      const output = response.data.output || [];
+
+      return output.slice(0, count).map(item => ({
+        code: item.stck_shrn_iscd,
+        name: item.hts_kor_isnm,
+        price: parseInt(item.stck_prpr),
+        changeRate: parseFloat(item.prdy_ctrt),
+        volume: parseInt(item.acml_vol),
+      }));
+    } catch (error) {
+      console.error(`[KIS] 등락률 상위 조회 실패:`, error.response?.data || error.message);
+      return [];
+    }
+  },
+
+  /**
+   * 시가총액 상위 종목 조회 (스크리닝용)
+   * @param {string} market - 시장
+   * @param {number} count - 조회 개수
+   */
+  async getMarketCapRanking(market = 'J', count = 100) {
+    const trId = 'FHPST01740000';
+    const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/quotations/capture-uplowprice`;
+
+    try {
+      const response = await axios.get(url, {
+        headers: await this.getHeaders(trId),
+        params: {
+          FID_COND_MRKT_DIV_CODE: market,
+          FID_COND_SCR_DIV_CODE: '20174',
+          FID_INPUT_ISCD: '0000',
+          FID_DIV_CLS_CODE: '0',
+          FID_BLNG_CLS_CODE: '0',
+          FID_TRGT_CLS_CODE: '111111111',
+          FID_TRGT_EXLS_CLS_CODE: '000000',
+          FID_INPUT_PRICE_1: '0',
+          FID_INPUT_PRICE_2: '0',
+          FID_VOL_CNT: '0',
+        }
+      });
+
+      const output = response.data.output || [];
+
+      return output.slice(0, count).map(item => ({
+        code: item.stck_shrn_iscd || item.mksc_shrn_iscd,
+        name: item.hts_kor_isnm,
+        price: parseInt(item.stck_prpr || 0),
+        changeRate: parseFloat(item.prdy_ctrt || 0),
+        volume: parseInt(item.acml_vol || 0),
+      }));
+    } catch (error) {
+      console.error(`[KIS] 시가총액 상위 조회 실패:`, error.response?.data || error.message);
+      return [];
+    }
+  },
+
+  /**
    * API 연결 테스트
    */
   async testConnection() {

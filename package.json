@@ -8,6 +8,7 @@
     "scheduler": "node trade-scheduler.js",
     "dashboard": "node dashboard-server.js",
     "emergency": "node emergency-sell.js",
+    "screening": "node run-screening.js",
     "test-api": "node -e \"require('./kis-api.js').testConnection()\""
   },
   "keywords": ["stock", "trading", "automation", "kis"],
