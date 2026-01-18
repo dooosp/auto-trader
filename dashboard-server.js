@@ -53,9 +53,9 @@ app.get('/api/summary', async (req, res) => {
     res.json({
       portfolio: {
         holdingsCount: portfolio.holdings?.length || 0,
-        totalDeposit: latestReturn.totalDeposit || 0,
-        totalEvaluation: latestReturn.totalEvaluation || 0,
-        totalProfit: latestReturn.totalProfit || 0,
+        totalDeposit: portfolio.summary?.totalDeposit || 0,
+        totalEvaluation: portfolio.summary?.totalEvaluation || 0,
+        totalProfit: portfolio.summary?.totalProfit || 0,
         lastUpdated: portfolio.lastUpdated,
       },
       trading: {
