@@ -478,19 +478,24 @@
         return;
       }
 
+      // summary에서 데이터 추출
+      const summary = portfolio.summary || {};
+      const totalDeposit = summary.totalDeposit || 0;
+      const totalEvaluation = summary.totalEvaluation || 0;
+      const totalProfit = summary.totalProfit || 0;
+
       // 총 자산 계산
-      const totalAsset = (portfolio.totalDeposit || 0) + (portfolio.totalEvaluation || 0);
+      const totalAsset = totalDeposit + totalEvaluation;
       document.getElementById('totalAsset').textContent = formatMoney(totalAsset) + '원';
-      document.getElementById('totalDeposit').textContent = formatMoney(portfolio.totalDeposit) + '원';
+      document.getElementById('totalDeposit').textContent = formatMoney(totalDeposit) + '원';
 
       const profitEl = document.getElementById('totalProfit');
-      const profit = portfolio.totalProfit || 0;
-      profitEl.textContent = (profit >= 0 ? '+' : '') + formatMoney(profit) + '원';
-      profitEl.className = 'value ' + (profit >= 0 ? 'positive' : 'negative');
+      profitEl.textContent = (totalProfit >= 0 ? '+' : '') + formatMoney(totalProfit) + '원';
+      profitEl.className = 'value ' + (totalProfit >= 0 ? 'positive' : 'negative');
 
       // 수익률 계산
-      const initialAsset = totalAsset - profit;
-      const profitRate = initialAsset > 0 ? (profit / initialAsset * 100) : 0;
+      const initialAsset = totalAsset - totalProfit;
+      const profitRate = initialAsset > 0 ? (totalProfit / initialAsset * 100) : 0;
       document.getElementById('profitRate').textContent = (profitRate >= 0 ? '+' : '') + profitRate.toFixed(2) + '%';
 
       // 보유 종목 수
