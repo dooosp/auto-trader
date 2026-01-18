@@ -18,52 +18,62 @@ const stockScreener = {
   },
 
   /**
-   * 후보 종목 수집 (거래량 + 시가총액 상위)
+   * 후보 종목 수집 (거래량 + 상승률 상위 - KOSPI & KOSDAQ)
    */
   async collectCandidates() {
     console.log('[Screener] 후보 종목 수집 중...');
 
     const candidates = new Map();  // 중복 제거용
 
-    // 1. 거래량 상위 50개
-    console.log('  - 거래량 상위 조회...');
-    try {
-      const volumeRanking = await kisApi.getVolumeRanking('J', 50);
-      await this.delay(500);
+    // 시장 코드: J = KOSPI, Q = KOSDAQ
+    const markets = [
+      { code: 'J', name: 'KOSPI' },
+      { code: 'Q', name: 'KOSDAQ' },
+    ];
 
-      for (const stock of volumeRanking) {
-        if (stock.code && stock.name) {
-          candidates.set(stock.code, {
-            ...stock,
-            source: 'volume',
-          });
+    for (const market of markets) {
+      // 1. 거래량 상위 30개
+      console.log(`  - ${market.name} 거래량 상위 조회...`);
+      try {
+        const volumeRanking = await kisApi.getVolumeRanking(market.code, 30);
+        await this.delay(500);
+
+        for (const stock of volumeRanking) {
+          if (stock.code && stock.name) {
+            candidates.set(stock.code, {
+              ...stock,
+              market: market.name,
+              source: 'volume',
+            });
+          }
         }
+        console.log(`    ${volumeRanking.length}개 수집`);
+      } catch (error) {
+        console.log(`    ${market.name} 거래량 조회 실패: ${error.message}`);
       }
-      console.log(`    ${volumeRanking.length}개 수집`);
-    } catch (error) {
-      console.log(`    거래량 조회 실패 (주말/휴일): ${error.message}`);
+
+      // 2. 상승률 상위 20개
+      console.log(`  - ${market.name} 상승률 상위 조회...`);
+      try {
+        const riseRanking = await kisApi.getChangeRateRanking(market.code, '0', 20);
+        await this.delay(500);
+
+        for (const stock of riseRanking) {
+          if (stock.code && stock.name && !candidates.has(stock.code)) {
+            candidates.set(stock.code, {
+              ...stock,
+              market: market.name,
+              source: 'rise',
+            });
+          }
+        }
+        console.log(`    ${riseRanking.length}개 수집`);
+      } catch (error) {
+        console.log(`    ${market.name} 상승률 조회 실패: ${error.message}`);
+      }
     }
 
-    // 2. 상승률 상위 30개
-    console.log('  - 상승률 상위 조회...');
-    try {
-      const riseRanking = await kisApi.getChangeRateRanking('J', '0', 30);
-      await this.delay(500);
-
-      for (const stock of riseRanking) {
-        if (stock.code && stock.name && !candidates.has(stock.code)) {
-          candidates.set(stock.code, {
-            ...stock,
-            source: 'rise',
-          });
-        }
-      }
-      console.log(`    ${riseRanking.length}개 수집`);
-    } catch (error) {
-      console.log(`    상승률 조회 실패 (주말/휴일): ${error.message}`);
-    }
-
-    console.log(`[Screener] 총 ${candidates.size}개 고유 종목 수집 완료`);
+    console.log(`[Screener] 총 ${candidates.size}개 고유 종목 수집 완료 (KOSPI + KOSDAQ)`);
     return Array.from(candidates.values());
   },
 
@@ -241,7 +251,8 @@ const stockScreener = {
 
       console.log(`\n[Screener] 상위 ${selected.length}개 종목 선정:`);
       selected.forEach((stock, i) => {
-        console.log(`  ${i + 1}. ${stock.name} (${stock.code}) - 점수: ${stock.score}, ${stock.signals?.join(', ') || ''}`);
+        const marketTag = stock.market ? `[${stock.market}]` : '';
+        console.log(`  ${i + 1}. ${marketTag} ${stock.name} (${stock.code}) - 점수: ${stock.score}, ${stock.signals?.join(', ') || ''}`);
       });
 
       const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
