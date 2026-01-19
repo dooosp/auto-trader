@@ -538,8 +538,8 @@
       const totalEvaluation = summary.totalEvaluation || 0;
       const totalProfit = summary.totalProfit || 0;
 
-      // 총 자산 계산
-      const totalAsset = totalDeposit + totalEvaluation;
+      // 총 자산 = totalEvaluation (KIS API의 tot_evlu_amt가 이미 전체 자산)
+      const totalAsset = totalEvaluation;
       document.getElementById('totalAsset').textContent = formatMoney(totalAsset) + '원';
       document.getElementById('totalDeposit').textContent = formatMoney(totalDeposit) + '원';
 
