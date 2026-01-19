@@ -4,15 +4,17 @@
       "code": "003550",
       "name": "LG",
       "quantity": 1,
-      "avgPrice": 88800,
-      "buyDate": "2026-01-19T06:25:19.778Z",
-      "orderNo": "0000014348"
+      "avgPrice": 89000,
+      "currentPrice": 89000,
+      "profit": 0,
+      "profitRate": 0,
+      "highestPrice": 89000
     }
   ],
   "summary": {
     "totalDeposit": 10000000,
-    "totalEvaluation": 10000000,
+    "totalEvaluation": 9999990,
     "totalProfit": 0
   },
-  "lastUpdated": "2026-01-19T06:25:19.778Z"
+  "lastUpdated": "2026-01-19T06:33:18.529Z"
 }
