@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "type": "BUY",
+    "code": "003550",
+    "name": "LG",
+    "quantity": 1,
+    "price": 88800,
+    "amount": 88800,
+    "orderNo": "0000014348",
+    "timestamp": "2026-01-19T06:25:19.792Z"
+  }
+]

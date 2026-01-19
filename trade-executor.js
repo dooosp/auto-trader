@@ -394,7 +394,7 @@ const tradeExecutor = {
               if (result) {
                 results.sells.push({ code: holding.code, name: holding.name, result, type: 'PARTIAL_SELL' });
               }
-              await stockFetcher.delay(500);
+              await stockFetcher.delay(1000);
             } else if (exitSignal.action === 'SELL' && exitSignal.exitType === 'TRAILING_STOP') {
               // 트레일링 스톱 (전량 매도)
               console.log(`  - ${holding.name}: ${exitSignal.reason}`);
@@ -407,7 +407,7 @@ const tradeExecutor = {
               if (result) {
                 results.sells.push({ code: holding.code, name: holding.name, result, type: 'TRAILING_STOP' });
               }
-              await stockFetcher.delay(500);
+              await stockFetcher.delay(1000);
             }
           }
         }
@@ -433,7 +433,7 @@ const tradeExecutor = {
           if (result) {
             results.sells.push({ ...signal, result });
           }
-          await stockFetcher.delay(500);
+          await stockFetcher.delay(1000);
         }
       }
 
@@ -485,7 +485,7 @@ const tradeExecutor = {
             if (result) {
               results.buys.push({ ...candidate, result });
             }
-            await stockFetcher.delay(500);
+            await stockFetcher.delay(1000);
           }
         }
       }
@@ -549,7 +549,7 @@ const tradeExecutor = {
           '긴급 매도'
         );
         results.push({ code: holding.code, name: holding.name, result });
-        await stockFetcher.delay(500);
+        await stockFetcher.delay(1000);
       } catch (error) {
         console.error(`[Executor] 긴급 매도 실패 (${holding.code}):`, error.message);
         results.push({ code: holding.code, name: holding.name, error: error.message });

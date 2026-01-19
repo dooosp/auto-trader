@@ -36,7 +36,7 @@ const stockScreener = {
       console.log(`  - ${market.name} 거래량 상위 조회...`);
       try {
         const volumeRanking = await kisApi.getVolumeRanking(market.code, 30);
-        await this.delay(500);
+        await this.delay(1000);
 
         for (const stock of volumeRanking) {
           if (stock.code && stock.name) {
@@ -56,7 +56,7 @@ const stockScreener = {
       console.log(`  - ${market.name} 상승률 상위 조회...`);
       try {
         const riseRanking = await kisApi.getChangeRateRanking(market.code, '0', 20);
-        await this.delay(500);
+        await this.delay(1000);
 
         for (const stock of riseRanking) {
           if (stock.code && stock.name && !candidates.has(stock.code)) {
@@ -237,7 +237,7 @@ const stockScreener = {
         const result = await this.analyzeStock(stock);
         analyzed.push(result);
 
-        await this.delay(300);  // API 호출 제한
+        await this.delay(1000);  // API 호출 제한
       }
       console.log('\n  분석 완료');
 

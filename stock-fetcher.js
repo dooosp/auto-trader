@@ -10,7 +10,7 @@ const stockFetcher = {
     try {
       // API 호출 제한으로 순차 호출 + 간격 추가
       const currentPrice = await kisApi.getStockPrice(stockCode);
-      await this.delay(300);
+      await this.delay(1000);
       const history = await kisApi.getStockHistory(stockCode, config.analysis.historyDays);
 
       return {
@@ -32,9 +32,9 @@ const stockFetcher = {
   async fetchStockWithWeekly(stockCode) {
     try {
       const currentPrice = await kisApi.getStockPrice(stockCode);
-      await this.delay(300);
+      await this.delay(1000);
       const dailyHistory = await kisApi.getStockHistory(stockCode, config.analysis.historyDays);
-      await this.delay(300);
+      await this.delay(1000);
 
       // 주봉 데이터 (MTF 분석용)
       let weeklyHistory = [];
@@ -62,7 +62,7 @@ const stockFetcher = {
    * @param {Array} stockCodes - 종목코드 배열
    * @param {number} delayMs - 호출 간 지연 시간 (ms)
    */
-  async fetchMultipleStocks(stockCodes, delayMs = 500) {
+  async fetchMultipleStocks(stockCodes, delayMs = 1000) {
     const results = [];
 
     for (const code of stockCodes) {
@@ -97,7 +97,7 @@ const stockFetcher = {
       if (data) {
         results.push(data);
       }
-      await this.delay(500);
+      await this.delay(1000);
     }
 
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
@@ -188,7 +188,7 @@ const stockFetcher = {
           changeRate: price.changeRate,
           updatedAt: new Date().toISOString(),
         });
-        await this.delay(200);
+        await this.delay(1000);
       } catch (error) {
         updated.push(holding);
       }

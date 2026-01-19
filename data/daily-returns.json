@@ -14,8 +14,8 @@
     "totalDeposit": 10000000,
     "totalEvaluation": 10000000,
     "totalProfit": 0,
-    "holdingsCount": 0,
-    "buys": 0,
+    "holdingsCount": 1,
+    "buys": 1,
     "sells": 0,
     "marketCondition": "NEUTRAL"
   }
