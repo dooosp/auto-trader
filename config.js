@@ -17,7 +17,7 @@ const config = {
   // 매매 설정
   trading: {
     buyAmount: parseInt(process.env.BUY_AMOUNT) || 500000,  // 1회 매수 금액 (50만원)
-    maxHoldings: parseInt(process.env.MAX_HOLDINGS) || 5,   // 최대 보유 종목 수
+    maxHoldings: parseInt(process.env.MAX_HOLDINGS) || 15,  // 최대 보유 종목 수
 
     // 매수 조건
     buy: {
