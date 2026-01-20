@@ -5,16 +5,80 @@
       "name": "LG",
       "quantity": 1,
       "avgPrice": 89000,
-      "currentPrice": 89000,
-      "profit": 0,
-      "profitRate": 0,
+      "currentPrice": 87500,
+      "profit": -1500,
+      "profitRate": -1.69,
       "highestPrice": 89000
+    },
+    {
+      "code": "036570",
+      "name": "엔씨소프트",
+      "quantity": 2,
+      "avgPrice": 236000,
+      "buyDate": "2026-01-20T01:19:37.935Z",
+      "orderNo": "0000005873"
+    },
+    {
+      "code": "005380",
+      "name": "현대차",
+      "quantity": 1,
+      "avgPrice": 465500,
+      "buyDate": "2026-01-20T01:19:39.156Z",
+      "orderNo": "0000005877"
+    },
+    {
+      "code": "000270",
+      "name": "기아",
+      "quantity": 3,
+      "avgPrice": 162800,
+      "buyDate": "2026-01-20T01:19:40.366Z",
+      "orderNo": "0000005878"
+    },
+    {
+      "code": "105560",
+      "name": "KB금융",
+      "quantity": 3,
+      "avgPrice": 133300,
+      "buyDate": "2026-01-20T01:19:41.588Z",
+      "orderNo": "0000005881"
+    },
+    {
+      "code": "055550",
+      "name": "신한지주",
+      "quantity": 6,
+      "avgPrice": 80600,
+      "buyDate": "2026-01-20T01:19:42.829Z",
+      "orderNo": "0000005884"
+    },
+    {
+      "code": "086790",
+      "name": "하나금융지주",
+      "quantity": 5,
+      "avgPrice": 98800,
+      "buyDate": "2026-01-20T01:19:44.033Z",
+      "orderNo": "0000005887"
+    },
+    {
+      "code": "066570",
+      "name": "LG전자",
+      "quantity": 4,
+      "avgPrice": 102500,
+      "buyDate": "2026-01-20T01:19:45.256Z",
+      "orderNo": "0000005891"
+    },
+    {
+      "code": "032830",
+      "name": "삼성생명",
+      "quantity": 2,
+      "avgPrice": 173300,
+      "buyDate": "2026-01-20T01:19:46.460Z",
+      "orderNo": "0000005892"
     }
   ],
   "summary": {
     "totalDeposit": 10000000,
-    "totalEvaluation": 9999990,
-    "totalProfit": 0
+    "totalEvaluation": 9998490,
+    "totalProfit": -1500
   },
-  "lastUpdated": "2026-01-19T08:48:20.683Z"
+  "lastUpdated": "2026-01-20T01:19:46.460Z"
 }

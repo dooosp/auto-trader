@@ -8,5 +8,85 @@
     "amount": 88800,
     "orderNo": "0000014348",
     "timestamp": "2026-01-19T06:25:19.792Z"
+  },
+  {
+    "type": "BUY",
+    "code": "036570",
+    "name": "엔씨소프트",
+    "quantity": 2,
+    "price": 236000,
+    "amount": 472000,
+    "orderNo": "0000005873",
+    "timestamp": "2026-01-20T01:19:37.935Z"
+  },
+  {
+    "type": "BUY",
+    "code": "005380",
+    "name": "현대차",
+    "quantity": 1,
+    "price": 465500,
+    "amount": 465500,
+    "orderNo": "0000005877",
+    "timestamp": "2026-01-20T01:19:39.156Z"
+  },
+  {
+    "type": "BUY",
+    "code": "000270",
+    "name": "기아",
+    "quantity": 3,
+    "price": 162800,
+    "amount": 488400,
+    "orderNo": "0000005878",
+    "timestamp": "2026-01-20T01:19:40.366Z"
+  },
+  {
+    "type": "BUY",
+    "code": "105560",
+    "name": "KB금융",
+    "quantity": 3,
+    "price": 133300,
+    "amount": 399900,
+    "orderNo": "0000005881",
+    "timestamp": "2026-01-20T01:19:41.588Z"
+  },
+  {
+    "type": "BUY",
+    "code": "055550",
+    "name": "신한지주",
+    "quantity": 6,
+    "price": 80600,
+    "amount": 483600,
+    "orderNo": "0000005884",
+    "timestamp": "2026-01-20T01:19:42.829Z"
+  },
+  {
+    "type": "BUY",
+    "code": "086790",
+    "name": "하나금융지주",
+    "quantity": 5,
+    "price": 98800,
+    "amount": 494000,
+    "orderNo": "0000005887",
+    "timestamp": "2026-01-20T01:19:44.033Z"
+  },
+  {
+    "type": "BUY",
+    "code": "066570",
+    "name": "LG전자",
+    "quantity": 4,
+    "price": 102500,
+    "amount": 410000,
+    "orderNo": "0000005891",
+    "timestamp": "2026-01-20T01:19:45.256Z"
+  },
+  {
+    "type": "BUY",
+    "code": "032830",
+    "name": "삼성생명",
+    "quantity": 2,
+    "price": 173300,
+    "amount": 346600,
+    "orderNo": "0000005892",
+    "timestamp": "2026-01-20T01:19:46.460Z"
   }
 ]
