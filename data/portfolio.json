@@ -5,9 +5,9 @@
       "name": "엔씨소프트",
       "quantity": 2,
       "avgPrice": 236500,
-      "currentPrice": 235500,
-      "profit": -2000,
-      "profitRate": -0.42,
+      "currentPrice": 234000,
+      "profit": -5000,
+      "profitRate": -1.06,
       "highestPrice": 236500
     },
     {
@@ -15,76 +15,84 @@
       "name": "신한지주",
       "quantity": 6,
       "avgPrice": 80650,
-      "currentPrice": 81600,
-      "profit": 5700,
-      "profitRate": 1.18,
-      "highestPrice": 81600
+      "currentPrice": 82200,
+      "profit": 9300,
+      "profitRate": 1.92,
+      "highestPrice": 82100
     },
     {
       "code": "086790",
       "name": "하나금융지주",
       "quantity": 5,
       "avgPrice": 98720,
-      "currentPrice": 100500,
-      "profit": 8900,
-      "profitRate": 1.8,
-      "highestPrice": 100400
+      "currentPrice": 101000,
+      "profit": 11400,
+      "profitRate": 2.31,
+      "highestPrice": 100700
     },
     {
       "code": "105560",
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 133300,
-      "currentPrice": 133800,
-      "profit": 1500,
-      "profitRate": 0.38,
-      "highestPrice": 133900
+      "currentPrice": 134400,
+      "profit": 3300,
+      "profitRate": 0.83,
+      "highestPrice": 134400
     },
     {
       "code": "005380",
       "name": "현대차",
       "quantity": 1,
-      "avgPrice": 480000,
-      "buyDate": "2026-01-20T03:41:17.237Z",
-      "orderNo": "0000011335"
+      "avgPrice": 483000,
+      "buyDate": "2026-01-20T04:42:22.059Z",
+      "orderNo": "0000013821"
     },
     {
       "code": "000270",
       "name": "기아",
-      "quantity": 2,
-      "avgPrice": 167350,
-      "buyDate": "2026-01-20T03:41:18.453Z",
-      "orderNo": "0000011336"
+      "quantity": 3,
+      "avgPrice": 166500,
+      "buyDate": "2026-01-20T04:42:23.349Z",
+      "orderNo": "0000013823"
+    },
+    {
+      "code": "316140",
+      "name": "우리금융지주",
+      "quantity": 17,
+      "avgPrice": 28350,
+      "buyDate": "2026-01-20T04:42:24.615Z",
+      "orderNo": "0000013825"
     },
     {
       "code": "066570",
       "name": "LG전자",
       "quantity": 4,
-      "avgPrice": 105000,
-      "buyDate": "2026-01-20T03:41:19.657Z",
-      "orderNo": "0000011338"
+      "avgPrice": 104900,
+      "buyDate": "2026-01-20T04:42:25.896Z",
+      "orderNo": "0000013828"
     },
     {
       "code": "032830",
       "name": "삼성생명",
       "quantity": 2,
-      "avgPrice": 175700,
-      "buyDate": "2026-01-20T03:41:21.850Z",
-      "orderNo": "0000011340"
+      "avgPrice": 176000,
+      "buyDate": "2026-01-20T04:42:28.175Z",
+      "orderNo": "0000013830"
     },
     {
       "code": "003550",
       "name": "LG",
       "quantity": 5,
-      "avgPrice": 89300,
-      "buyDate": "2026-01-20T03:41:23.042Z",
-      "orderNo": "0000011341"
+      "avgPrice": 90000,
+      "buyDate": "2026-01-20T04:42:29.431Z",
+      "orderNo": "0000013833"
     }
   ],
   "summary": {
     "totalDeposit": 10000000,
-    "totalEvaluation": 10055640,
-    "totalProfit": 56100
+    "totalEvaluation": 10062036,
+    "totalProfit": 22300
   },
-  "lastUpdated": "2026-01-20T03:41:23.042Z"
+  "lastUpdated": "2026-01-20T04:42:29.431Z"
 }
