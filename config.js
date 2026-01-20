@@ -31,6 +31,26 @@ const config = {
       rsiAbove: 70,           // RSI > 70 (과매수)
       stopLoss: -0.02,        // 손절: -2%
       takeProfit: 0.10,       // 익절: +10%
+    },
+
+    // 매매 안전장치
+    safety: {
+      enabled: true,                    // 안전장치 활성화
+      cooldownHours: 24,                // 같은 종목 매도 후 재매수 금지 시간 (24시간)
+      minHoldingHours: 2,               // 최소 보유 시간 (2시간) - 이 시간 전에는 매도 금지
+
+      // 다중 확인 설정
+      multiConfirm: {
+        enabled: true,                  // 다중 확인 활성화
+        requiredBuyConditions: 3,       // 매수 시 최소 충족 조건 수
+        requiredSellConditions: 2,      // 매도 시 최소 충족 조건 수
+      },
+
+      // 가격 변동폭 필터
+      priceChange: {
+        enabled: true,
+        minChangePercent: 1.0,          // 최소 1% 변동 시에만 매매 고려
+      },
     }
   },
 

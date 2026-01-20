@@ -259,6 +259,7 @@ const technicalAnalyzer = {
 
   /**
    * 매매 신호 생성 (Phase 1: 다중 지표 기반, Phase 2: MTF + 커플링)
+   * 안전장치: 다중 확인 시스템 (여러 조건 동시 충족 필요)
    * @param {Object} stockData - { current, history, weeklyHistory }
    * @param {Object} holding - 보유 정보 (없으면 null)
    * @param {Object} newsSentiment - 뉴스 감정 분석 결과 (선택)
@@ -268,6 +269,8 @@ const technicalAnalyzer = {
   generateSignal(stockData, holding = null, newsSentiment = null, marketData = null, sectorData = null) {
     const analysis = this.analyze(stockData);
     const { trading } = config;
+    const safety = trading.safety || {};
+    const multiConfirm = safety.multiConfirm || {};
 
     // 뉴스 감정 정보 추가
     analysis.newsSentiment = newsSentiment?.sentiment || 'NEUTRAL';
@@ -278,126 +281,104 @@ const technicalAnalyzer = {
     const dynamicStopLoss = Math.max(atrStopLoss, trading.sell.stopLoss);  // 최소 -2%
 
     // ========================================
-    // 보유 중인 경우 - 매도 조건 체크
+    // 보유 중인 경우 - 매도 조건 체크 (다중 확인 적용)
     // ========================================
     if (holding) {
       const profitRate = (analysis.currentPrice - holding.avgPrice) / holding.avgPrice;
 
-      // 1. ATR 기반 동적 손절
+      // === 긴급 매도 조건 (단일 조건으로 즉시 실행) ===
+
+      // 1. ATR 기반 동적 손절 (손실 방지 - 예외 허용)
       if (profitRate <= dynamicStopLoss) {
         return {
           action: 'SELL',
-          reason: `ATR 손절 (${(profitRate * 100).toFixed(2)}%, ATR: ${analysis.atrPercent}%)`,
+          reason: `[긴급] ATR 손절 (${(profitRate * 100).toFixed(2)}%, ATR: ${analysis.atrPercent}%)`,
           analysis,
           priority: 1,
         };
       }
 
-      // 2. 악재 뉴스 + 손실 시 빠른 탈출
+      // 2. 악재 뉴스 + 손실 시 빠른 탈출 (긴급)
       if (analysis.newsSentiment === 'NEGATIVE' && profitRate <= -0.01) {
         return {
           action: 'SELL',
-          reason: `악재 + 손실 (${(profitRate * 100).toFixed(2)}%)`,
+          reason: `[긴급] 악재 + 손실 (${(profitRate * 100).toFixed(2)}%)`,
           analysis,
           priority: 1,
         };
       }
 
-      // 3. 다중 지표 강한 매도 신호
-      if (analysis.confluenceScore.signal === 'STRONG_SELL') {
-        return {
-          action: 'SELL',
-          reason: `다중 매도 신호 (점수: ${analysis.confluenceScore.sell})`,
-          analysis,
-          priority: 2,
-        };
+      // === 다중 확인 매도 조건 (여러 조건 동시 충족 필요) ===
+      const sellConditions = [];
+      const requiredSellConditions = multiConfirm.enabled ? (multiConfirm.requiredSellConditions || 2) : 1;
+
+      // 조건 1: RSI 과매수 (70 이상)
+      if (analysis.rsi >= 70) {
+        sellConditions.push(`RSI 과매수(${analysis.rsi})`);
       }
 
-      // 4. 익절 (1차 목표)
-      if (profitRate >= trading.sell.takeProfit) {
-        return {
-          action: 'SELL',
-          reason: `익절 (${(profitRate * 100).toFixed(2)}%)`,
-          analysis,
-          priority: 2,
-        };
+      // 조건 2: 볼린저 밴드 상단 돌파
+      if (analysis.bbSignal === 'OVERBOUGHT') {
+        sellConditions.push('BB 상단 돌파');
       }
 
-      // 5. MACD 데드크로스
-      if (analysis.macdCrossover === 'DEAD_CROSS' && profitRate > 0) {
-        return {
-          action: 'SELL',
-          reason: `MACD 데드크로스 + 이익 (${(profitRate * 100).toFixed(2)}%)`,
-          analysis,
-          priority: 3,
-        };
+      // 조건 3: MACD 데드크로스
+      if (analysis.macdCrossover === 'DEAD_CROSS') {
+        sellConditions.push('MACD 데드크로스');
       }
 
-      // 6. RSI 과매수 + 볼린저 상단
-      if (analysis.rsi >= 70 && analysis.bbSignal === 'OVERBOUGHT') {
-        return {
-          action: 'SELL',
-          reason: `RSI 과매수 + BB 상단 (RSI: ${analysis.rsi})`,
-          analysis,
-          priority: 3,
-        };
+      // 조건 4: 5일선 이탈
+      if (!analysis.aboveMA5) {
+        sellConditions.push('5일선 이탈');
       }
 
-      // 7. 5일선 이탈 + 거래량 급증 (매도세)
-      if (!analysis.aboveMA5 && analysis.volumeSignal === 'STRONG_SELLING') {
-        return {
-          action: 'SELL',
-          reason: '5일선 이탈 + 강한 매도세',
-          analysis,
-          priority: 4,
-        };
+      // 조건 5: 강한 매도세 (거래량)
+      if (analysis.volumeSignal === 'STRONG_SELLING' || analysis.volumeSignal === 'SELLING_PRESSURE') {
+        sellConditions.push('매도세 감지');
       }
 
-      // Phase 2: MTF 강한 매도 신호
-      if (analysis.mtf?.mtfSignal === 'STRONG_SELL') {
-        return {
-          action: 'SELL',
-          reason: `MTF 강한 매도 (주봉+일봉 하락 정렬)`,
-          analysis,
-          priority: 2,
-        };
+      // 조건 6: MTF 매도 신호
+      if (analysis.mtf?.mtfSignal === 'SELL' || analysis.mtf?.mtfSignal === 'STRONG_SELL') {
+        sellConditions.push(`MTF ${analysis.mtf.mtfSignal}`);
       }
 
-      // Phase 2: MTF 매도 + 손실
-      if (analysis.mtf?.mtfSignal === 'SELL' && profitRate < 0) {
-        return {
-          action: 'SELL',
-          reason: `MTF 매도 + 손실 (${(profitRate * 100).toFixed(2)}%)`,
-          analysis,
-          priority: 3,
-        };
-      }
-
-      // Phase 3: 유동성 스윕 매도 신호
+      // 조건 7: 유동성 스윕 매도 신호
       if (analysis.sr?.liquiditySweep?.detected && analysis.sr.liquiditySweep.type === 'BEARISH_SWEEP') {
+        sellConditions.push('유동성 스윕 매도');
+      }
+
+      // 조건 8: 저항선 근처 + 수익
+      if (analysis.sr?.proximity?.zone === 'RESISTANCE_ZONE' && profitRate > 0.03) {
+        sellConditions.push('저항선 도달');
+      }
+
+      // 조건 9: 익절 목표 도달 (기본 10%)
+      if (profitRate >= trading.sell.takeProfit) {
+        sellConditions.push(`익절 목표(+${(profitRate * 100).toFixed(1)}%)`);
+      }
+
+      // 다중 확인: 설정된 개수 이상의 조건이 충족되어야 매도
+      if (sellConditions.length >= requiredSellConditions) {
         return {
           action: 'SELL',
-          reason: `유동성 스윕 매도 (고점 스윕 후 하락)`,
+          reason: `다중 매도 (${sellConditions.length}/${requiredSellConditions}): ${sellConditions.join(', ')}`,
           analysis,
           priority: 2,
+          conditions: sellConditions,
         };
       }
 
-      // Phase 3: 저항선 근처 + 이익 시 매도
-      if (analysis.sr?.proximity?.zone === 'RESISTANCE_ZONE' && profitRate > 0.03) {
-        const resistance = analysis.sr.proximity.nearResistance;
-        return {
-          action: 'SELL',
-          reason: `저항선 익절 (${resistance.price.toLocaleString()}원, +${(profitRate * 100).toFixed(1)}%)`,
-          analysis,
-          priority: 3,
-        };
-      }
+      // 매도 조건 미충족
+      const unmetReason = sellConditions.length > 0
+        ? `매도 조건 ${sellConditions.length}/${requiredSellConditions}: ${sellConditions.join(', ')}`
+        : '매도 조건 미충족';
 
       return {
         action: 'HOLD',
-        reason: '매도 조건 미충족',
+        reason: unmetReason,
         analysis,
+        conditionsMet: sellConditions.length,
+        conditionsRequired: requiredSellConditions,
       };
     }
 
@@ -485,118 +466,96 @@ const technicalAnalyzer = {
     }
 
     // ========================================
-    // 매수 조건 체크 (다중 확인 기반)
+    // 매수 조건 체크 (다중 확인 시스템 적용)
     // ========================================
+    const buyConditions = [];
+    const requiredBuyConditions = multiConfirm.enabled ? (multiConfirm.requiredBuyConditions || 3) : 1;
 
-    // 1. 강한 매수 신호 (다중 확인 점수 4점 이상)
-    if (analysis.confluenceScore.signal === 'STRONG_BUY') {
-      // Phase 2: MTF 보너스
-      let mtfBonus = '';
-      if (analysis.mtf?.mtfSignal === 'STRONG_BUY') {
-        mtfBonus = ', MTF 정렬';
-      }
-      return {
-        action: 'BUY',
-        reason: `강한 매수 신호 (점수: ${analysis.confluenceScore.buy}, RR: ${rrRatio.toFixed(1)}${mtfBonus})`,
-        analysis,
-        priority: 1,
-      };
+    // 조건 1: RSI 과매도 (30 이하) 또는 낮은 RSI (40 이하)
+    if (analysis.rsi <= 30) {
+      buyConditions.push(`RSI 과매도(${analysis.rsi})`);
+    } else if (analysis.rsi <= 40) {
+      buyConditions.push(`RSI 낮음(${analysis.rsi})`);
     }
 
-    // Phase 2: MTF 강한 매수 + 일봉 조건 충족
-    if (analysis.mtf?.mtfSignal === 'STRONG_BUY' && analysis.confluenceScore.buy >= 2) {
-      return {
-        action: 'BUY',
-        reason: `MTF 강한 매수 (주봉+일봉 상승 정렬, 점수: ${analysis.confluenceScore.buy})`,
-        analysis,
-        priority: 1,
-      };
+    // 조건 2: 볼린저 밴드 하단 (과매도)
+    if (analysis.bbSignal === 'OVERSOLD' || analysis.bbSignal === 'LOWER_ZONE') {
+      buyConditions.push(`BB 하단(${analysis.bbSignal})`);
     }
 
-    // Phase 3: 유동성 스윕 매수 신호 (최우선)
+    // 조건 3: MACD 골든크로스 또는 상승 추세
+    if (analysis.macdCrossover === 'GOLDEN_CROSS') {
+      buyConditions.push('MACD 골든크로스');
+    } else if (analysis.macdTrend === 'BULLISH') {
+      buyConditions.push('MACD 상승추세');
+    }
+
+    // 조건 4: 5일선 위에 위치
+    if (analysis.aboveMA5) {
+      buyConditions.push('5일선 위');
+    }
+
+    // 조건 5: 이평선 정배열 (5일 > 20일)
+    if (analysis.ma5AboveMA20) {
+      buyConditions.push('이평선 정배열');
+    }
+
+    // 조건 6: 거래량 증가 (매수세)
+    if (analysis.volumeSignal === 'STRONG_BUYING' || analysis.volumeSignal === 'BUYING_PRESSURE') {
+      buyConditions.push(`매수세(${analysis.volumeSignal})`);
+    }
+
+    // 조건 7: MTF 매수 신호 (주봉+일봉 정렬)
+    if (analysis.mtf?.mtfSignal === 'STRONG_BUY' || analysis.mtf?.mtfSignal === 'BUY') {
+      buyConditions.push(`MTF ${analysis.mtf.mtfSignal}`);
+    }
+
+    // 조건 8: 유동성 스윕 매수 신호
     if (analysis.sr?.liquiditySweep?.detected && analysis.sr.liquiditySweep.type === 'BULLISH_SWEEP') {
+      buyConditions.push('유동성 스윕 반등');
+    }
+
+    // 조건 9: 지지선 근처
+    if (analysis.sr?.proximity?.zone === 'SUPPORT_ZONE') {
+      buyConditions.push('지지선 근처');
+    }
+
+    // 조건 10: 피보나치 황금구간
+    if (analysis.fibZone === 'GOLDEN_ZONE' || analysis.fibZone === 'BUY_ZONE') {
+      buyConditions.push(`피보나치 ${analysis.fibZone}`);
+    }
+
+    // 조건 11: 호재 뉴스
+    if (analysis.newsSentiment === 'POSITIVE' || analysis.newsScore >= 2) {
+      buyConditions.push('호재 뉴스');
+    }
+
+    // 다중 확인: 설정된 개수 이상의 조건이 충족되어야 매수
+    if (buyConditions.length >= requiredBuyConditions) {
+      // 우선순위 결정
+      let priority = 2;
+      if (buyConditions.length >= 5) priority = 1;  // 5개 이상 조건 충족 시 최우선
+
       return {
         action: 'BUY',
-        reason: `유동성 스윕 매수 (저점 스윕 후 반등)`,
+        reason: `다중 매수 (${buyConditions.length}/${requiredBuyConditions}): ${buyConditions.join(', ')}`,
         analysis,
-        priority: 1,
+        priority,
+        conditions: buyConditions,
       };
     }
 
-    // Phase 3: 지지선 근처 + 매수 조건
-    if (analysis.sr?.proximity?.zone === 'SUPPORT_ZONE' && analysis.confluenceScore.buy >= 2) {
-      const support = analysis.sr.proximity.nearSupport;
-      return {
-        action: 'BUY',
-        reason: `지지선 매수 (${support.price.toLocaleString()}원, 터치 ${support.touches}회)`,
-        analysis,
-        priority: 1,
-      };
-    }
-
-    // 2. 피보나치 황금구간 + MACD 골든크로스
-    if (analysis.fibZone === 'GOLDEN_ZONE' && analysis.macdCrossover === 'GOLDEN_CROSS') {
-      return {
-        action: 'BUY',
-        reason: `피보나치 황금구간 + MACD 골든크로스`,
-        analysis,
-        priority: 1,
-      };
-    }
-
-    // 3. 볼린저 하단 + RSI 과매도 + 거래량 급증 (반등 신호)
-    if (analysis.bbSignal === 'OVERSOLD' && analysis.rsi < 30 && analysis.volumeRatio >= 1.5) {
-      return {
-        action: 'BUY',
-        reason: `BB 하단 + RSI 과매도 + 거래량 (RSI: ${analysis.rsi})`,
-        analysis,
-        priority: 1,
-      };
-    }
-
-    // 4. 일반 매수 신호 (다중 확인 점수 2점 이상 + 추가 조건)
-    if (analysis.confluenceScore.signal === 'BUY') {
-      // 추가 필터: 상승 추세 + 뉴스 긍정적
-      if (analysis.ma5AboveMA20 && analysis.newsSentiment !== 'NEGATIVE') {
-        return {
-          action: 'BUY',
-          reason: `매수 신호 (점수: ${analysis.confluenceScore.buy})`,
-          analysis,
-          priority: 2,
-        };
-      }
-    }
-
-    // 5. MACD 골든크로스 + RSI 적정 (기존 로직 유지)
-    if (analysis.macdCrossover === 'GOLDEN_CROSS' && analysis.rsi < 50 && analysis.aboveMA5) {
-      return {
-        action: 'BUY',
-        reason: `MACD 골든크로스 (RSI: ${analysis.rsi})`,
-        analysis,
-        priority: 2,
-      };
-    }
-
-    // 6. 강한 호재 뉴스 + 기본 조건 충족
-    if (analysis.newsScore >= 3 && analysis.aboveMA5 && analysis.rsi < 60) {
-      return {
-        action: 'BUY',
-        reason: `강한 호재 뉴스 (점수: ${analysis.newsScore})`,
-        analysis,
-        priority: 3,
-      };
-    }
-
-    // 조건 미충족
-    const reasons = [];
-    if (analysis.confluenceScore.buy < 2) reasons.push(`매수점수 ${analysis.confluenceScore.buy}`);
-    if (analysis.rsi >= 50) reasons.push(`RSI ${analysis.rsi}`);
-    if (!analysis.aboveMA5) reasons.push('5일선 하회');
+    // 매수 조건 미충족
+    const unmetReason = buyConditions.length > 0
+      ? `매수 조건 ${buyConditions.length}/${requiredBuyConditions}: ${buyConditions.join(', ')}`
+      : '매수 조건 미충족';
 
     return {
       action: 'HOLD',
-      reason: reasons.join(', ') || '매수 조건 미충족',
+      reason: unmetReason,
       analysis,
+      conditionsMet: buyConditions.length,
+      conditionsRequired: requiredBuyConditions,
     };
   },
 

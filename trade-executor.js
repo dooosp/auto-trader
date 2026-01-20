@@ -9,6 +9,11 @@ const config = require('./config');
 
 const tradeExecutor = {
   /**
+   * 쿨다운 데이터 파일 경로
+   */
+  cooldownPath: './data/cooldown.json',
+
+  /**
    * 데이터 파일 로드
    */
   loadData(filePath) {
@@ -35,6 +40,105 @@ const tradeExecutor = {
     }
 
     fs.writeFileSync(fullPath, JSON.stringify(data, null, 2), 'utf8');
+  },
+
+  /**
+   * 쿨다운 데이터 로드
+   */
+  loadCooldown() {
+    return this.loadData(this.cooldownPath) || { soldStocks: {} };
+  },
+
+  /**
+   * 쿨다운 데이터 저장
+   */
+  saveCooldown(cooldownData) {
+    this.saveData(this.cooldownPath, cooldownData);
+  },
+
+  /**
+   * 쿨다운 체크 (매도 후 재매수 금지 시간 확인)
+   * @param {string} stockCode - 종목코드
+   * @returns {Object} { allowed: boolean, reason: string, hoursLeft: number }
+   */
+  checkCooldown(stockCode) {
+    const safety = config.trading.safety;
+    if (!safety?.enabled) {
+      return { allowed: true, reason: '' };
+    }
+
+    const cooldownData = this.loadCooldown();
+    const soldInfo = cooldownData.soldStocks[stockCode];
+
+    if (!soldInfo) {
+      return { allowed: true, reason: '' };
+    }
+
+    const soldTime = new Date(soldInfo.soldAt);
+    const now = new Date();
+    const hoursPassed = (now - soldTime) / (1000 * 60 * 60);
+    const cooldownHours = safety.cooldownHours || 24;
+
+    if (hoursPassed < cooldownHours) {
+      const hoursLeft = Math.ceil(cooldownHours - hoursPassed);
+      return {
+        allowed: false,
+        reason: `쿨다운 중 (${hoursLeft}시간 남음)`,
+        hoursLeft,
+      };
+    }
+
+    // 쿨다운 만료 - 기록 삭제
+    delete cooldownData.soldStocks[stockCode];
+    this.saveCooldown(cooldownData);
+
+    return { allowed: true, reason: '' };
+  },
+
+  /**
+   * 쿨다운 기록 (매도 시 호출)
+   * @param {string} stockCode - 종목코드
+   * @param {string} stockName - 종목명
+   */
+  recordCooldown(stockCode, stockName) {
+    const safety = config.trading.safety;
+    if (!safety?.enabled) return;
+
+    const cooldownData = this.loadCooldown();
+    cooldownData.soldStocks[stockCode] = {
+      name: stockName,
+      soldAt: new Date().toISOString(),
+    };
+    this.saveCooldown(cooldownData);
+    console.log(`[Executor] 쿨다운 기록: ${stockName} (${safety.cooldownHours}시간 재매수 금지)`);
+  },
+
+  /**
+   * 최소 보유 시간 체크
+   * @param {Object} holding - 보유 종목 정보
+   * @returns {Object} { allowed: boolean, reason: string, hoursLeft: number }
+   */
+  checkMinHoldingTime(holding) {
+    const safety = config.trading.safety;
+    if (!safety?.enabled || !holding.buyDate) {
+      return { allowed: true, reason: '' };
+    }
+
+    const buyTime = new Date(holding.buyDate);
+    const now = new Date();
+    const hoursHeld = (now - buyTime) / (1000 * 60 * 60);
+    const minHoldingHours = safety.minHoldingHours || 2;
+
+    if (hoursHeld < minHoldingHours) {
+      const hoursLeft = Math.ceil(minHoldingHours - hoursHeld);
+      return {
+        allowed: false,
+        reason: `최소 보유시간 미충족 (${hoursLeft}시간 남음)`,
+        hoursLeft,
+      };
+    }
+
+    return { allowed: true, reason: '' };
   },
 
   /**
@@ -109,6 +213,13 @@ const tradeExecutor = {
       return null;
     }
 
+    // 쿨다운 체크 (매도 후 재매수 금지)
+    const cooldownCheck = this.checkCooldown(stockCode);
+    if (!cooldownCheck.allowed) {
+      console.log(`[Executor] 매수 차단: ${stockCode} - ${cooldownCheck.reason}`);
+      return null;
+    }
+
     // 매수 수량 계산
     const quantity = Math.floor(config.trading.buyAmount / currentPrice);
     if (quantity < 1) {
@@ -171,17 +282,32 @@ const tradeExecutor = {
       return null;
     }
 
+    // 최소 보유 시간 체크 (손절은 예외)
+    const profitRate = (currentPrice - holding.avgPrice) / holding.avgPrice;
+    const isStopLoss = profitRate <= (config.trading.sell.stopLoss || -0.02);
+
+    if (!isStopLoss) {
+      const holdingTimeCheck = this.checkMinHoldingTime(holding);
+      if (!holdingTimeCheck.allowed) {
+        console.log(`[Executor] 매도 차단: ${holding.name} - ${holdingTimeCheck.reason}`);
+        return null;
+      }
+    }
+
     try {
       // 매도 주문 실행
       const result = await kisApi.sellStock(stockCode, quantity, 0);  // 시장가
 
       if (result.success) {
-        const profitRate = ((currentPrice - holding.avgPrice) / holding.avgPrice * 100).toFixed(2);
+        const profitRateCalc = ((currentPrice - holding.avgPrice) / holding.avgPrice * 100).toFixed(2);
         const profit = (currentPrice - holding.avgPrice) * quantity;
 
         // 포트폴리오에서 제거
         portfolio.holdings = portfolio.holdings.filter(h => h.code !== stockCode);
         this.savePortfolio(portfolio);
+
+        // 쿨다운 기록 (재매수 금지)
+        this.recordCooldown(stockCode, holding.name);
 
         // 매매 기록 저장
         this.saveTrade({
@@ -193,13 +319,13 @@ const tradeExecutor = {
           amount: quantity * currentPrice,
           avgPrice: holding.avgPrice,
           profit,
-          profitRate: parseFloat(profitRate),
+          profitRate: parseFloat(profitRateCalc),
           reason,
           orderNo: result.orderNo,
         });
 
-        console.log(`[Executor] 매도 완료: ${holding.name} ${quantity}주 @ ${currentPrice.toLocaleString()}원 (수익률: ${profitRate}%)`);
-        return { success: true, quantity, price: currentPrice, profitRate, profit };
+        console.log(`[Executor] 매도 완료: ${holding.name} ${quantity}주 @ ${currentPrice.toLocaleString()}원 (수익률: ${profitRateCalc}%)`);
+        return { success: true, quantity, price: currentPrice, profitRate: profitRateCalc, profit };
       }
     } catch (error) {
       console.error(`[Executor] 매도 실패 (${stockCode}):`, error.message);
