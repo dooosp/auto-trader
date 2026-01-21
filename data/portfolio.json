@@ -5,10 +5,10 @@
       "name": "삼성전자",
       "quantity": 3,
       "avgPrice": 147700,
-      "currentPrice": 148600,
-      "profit": 2700,
-      "profitRate": 0.61,
-      "highestPrice": 148600
+      "currentPrice": 149200,
+      "profit": 4500,
+      "profitRate": 1.02,
+      "highestPrice": 149500
     },
     {
       "code": "055550",
@@ -18,33 +18,33 @@
       "currentPrice": 81200,
       "profit": 3300,
       "profitRate": 0.68,
-      "highestPrice": 81100
+      "highestPrice": 81200
     },
     {
       "code": "068270",
       "name": "셀트리온",
       "quantity": 2,
       "avgPrice": 203000,
-      "currentPrice": 202500,
-      "profit": -1000,
-      "profitRate": -0.25,
-      "highestPrice": 203000
+      "currentPrice": 204000,
+      "profit": 2000,
+      "profitRate": 0.49,
+      "highestPrice": 204000
     },
     {
       "code": "316140",
       "name": "우리금융지주",
       "quantity": 17,
       "avgPrice": 28314,
-      "currentPrice": 28800,
-      "profit": 8250,
-      "profitRate": 1.71,
-      "highestPrice": 28750
+      "currentPrice": 28850,
+      "profit": 9100,
+      "profitRate": 1.89,
+      "highestPrice": 28850
     }
   ],
   "summary": {
     "totalDeposit": 9910990,
-    "totalEvaluation": 10075269,
-    "totalProfit": 13250
+    "totalEvaluation": 10080919,
+    "totalProfit": 18900
   },
-  "lastUpdated": "2026-01-21T05:26:29.008Z"
+  "lastUpdated": "2026-01-21T06:31:05.388Z"
 }
