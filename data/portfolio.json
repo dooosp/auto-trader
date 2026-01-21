@@ -1,83 +1,43 @@
 {
   "holdings": [
     {
-      "code": "000270",
-      "name": "기아",
-      "quantity": 3,
-      "avgPrice": 165900,
-      "currentPrice": 164700,
-      "profit": -3600,
-      "profitRate": -0.72,
-      "highestPrice": 165900
-    },
-    {
-      "code": "003550",
-      "name": "LG",
-      "quantity": 5,
-      "avgPrice": 89700,
-      "currentPrice": 89200,
-      "profit": -2500,
-      "profitRate": -0.56,
-      "highestPrice": 89700
-    },
-    {
-      "code": "005380",
-      "name": "현대차",
-      "quantity": 1,
-      "avgPrice": 484000,
-      "currentPrice": 478500,
-      "profit": -5500,
-      "profitRate": -1.14,
-      "highestPrice": 484000
-    },
-    {
       "code": "005930",
       "name": "삼성전자",
       "quantity": 3,
       "avgPrice": 147700,
-      "currentPrice": 145400,
-      "profit": -6900,
-      "profitRate": -1.56,
-      "highestPrice": 147700
+      "currentPrice": 149400,
+      "profit": 5100,
+      "profitRate": 1.15,
+      "highestPrice": 149250
     },
     {
       "code": "032830",
       "name": "삼성생명",
       "quantity": 2,
       "avgPrice": 176300,
-      "currentPrice": 174800,
-      "profit": -3000,
-      "profitRate": -0.85,
+      "currentPrice": 173000,
+      "profit": -6600,
+      "profitRate": -1.87,
       "highestPrice": 176300
-    },
-    {
-      "code": "036570",
-      "name": "엔씨소프트",
-      "quantity": 2,
-      "avgPrice": 236500,
-      "currentPrice": 234000,
-      "profit": -5000,
-      "profitRate": -1.06,
-      "highestPrice": 236500
     },
     {
       "code": "055550",
       "name": "신한지주",
       "quantity": 6,
       "avgPrice": 80650,
-      "currentPrice": 81800,
-      "profit": 6900,
-      "profitRate": 1.43,
-      "highestPrice": 81800
+      "currentPrice": 81200,
+      "profit": 3300,
+      "profitRate": 0.68,
+      "highestPrice": 81200
     },
     {
       "code": "066570",
       "name": "LG전자",
       "quantity": 4,
       "avgPrice": 105325,
-      "currentPrice": 104700,
-      "profit": -2500,
-      "profitRate": -0.59,
+      "currentPrice": 104150,
+      "profit": -4700,
+      "profitRate": -1.12,
       "highestPrice": 105325
     },
     {
@@ -85,36 +45,36 @@
       "name": "하나금융지주",
       "quantity": 5,
       "avgPrice": 98720,
-      "currentPrice": 100000,
-      "profit": 6400,
-      "profitRate": 1.3,
-      "highestPrice": 100000
+      "currentPrice": 99400,
+      "profit": 3400,
+      "profitRate": 0.69,
+      "highestPrice": 99400
     },
     {
       "code": "105560",
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 133300,
-      "currentPrice": 132800,
-      "profit": -1500,
-      "profitRate": -0.38,
-      "highestPrice": 133300
+      "currentPrice": 133500,
+      "profit": 600,
+      "profitRate": 0.15,
+      "highestPrice": 133450
     },
     {
       "code": "316140",
       "name": "우리금융지주",
       "quantity": 17,
       "avgPrice": 28314,
-      "currentPrice": 28325,
-      "profit": 175,
-      "profitRate": 0.04,
-      "highestPrice": 28325
+      "currentPrice": 28600,
+      "profit": 4850,
+      "profitRate": 1.01,
+      "highestPrice": 28550
     }
   ],
   "summary": {
-    "totalDeposit": 10000000,
-    "totalEvaluation": 10016581,
-    "totalProfit": -17025
+    "totalDeposit": 9910990,
+    "totalEvaluation": 10064456,
+    "totalProfit": 30850
   },
-  "lastUpdated": "2026-01-20T06:30:56.269Z"
+  "lastUpdated": "2026-01-21T01:22:48.869Z"
 }
