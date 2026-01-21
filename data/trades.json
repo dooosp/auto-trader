@@ -578,5 +578,19 @@
     "amount": 407000,
     "orderNo": "0000015674",
     "timestamp": "2026-01-21T03:41:36.347Z"
+  },
+  {
+    "type": "SELL",
+    "code": "066570",
+    "name": "LG전자",
+    "quantity": 4,
+    "price": 105800,
+    "amount": 423200,
+    "avgPrice": 105325,
+    "profit": 1900,
+    "profitRate": 0.45,
+    "reason": "다중 매도 (2/2): RSI 과매수(72.64), BB 상단 돌파",
+    "orderNo": "0000018218",
+    "timestamp": "2026-01-21T04:41:42.385Z"
   }
 ]

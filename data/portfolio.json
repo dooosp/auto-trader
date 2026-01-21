@@ -5,54 +5,46 @@
       "name": "삼성전자",
       "quantity": 3,
       "avgPrice": 147700,
-      "currentPrice": 148550,
-      "profit": 2550,
-      "profitRate": 0.58,
-      "highestPrice": 148500
+      "currentPrice": 149000,
+      "profit": 3900,
+      "profitRate": 0.88,
+      "highestPrice": 148800
     },
     {
       "code": "055550",
       "name": "신한지주",
       "quantity": 6,
       "avgPrice": 80650,
-      "currentPrice": 81100,
-      "profit": 2700,
-      "profitRate": 0.56,
-      "highestPrice": 81200
+      "currentPrice": 80900,
+      "profit": 1500,
+      "profitRate": 0.31,
+      "highestPrice": 80900
     },
     {
-      "code": "066570",
-      "name": "LG전자",
-      "quantity": 4,
-      "avgPrice": 105325,
-      "currentPrice": 103900,
-      "profit": -5700,
-      "profitRate": -1.35,
-      "highestPrice": 105325
+      "code": "068270",
+      "name": "셀트리온",
+      "quantity": 2,
+      "avgPrice": 203000,
+      "currentPrice": 203000,
+      "profit": 0,
+      "profitRate": 0,
+      "highestPrice": 203000
     },
     {
       "code": "316140",
       "name": "우리금융지주",
       "quantity": 17,
       "avgPrice": 28314,
-      "currentPrice": 28900,
-      "profit": 9950,
-      "profitRate": 2.07,
-      "highestPrice": 28900
-    },
-    {
-      "code": "068270",
-      "name": "셀트리온",
-      "quantity": 2,
-      "avgPrice": 203500,
-      "buyDate": "2026-01-21T03:41:36.346Z",
-      "orderNo": "0000015674"
+      "currentPrice": 28650,
+      "profit": 5700,
+      "profitRate": 1.18,
+      "highestPrice": 28650
     }
   ],
   "summary": {
     "totalDeposit": 9910990,
-    "totalEvaluation": 10071683,
-    "totalProfit": 12100
+    "totalEvaluation": 10073674,
+    "totalProfit": 12600
   },
-  "lastUpdated": "2026-01-21T03:41:36.346Z"
+  "lastUpdated": "2026-01-21T04:41:42.384Z"
 }
