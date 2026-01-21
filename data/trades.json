@@ -526,5 +526,57 @@
     "reason": "다중 매도 (2/2): RSI 과매수(79.95), BB 상단 돌파",
     "orderNo": "0000006684",
     "timestamp": "2026-01-21T01:22:48.870Z"
+  },
+  {
+    "type": "SELL",
+    "code": "032830",
+    "name": "삼성생명",
+    "quantity": 2,
+    "price": 173800,
+    "amount": 347600,
+    "avgPrice": 176300,
+    "profit": -5000,
+    "profitRate": -1.42,
+    "reason": "다중 매도 (2/2): BB 상단 돌파, 유동성 스윕 매도",
+    "orderNo": "0000015663",
+    "timestamp": "2026-01-21T03:41:25.196Z"
+  },
+  {
+    "type": "SELL",
+    "code": "086790",
+    "name": "하나금융지주",
+    "quantity": 5,
+    "price": 100200,
+    "amount": 501000,
+    "avgPrice": 98720,
+    "profit": 7400,
+    "profitRate": 1.5,
+    "reason": "다중 매도 (2/2): RSI 과매수(71.63), BB 상단 돌파",
+    "orderNo": "0000015667",
+    "timestamp": "2026-01-21T03:41:26.440Z"
+  },
+  {
+    "type": "SELL",
+    "code": "105560",
+    "name": "KB금융",
+    "quantity": 3,
+    "price": 134400,
+    "amount": 403200,
+    "avgPrice": 133300,
+    "profit": 3300,
+    "profitRate": 0.83,
+    "reason": "다중 매도 (2/2): RSI 과매수(70.25), BB 상단 돌파",
+    "orderNo": "0000015669",
+    "timestamp": "2026-01-21T03:41:27.688Z"
+  },
+  {
+    "type": "BUY",
+    "code": "068270",
+    "name": "셀트리온",
+    "quantity": 2,
+    "price": 203500,
+    "amount": 407000,
+    "orderNo": "0000015674",
+    "timestamp": "2026-01-21T03:41:36.347Z"
   }
 ]

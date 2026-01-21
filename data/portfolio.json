@@ -5,29 +5,19 @@
       "name": "삼성전자",
       "quantity": 3,
       "avgPrice": 147700,
-      "currentPrice": 149400,
-      "profit": 5100,
-      "profitRate": 1.15,
-      "highestPrice": 149250
-    },
-    {
-      "code": "032830",
-      "name": "삼성생명",
-      "quantity": 2,
-      "avgPrice": 176300,
-      "currentPrice": 173000,
-      "profit": -6600,
-      "profitRate": -1.87,
-      "highestPrice": 176300
+      "currentPrice": 148550,
+      "profit": 2550,
+      "profitRate": 0.58,
+      "highestPrice": 148500
     },
     {
       "code": "055550",
       "name": "신한지주",
       "quantity": 6,
       "avgPrice": 80650,
-      "currentPrice": 81200,
-      "profit": 3300,
-      "profitRate": 0.68,
+      "currentPrice": 81100,
+      "profit": 2700,
+      "profitRate": 0.56,
       "highestPrice": 81200
     },
     {
@@ -35,46 +25,34 @@
       "name": "LG전자",
       "quantity": 4,
       "avgPrice": 105325,
-      "currentPrice": 104150,
-      "profit": -4700,
-      "profitRate": -1.12,
+      "currentPrice": 103900,
+      "profit": -5700,
+      "profitRate": -1.35,
       "highestPrice": 105325
-    },
-    {
-      "code": "086790",
-      "name": "하나금융지주",
-      "quantity": 5,
-      "avgPrice": 98720,
-      "currentPrice": 99400,
-      "profit": 3400,
-      "profitRate": 0.69,
-      "highestPrice": 99400
-    },
-    {
-      "code": "105560",
-      "name": "KB금융",
-      "quantity": 3,
-      "avgPrice": 133300,
-      "currentPrice": 133500,
-      "profit": 600,
-      "profitRate": 0.15,
-      "highestPrice": 133450
     },
     {
       "code": "316140",
       "name": "우리금융지주",
       "quantity": 17,
       "avgPrice": 28314,
-      "currentPrice": 28600,
-      "profit": 4850,
-      "profitRate": 1.01,
-      "highestPrice": 28550
+      "currentPrice": 28900,
+      "profit": 9950,
+      "profitRate": 2.07,
+      "highestPrice": 28900
+    },
+    {
+      "code": "068270",
+      "name": "셀트리온",
+      "quantity": 2,
+      "avgPrice": 203500,
+      "buyDate": "2026-01-21T03:41:36.346Z",
+      "orderNo": "0000015674"
     }
   ],
   "summary": {
     "totalDeposit": 9910990,
-    "totalEvaluation": 10064456,
-    "totalProfit": 30850
+    "totalEvaluation": 10071683,
+    "totalProfit": 12100
   },
-  "lastUpdated": "2026-01-21T01:22:48.869Z"
+  "lastUpdated": "2026-01-21T03:41:36.346Z"
 }
