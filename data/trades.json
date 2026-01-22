@@ -602,5 +602,79 @@
     "amount": 367500,
     "orderNo": "0000007150",
     "timestamp": "2026-01-22T01:22:33.338Z"
+  },
+  {
+    "type": "SELL",
+    "code": "006400",
+    "name": "삼성SDI",
+    "quantity": 1,
+    "price": 371000,
+    "amount": 371000,
+    "avgPrice": 367000,
+    "profit": 4000,
+    "profitRate": 1.09,
+    "reason": "다중 매도 (2/2): RSI 과매수(82.53), BB 상단 돌파",
+    "orderNo": "0000012713",
+    "timestamp": "2026-01-22T03:45:13.789Z"
+  },
+  {
+    "type": "BUY",
+    "code": "000270",
+    "name": "기아",
+    "quantity": 2,
+    "price": 168300,
+    "amount": 336600,
+    "orderNo": "0000012718",
+    "timestamp": "2026-01-22T03:45:15.026Z"
+  },
+  {
+    "type": "BUY",
+    "code": "086790",
+    "name": "하나금융지주",
+    "quantity": 4,
+    "price": 100300,
+    "amount": 401200,
+    "orderNo": "0000012720",
+    "timestamp": "2026-01-22T03:45:16.233Z"
+  },
+  {
+    "type": "BUY",
+    "code": "036570",
+    "name": "엔씨소프트",
+    "quantity": 2,
+    "price": 229500,
+    "amount": 459000,
+    "orderNo": "0000012721",
+    "timestamp": "2026-01-22T03:45:18.455Z"
+  },
+  {
+    "type": "BUY",
+    "code": "105560",
+    "name": "KB금융",
+    "quantity": 3,
+    "price": 134600,
+    "amount": 403800,
+    "orderNo": "0000012724",
+    "timestamp": "2026-01-22T03:45:20.651Z"
+  },
+  {
+    "type": "BUY",
+    "code": "032830",
+    "name": "삼성생명",
+    "quantity": 2,
+    "price": 180700,
+    "amount": 361400,
+    "orderNo": "0000012726",
+    "timestamp": "2026-01-22T03:45:22.853Z"
+  },
+  {
+    "type": "BUY",
+    "code": "003550",
+    "name": "LG",
+    "quantity": 5,
+    "price": 88900,
+    "amount": 444500,
+    "orderNo": "0000012727",
+    "timestamp": "2026-01-22T03:45:24.060Z"
   }
 ]
