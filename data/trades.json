@@ -744,5 +744,35 @@
     "amount": 424800,
     "orderNo": "0000015014",
     "timestamp": "2026-01-22T04:45:04.491Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "005930",
+    "name": "삼성전자",
+    "quantity": 1,
+    "price": 155300,
+    "amount": 155300,
+    "avgPrice": 147700,
+    "profit": 7600,
+    "profitRate": 5.15,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 1,
+    "orderNo": "0000016442",
+    "timestamp": "2026-01-22T05:25:56.283Z"
+  },
+  {
+    "type": "SELL",
+    "code": "066570",
+    "name": "LG전자",
+    "quantity": 4,
+    "price": 106300,
+    "amount": 425200,
+    "avgPrice": 106250,
+    "profit": 200,
+    "profitRate": 0.05,
+    "reason": "다중 매도 (2/2): RSI 과매수(70.3), 유동성 스윕 매도",
+    "orderNo": "0000016443",
+    "timestamp": "2026-01-22T05:25:57.472Z"
   }
 ]

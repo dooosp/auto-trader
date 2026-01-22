@@ -5,20 +5,20 @@
       "name": "LG",
       "quantity": 5,
       "avgPrice": 88980,
-      "currentPrice": 89000,
-      "profit": 100,
-      "profitRate": 0.02,
+      "currentPrice": 88600,
+      "profit": -1900,
+      "profitRate": -0.43,
       "highestPrice": 88980
     },
     {
       "code": "005930",
       "name": "삼성전자",
-      "quantity": 2,
+      "quantity": 1,
       "avgPrice": 147700,
-      "currentPrice": 155200,
-      "profit": 22500,
-      "profitRate": 5.08,
-      "highestPrice": 155200,
+      "currentPrice": 155300,
+      "profit": 15200,
+      "profitRate": 5.15,
+      "highestPrice": 155300,
       "partialSells": [
         "L5"
       ]
@@ -38,9 +38,9 @@
       "name": "신한지주",
       "quantity": 6,
       "avgPrice": 80650,
-      "currentPrice": 82300,
-      "profit": 9900,
-      "profitRate": 2.05,
+      "currentPrice": 82100,
+      "profit": 8700,
+      "profitRate": 1.8,
       "highestPrice": 82200
     },
     {
@@ -51,16 +51,16 @@
       "currentPrice": 208500,
       "profit": 11000,
       "profitRate": 2.71,
-      "highestPrice": 209000
+      "highestPrice": 208000
     },
     {
       "code": "105560",
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 134700,
-      "currentPrice": 134500,
-      "profit": -600,
-      "profitRate": -0.15,
+      "currentPrice": 134200,
+      "profit": -1500,
+      "profitRate": -0.37,
       "highestPrice": 134700
     },
     {
@@ -71,21 +71,13 @@
       "currentPrice": 28950,
       "profit": 10800,
       "profitRate": 2.24,
-      "highestPrice": 28950
-    },
-    {
-      "code": "066570",
-      "name": "LG전자",
-      "quantity": 4,
-      "avgPrice": 106200,
-      "buyDate": "2026-01-22T04:45:04.491Z",
-      "orderNo": "0000015014"
+      "highestPrice": 28900
     }
   ],
   "summary": {
     "totalDeposit": 5054656,
-    "totalEvaluation": 10106469,
-    "totalProfit": 42100
+    "totalEvaluation": 10099758,
+    "totalProfit": 38100
   },
-  "lastUpdated": "2026-01-22T04:45:04.491Z"
+  "lastUpdated": "2026-01-22T05:25:57.471Z"
 }
