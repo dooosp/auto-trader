@@ -774,5 +774,19 @@
     "reason": "다중 매도 (2/2): RSI 과매수(70.3), 유동성 스윕 매도",
     "orderNo": "0000016443",
     "timestamp": "2026-01-22T05:25:57.472Z"
+  },
+  {
+    "type": "SELL",
+    "code": "055550",
+    "name": "신한지주",
+    "quantity": 6,
+    "price": 82700,
+    "amount": 496200,
+    "avgPrice": 80650,
+    "profit": 12300,
+    "profitRate": 2.54,
+    "reason": "다중 매도 (2/2): RSI 과매수(70.47), BB 상단 돌파",
+    "orderNo": "0000018804",
+    "timestamp": "2026-01-22T06:29:40.155Z"
   }
 ]
