@@ -892,5 +892,63 @@
     "amount": 373500,
     "orderNo": "0000013734",
     "timestamp": "2026-01-23T04:40:01.932Z"
+  },
+  {
+    "type": "SELL",
+    "code": "005930",
+    "name": "삼성전자",
+    "quantity": 3,
+    "price": 151500,
+    "amount": 454500,
+    "avgPrice": 154766,
+    "profit": -9798,
+    "profitRate": -2.11,
+    "reason": "[긴급] ATR 손절 (-2.11%, ATR: 3.72%)",
+    "orderNo": "0000015578",
+    "timestamp": "2026-01-23T05:25:37.105Z"
+  },
+  {
+    "type": "SELL",
+    "code": "006400",
+    "name": "삼성SDI",
+    "quantity": 1,
+    "price": 369000,
+    "amount": 369000,
+    "avgPrice": 373500,
+    "profit": -4500,
+    "profitRate": -1.2,
+    "reason": "다중 매도 (3/2): RSI 과매수(75.89), BB 상단 돌파, 매도세 감지",
+    "orderNo": "0000015581",
+    "timestamp": "2026-01-23T05:25:38.359Z"
+  },
+  {
+    "type": "BUY",
+    "code": "086790",
+    "name": "하나금융지주",
+    "quantity": 4,
+    "price": 100600,
+    "amount": 402400,
+    "orderNo": "0000015584",
+    "timestamp": "2026-01-23T05:25:41.624Z"
+  },
+  {
+    "type": "BUY",
+    "code": "000270",
+    "name": "기아",
+    "quantity": 3,
+    "price": 158800,
+    "amount": 476400,
+    "orderNo": "0000015588",
+    "timestamp": "2026-01-23T05:25:47.338Z"
+  },
+  {
+    "type": "BUY",
+    "code": "032830",
+    "name": "삼성생명",
+    "quantity": 2,
+    "price": 183400,
+    "amount": 366800,
+    "orderNo": "0000015592",
+    "timestamp": "2026-01-23T05:25:51.994Z"
   }
 ]

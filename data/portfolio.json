@@ -1,24 +1,14 @@
 {
   "holdings": [
     {
-      "code": "005930",
-      "name": "삼성전자",
-      "quantity": 3,
-      "avgPrice": 154766,
-      "currentPrice": 152500,
-      "profit": -6800,
-      "profitRate": -1.46,
-      "highestPrice": 154766
-    },
-    {
       "code": "035420",
       "name": "NAVER",
       "quantity": 1,
       "avgPrice": 263500,
-      "currentPrice": 265000,
-      "profit": 1500,
-      "profitRate": 0.57,
-      "highestPrice": 265500
+      "currentPrice": 264000,
+      "profit": 500,
+      "profitRate": 0.19,
+      "highestPrice": 264000
     },
     {
       "code": "068270",
@@ -28,31 +18,47 @@
       "currentPrice": 212000,
       "profit": 18000,
       "profitRate": 4.43,
-      "highestPrice": 212000
+      "highestPrice": 212500
     },
     {
       "code": "105560",
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 134700,
-      "currentPrice": 135500,
-      "profit": 2400,
-      "profitRate": 0.59,
-      "highestPrice": 135500
+      "currentPrice": 135200,
+      "profit": 1500,
+      "profitRate": 0.37,
+      "highestPrice": 135200
     },
     {
-      "code": "006400",
-      "name": "삼성SDI",
-      "quantity": 1,
-      "avgPrice": 373500,
-      "buyDate": "2026-01-23T04:40:01.931Z",
-      "orderNo": "0000013734"
+      "code": "086790",
+      "name": "하나금융지주",
+      "quantity": 4,
+      "avgPrice": 100600,
+      "buyDate": "2026-01-23T05:25:41.623Z",
+      "orderNo": "0000015584"
+    },
+    {
+      "code": "000270",
+      "name": "기아",
+      "quantity": 3,
+      "avgPrice": 158800,
+      "buyDate": "2026-01-23T05:25:47.337Z",
+      "orderNo": "0000015588"
+    },
+    {
+      "code": "032830",
+      "name": "삼성생명",
+      "quantity": 2,
+      "avgPrice": 183400,
+      "buyDate": "2026-01-23T05:25:51.993Z",
+      "orderNo": "0000015592"
     }
   ],
   "summary": {
     "totalDeposit": 8247669,
-    "totalEvaluation": 10141441,
-    "totalProfit": 15100
+    "totalEvaluation": 10132491,
+    "totalProfit": 6200
   },
-  "lastUpdated": "2026-01-23T04:40:01.931Z"
+  "lastUpdated": "2026-01-23T05:25:51.993Z"
 }
