@@ -1,14 +1,24 @@
 {
   "holdings": [
     {
+      "code": "000270",
+      "name": "기아",
+      "quantity": 3,
+      "avgPrice": 158900,
+      "currentPrice": 159100,
+      "profit": 600,
+      "profitRate": 0.13,
+      "highestPrice": 159100
+    },
+    {
       "code": "035420",
       "name": "NAVER",
       "quantity": 1,
       "avgPrice": 263500,
-      "currentPrice": 264000,
-      "profit": 500,
-      "profitRate": 0.19,
-      "highestPrice": 264000
+      "currentPrice": 265000,
+      "profit": 1500,
+      "profitRate": 0.57,
+      "highestPrice": 265000
     },
     {
       "code": "068270",
@@ -18,47 +28,31 @@
       "currentPrice": 212000,
       "profit": 18000,
       "profitRate": 4.43,
-      "highestPrice": 212500
+      "highestPrice": 212000
     },
     {
       "code": "105560",
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 134700,
-      "currentPrice": 135200,
-      "profit": 1500,
-      "profitRate": 0.37,
-      "highestPrice": 135200
+      "currentPrice": 135900,
+      "profit": 3600,
+      "profitRate": 0.89,
+      "highestPrice": 135900
     },
     {
-      "code": "086790",
-      "name": "하나금융지주",
+      "code": "066570",
+      "name": "LG전자",
       "quantity": 4,
-      "avgPrice": 100600,
-      "buyDate": "2026-01-23T05:25:41.623Z",
-      "orderNo": "0000015584"
-    },
-    {
-      "code": "000270",
-      "name": "기아",
-      "quantity": 3,
-      "avgPrice": 158800,
-      "buyDate": "2026-01-23T05:25:47.337Z",
-      "orderNo": "0000015588"
-    },
-    {
-      "code": "032830",
-      "name": "삼성생명",
-      "quantity": 2,
-      "avgPrice": 183400,
-      "buyDate": "2026-01-23T05:25:51.993Z",
-      "orderNo": "0000015592"
+      "avgPrice": 105600,
+      "buyDate": "2026-01-23T06:29:20.385Z",
+      "orderNo": "0000020778"
     }
   ],
   "summary": {
     "totalDeposit": 8247669,
-    "totalEvaluation": 10132491,
-    "totalProfit": 6200
+    "totalEvaluation": 10140274,
+    "totalProfit": 29900
   },
-  "lastUpdated": "2026-01-23T05:25:51.993Z"
+  "lastUpdated": "2026-01-23T06:29:20.385Z"
 }

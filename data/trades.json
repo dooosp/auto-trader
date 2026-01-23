@@ -950,5 +950,43 @@
     "amount": 366800,
     "orderNo": "0000015592",
     "timestamp": "2026-01-23T05:25:51.994Z"
+  },
+  {
+    "type": "SELL",
+    "code": "032830",
+    "name": "삼성생명",
+    "quantity": 2,
+    "price": 185100,
+    "amount": 370200,
+    "avgPrice": 183200,
+    "profit": 3800,
+    "profitRate": 1.04,
+    "reason": "다중 매도 (2/2): RSI 과매수(72.93), BB 상단 돌파",
+    "orderNo": "0000020775",
+    "timestamp": "2026-01-23T06:29:09.468Z"
+  },
+  {
+    "type": "SELL",
+    "code": "086790",
+    "name": "하나금융지주",
+    "quantity": 4,
+    "price": 101300,
+    "amount": 405200,
+    "avgPrice": 100700,
+    "profit": 2400,
+    "profitRate": 0.6,
+    "reason": "다중 매도 (2/2): RSI 과매수(74.66), BB 상단 돌파",
+    "orderNo": "0000020776",
+    "timestamp": "2026-01-23T06:29:10.685Z"
+  },
+  {
+    "type": "BUY",
+    "code": "066570",
+    "name": "LG전자",
+    "quantity": 4,
+    "price": 105600,
+    "amount": 422400,
+    "orderNo": "0000020778",
+    "timestamp": "2026-01-23T06:29:20.385Z"
   }
 ]
