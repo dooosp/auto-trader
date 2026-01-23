@@ -1,6 +1,16 @@
 {
   "holdings": [
     {
+      "code": "005930",
+      "name": "삼성전자",
+      "quantity": 3,
+      "avgPrice": 154766,
+      "currentPrice": 152500,
+      "profit": -6800,
+      "profitRate": -1.46,
+      "highestPrice": 154766
+    },
+    {
       "code": "035420",
       "name": "NAVER",
       "quantity": 1,
@@ -8,41 +18,41 @@
       "currentPrice": 265000,
       "profit": 1500,
       "profitRate": 0.57,
-      "highestPrice": 265000
+      "highestPrice": 265500
     },
     {
       "code": "068270",
       "name": "셀트리온",
       "quantity": 2,
       "avgPrice": 203000,
-      "currentPrice": 210500,
-      "profit": 15000,
-      "profitRate": 3.69,
-      "highestPrice": 210500
+      "currentPrice": 212000,
+      "profit": 18000,
+      "profitRate": 4.43,
+      "highestPrice": 212000
     },
     {
       "code": "105560",
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 134700,
-      "currentPrice": 135300,
-      "profit": 1800,
-      "profitRate": 0.45,
-      "highestPrice": 135300
+      "currentPrice": 135500,
+      "profit": 2400,
+      "profitRate": 0.59,
+      "highestPrice": 135500
     },
     {
-      "code": "005930",
-      "name": "삼성전자",
-      "quantity": 3,
-      "avgPrice": 154800,
-      "buyDate": "2026-01-23T03:30:43.601Z",
-      "orderNo": "0000011261"
+      "code": "006400",
+      "name": "삼성SDI",
+      "quantity": 1,
+      "avgPrice": 373500,
+      "buyDate": "2026-01-23T04:40:01.931Z",
+      "orderNo": "0000013734"
     }
   ],
   "summary": {
     "totalDeposit": 8247669,
-    "totalEvaluation": 10145177,
-    "totalProfit": 16300
+    "totalEvaluation": 10141441,
+    "totalProfit": 15100
   },
-  "lastUpdated": "2026-01-23T03:30:43.601Z"
+  "lastUpdated": "2026-01-23T04:40:01.931Z"
 }
