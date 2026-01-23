@@ -858,5 +858,29 @@
     "amount": 262500,
     "orderNo": "0000006012",
     "timestamp": "2026-01-23T01:20:40.611Z"
+  },
+  {
+    "type": "SELL",
+    "code": "036570",
+    "name": "엔씨소프트",
+    "quantity": 2,
+    "price": 229500,
+    "amount": 459000,
+    "avgPrice": 230000,
+    "profit": -1000,
+    "profitRate": -0.22,
+    "reason": "다중 매도 (2/2): MACD 데드크로스, 5일선 이탈",
+    "orderNo": "0000011259",
+    "timestamp": "2026-01-23T03:30:41.385Z"
+  },
+  {
+    "type": "BUY",
+    "code": "005930",
+    "name": "삼성전자",
+    "quantity": 3,
+    "price": 154800,
+    "amount": 464400,
+    "orderNo": "0000011261",
+    "timestamp": "2026-01-23T03:30:43.601Z"
   }
 ]
