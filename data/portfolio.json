@@ -1,34 +1,14 @@
 {
   "holdings": [
     {
-      "code": "003550",
-      "name": "LG",
-      "quantity": 5,
-      "avgPrice": 88980,
-      "currentPrice": 88700,
-      "profit": -1400,
-      "profitRate": -0.31,
-      "highestPrice": 88980
-    },
-    {
-      "code": "005930",
-      "name": "삼성전자",
-      "quantity": 1,
-      "avgPrice": 147700,
-      "currentPrice": 152100,
-      "profit": 4400,
-      "profitRate": 2.98,
-      "highestPrice": 152100
-    },
-    {
       "code": "036570",
       "name": "엔씨소프트",
       "quantity": 2,
       "avgPrice": 230000,
-      "currentPrice": 228500,
-      "profit": -3000,
-      "profitRate": -0.65,
-      "highestPrice": 230000
+      "currentPrice": 231000,
+      "profit": 2000,
+      "profitRate": 0.43,
+      "highestPrice": 231000
     },
     {
       "code": "068270",
@@ -38,33 +18,31 @@
       "currentPrice": 208000,
       "profit": 10000,
       "profitRate": 2.46,
-      "highestPrice": 208000
+      "highestPrice": 208500
     },
     {
       "code": "105560",
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 134700,
-      "currentPrice": 134900,
-      "profit": 600,
-      "profitRate": 0.15,
-      "highestPrice": 134900
+      "currentPrice": 135400,
+      "profit": 2100,
+      "profitRate": 0.52,
+      "highestPrice": 135300
     },
     {
-      "code": "316140",
-      "name": "우리금융지주",
-      "quantity": 17,
-      "avgPrice": 28314,
-      "currentPrice": 28950,
-      "profit": 10800,
-      "profitRate": 2.24,
-      "highestPrice": 28950
+      "code": "035420",
+      "name": "NAVER",
+      "quantity": 1,
+      "avgPrice": 262500,
+      "buyDate": "2026-01-23T01:20:40.610Z",
+      "orderNo": "0000006012"
     }
   ],
   "summary": {
-    "totalDeposit": 5054656,
-    "totalEvaluation": 10101318,
-    "totalProfit": 33700
+    "totalDeposit": 8247669,
+    "totalEvaluation": 10146454,
+    "totalProfit": 66400
   },
-  "lastUpdated": "2026-01-22T06:29:40.154Z"
+  "lastUpdated": "2026-01-23T01:20:40.610Z"
 }
