@@ -213,6 +213,17 @@ const tradeExecutor = {
       return null;
     }
 
+    // 업종 분산 체크 (같은 업종 최대 N개)
+    const maxPerSector = config.trading.safety?.maxPerSector || 2;
+    const stockSector = config.sectorMap[stockCode];
+    if (stockSector) {
+      const sameSectorCount = portfolio.holdings.filter(h => config.sectorMap[h.code] === stockSector).length;
+      if (sameSectorCount >= maxPerSector) {
+        console.log(`[Executor] 업종 분산 제한: ${stockSector} 업종 이미 ${sameSectorCount}개 보유`);
+        return null;
+      }
+    }
+
     // 쿨다운 체크 (매도 후 재매수 금지)
     const cooldownCheck = this.checkCooldown(stockCode);
     if (!cooldownCheck.allowed) {
@@ -284,9 +295,16 @@ const tradeExecutor = {
 
     // 최소 보유 시간 체크 (손절은 예외)
     const profitRate = (currentPrice - holding.avgPrice) / holding.avgPrice;
-    const isStopLoss = profitRate <= (config.trading.sell.stopLoss || -0.02);
+    const isStopLoss = profitRate <= (config.trading.sell.stopLoss || -0.05);
 
     if (!isStopLoss) {
+      // 최소 익절 필터: 수익률이 0~minProfitToSell 사이면 매도 차단 (수수료 고려)
+      const minProfitToSell = config.trading.sell.minProfitToSell || 0.03;
+      if (profitRate > 0 && profitRate < minProfitToSell) {
+        console.log(`[Executor] 매도 차단: ${holding.name} - 최소 익절 미달 (+${(profitRate * 100).toFixed(1)}% < +${minProfitToSell * 100}%)`);
+        return null;
+      }
+
       const holdingTimeCheck = this.checkMinHoldingTime(holding);
       if (!holdingTimeCheck.allowed) {
         console.log(`[Executor] 매도 차단: ${holding.name} - ${holdingTimeCheck.reason}`);
@@ -589,9 +607,12 @@ const tradeExecutor = {
         if (buyCandidates.length === 0) {
           console.log('  매수 조건 충족 종목 없음');
         } else {
-          // 최대 보유 종목 수까지만 매수
+          // 최대 보유 종목 수 및 1회 실행당 최대 매수 제한 적용
           const availableSlots = config.trading.maxHoldings - updatedPortfolio.holdings.length;
-          const candidatesToBuy = buyCandidates.slice(0, availableSlots);
+          const maxBuyPerRun = config.trading.safety?.maxBuyPerRun || 2;
+          const maxBuy = Math.min(availableSlots, maxBuyPerRun);
+          const candidatesToBuy = buyCandidates.slice(0, maxBuy);
+          console.log(`  매수 후보 ${buyCandidates.length}개 중 최대 ${maxBuy}개 매수`);
 
           for (const candidate of candidatesToBuy) {
             // Phase 2: MTF/커플링 정보 포함 출력

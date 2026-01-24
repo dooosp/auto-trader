@@ -29,21 +29,24 @@ const config = {
     // 매도 조건
     sell: {
       rsiAbove: 70,           // RSI > 70 (과매수)
-      stopLoss: -0.02,        // 손절: -2%
+      stopLoss: -0.05,        // 손절: -5% (대형주 일중 변동 감안)
       takeProfit: 0.10,       // 익절: +10%
+      minProfitToSell: 0.03,  // 최소 익절 기준: +3% 미만이면 매도 안 함 (수수료 고려)
     },
 
     // 매매 안전장치
     safety: {
       enabled: true,                    // 안전장치 활성화
-      cooldownHours: 24,                // 같은 종목 매도 후 재매수 금지 시간 (24시간)
-      minHoldingHours: 2,               // 최소 보유 시간 (2시간) - 이 시간 전에는 매도 금지
+      cooldownHours: 72,                // 같은 종목 매도 후 재매수 금지 시간 (72시간 = 3일)
+      minHoldingHours: 24,              // 최소 보유 시간 (24시간) - 이 시간 전에는 매도 금지
+      maxBuyPerRun: 2,                  // 1회 실행당 최대 매수 종목 수
+      maxPerSector: 2,                  // 같은 업종 최대 보유 수
 
       // 다중 확인 설정
       multiConfirm: {
         enabled: true,                  // 다중 확인 활성화
-        requiredBuyConditions: 3,       // 매수 시 최소 충족 조건 수
-        requiredSellConditions: 2,      // 매도 시 최소 충족 조건 수
+        requiredBuyConditions: 5,       // 매수 시 최소 충족 조건 수 (강화)
+        requiredSellConditions: 3,      // 매도 시 최소 충족 조건 수 (강화)
       },
 
       // 가격 변동폭 필터
