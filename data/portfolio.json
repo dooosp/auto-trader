@@ -5,54 +5,67 @@
       "name": "기아",
       "quantity": 3,
       "avgPrice": 158900,
-      "currentPrice": 159100,
-      "profit": 600,
-      "profitRate": 0.13,
-      "highestPrice": 159100
+      "currentPrice": 155550,
+      "profit": -10050,
+      "profitRate": -2.11,
+      "highestPrice": 158900
     },
     {
       "code": "035420",
       "name": "NAVER",
       "quantity": 1,
       "avgPrice": 263500,
-      "currentPrice": 265000,
-      "profit": 1500,
-      "profitRate": 0.57,
-      "highestPrice": 265000
-    },
-    {
-      "code": "068270",
-      "name": "셀트리온",
-      "quantity": 2,
-      "avgPrice": 203000,
-      "currentPrice": 212000,
-      "profit": 18000,
-      "profitRate": 4.43,
-      "highestPrice": 212000
-    },
-    {
-      "code": "105560",
-      "name": "KB금융",
-      "quantity": 3,
-      "avgPrice": 134700,
-      "currentPrice": 135900,
-      "profit": 3600,
-      "profitRate": 0.89,
-      "highestPrice": 135900
+      "currentPrice": 267500,
+      "profit": 4000,
+      "profitRate": 1.52,
+      "highestPrice": 267500
     },
     {
       "code": "066570",
       "name": "LG전자",
       "quantity": 4,
       "avgPrice": 105600,
-      "buyDate": "2026-01-23T06:29:20.385Z",
-      "orderNo": "0000020778"
+      "currentPrice": 102500,
+      "profit": -12400,
+      "profitRate": -2.94,
+      "highestPrice": 105600
+    },
+    {
+      "code": "068270",
+      "name": "셀트리온",
+      "quantity": 1,
+      "avgPrice": 203000,
+      "currentPrice": 213000,
+      "profit": 20000,
+      "profitRate": 4.93,
+      "highestPrice": 213500,
+      "partialSells": [
+        "L5"
+      ]
+    },
+    {
+      "code": "105560",
+      "name": "KB금융",
+      "quantity": 3,
+      "avgPrice": 134700,
+      "currentPrice": 138600,
+      "profit": 11700,
+      "profitRate": 2.9,
+      "highestPrice": 138500
+    },
+    {
+      "code": "055550",
+      "name": "신한지주",
+      "quantity": 5,
+      "avgPrice": 84100,
+      "buyDate": "2026-01-26T01:26:43.073Z",
+      "orderNo": "0000008244"
     }
   ],
   "summary": {
-    "totalDeposit": 8247669,
-    "totalEvaluation": 10140274,
-    "totalProfit": 29900
+    "totalDeposit": 7736004,
+    "totalEvaluation": 10127326,
+    "totalProfit": 13250
   },
-  "lastUpdated": "2026-01-23T06:29:20.385Z"
+  "lastUpdated": "2026-01-26T01:26:43.073Z"
 }
