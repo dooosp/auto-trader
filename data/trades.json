@@ -1030,5 +1030,59 @@
     "remainingQuantity": 0,
     "orderNo": "0000016453",
     "timestamp": "2026-01-26T03:54:12.793Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "035420",
+    "name": "NAVER",
+    "quantity": 1,
+    "price": 286500,
+    "amount": 286500,
+    "avgPrice": 263500,
+    "profit": 23000,
+    "profitRate": 8.73,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 0,
+    "orderNo": "0000009885",
+    "timestamp": "2026-01-27T01:25:52.621Z"
+  },
+  {
+    "type": "SELL",
+    "code": "066570",
+    "name": "LG전자",
+    "quantity": 4,
+    "price": 99900,
+    "amount": 399600,
+    "avgPrice": 105600,
+    "profit": -22800,
+    "profitRate": -5.4,
+    "reason": "[긴급] ATR 손절 (-5.40%, ATR: 5.41%)",
+    "orderNo": "0000009889",
+    "timestamp": "2026-01-27T01:25:53.857Z"
+  },
+  {
+    "type": "SELL",
+    "code": "105560",
+    "name": "KB금융",
+    "quantity": 3,
+    "price": 141000,
+    "amount": 423000,
+    "avgPrice": 134700,
+    "profit": 18900,
+    "profitRate": 4.68,
+    "reason": "다중 매도 (3/3): RSI 과매수(79), BB 상단 돌파, 저항선 도달",
+    "orderNo": "0000009890",
+    "timestamp": "2026-01-27T01:25:55.072Z"
+  },
+  {
+    "type": "BUY",
+    "code": "035420",
+    "name": "NAVER",
+    "quantity": 1,
+    "price": 286500,
+    "amount": 286500,
+    "orderNo": "0000009894",
+    "timestamp": "2026-01-27T01:25:56.349Z"
   }
 ]
