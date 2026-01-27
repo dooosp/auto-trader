@@ -5,34 +5,36 @@
       "name": "기아",
       "quantity": 3,
       "avgPrice": 158900,
-      "currentPrice": 151000,
-      "profit": -23700,
-      "profitRate": -4.97,
+      "currentPrice": 153400,
+      "profit": -16500,
+      "profitRate": -3.46,
       "highestPrice": 158900
+    },
+    {
+      "code": "035420",
+      "name": "NAVER",
+      "quantity": 1,
+      "avgPrice": 288500,
+      "currentPrice": 280000,
+      "profit": -8500,
+      "profitRate": -2.95,
+      "highestPrice": 288500
     },
     {
       "code": "055550",
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 84180,
-      "currentPrice": 84500,
-      "profit": 1600,
-      "profitRate": 0.38,
-      "highestPrice": 84600
-    },
-    {
-      "code": "035420",
-      "name": "NAVER",
-      "quantity": 1,
-      "avgPrice": 286500,
-      "buyDate": "2026-01-27T01:25:56.348Z",
-      "orderNo": "0000009894"
+      "currentPrice": 86000,
+      "profit": 9100,
+      "profitRate": 2.16,
+      "highestPrice": 86000
     }
   ],
   "summary": {
     "totalDeposit": 8141376,
-    "totalEvaluation": 10131814,
-    "totalProfit": -1800
+    "totalEvaluation": 10136304,
+    "totalProfit": -15900
   },
-  "lastUpdated": "2026-01-27T01:25:56.348Z"
+  "lastUpdated": "2026-01-27T03:45:22.021Z"
 }
