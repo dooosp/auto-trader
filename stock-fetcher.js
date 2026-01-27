@@ -130,14 +130,17 @@ const stockFetcher = {
     const now = new Date();
     const kstOffset = 9 * 60; // KST = UTC+9
     const utcMinutes = now.getUTCHours() * 60 + now.getUTCMinutes();
-    const kstMinutes = utcMinutes + kstOffset;
+    const kstMinutes = (utcMinutes + kstOffset) % 1440;  // 0-1439 범위로 정규화
 
     const { open, close } = config.marketHours;
     const openMinutes = open.hour * 60 + open.minute;
     const closeMinutes = close.hour * 60 + close.minute;
 
+    // KST 기준 요일 계산
+    const kstDate = new Date(now.getTime() + kstOffset * 60000);
+    const kstDay = kstDate.getUTCDay();
+
     // 주말 체크 (0=일, 6=토)
-    const kstDay = new Date(now.getTime() + kstOffset * 60000).getUTCDay();
     if (kstDay === 0 || kstDay === 6) {
       return false;
     }
@@ -152,7 +155,7 @@ const stockFetcher = {
     const now = new Date();
     const kstOffset = 9 * 60;
     const utcMinutes = now.getUTCHours() * 60 + now.getUTCMinutes();
-    const kstMinutes = utcMinutes + kstOffset;
+    const kstMinutes = (utcMinutes + kstOffset) % 1440;  // 0-1439 범위로 정규화
 
     const { open } = config.marketHours;
     const openMinutes = open.hour * 60 + open.minute;
@@ -161,7 +164,7 @@ const stockFetcher = {
       return openMinutes - kstMinutes;
     } else {
       // 내일 장 시작까지
-      return (24 * 60 - kstMinutes) + openMinutes;
+      return (1440 - kstMinutes) + openMinutes;
     }
   },
 

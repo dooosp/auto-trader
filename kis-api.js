@@ -638,6 +638,72 @@ const kisApi = {
       console.error('\n테스트 실패:', error.message);
       return false;
     }
+  },
+
+  // ============================================
+  // 투자자별 매매동향 (수급 분석)
+  // ============================================
+
+  /**
+   * 종목별 투자자 매매동향 조회
+   * @param {string} stockCode - 종목코드
+   * @param {number} days - 조회 일수 (기본 5)
+   * @returns {Object} 투자자별 순매수 정보
+   */
+  async getInvestorTrend(stockCode, days = 5) {
+    try {
+      const headers = await this.getHeaders('FHKST01010900');
+      const params = {
+        FID_COND_MRKT_DIV_CODE: 'J',
+        FID_INPUT_ISCD: stockCode,
+      };
+
+      const response = await axios.get(
+        `${config.kis.baseUrl}/uapi/domestic-stock/v1/quotations/inquire-investor`,
+        { headers, params }
+      );
+
+      if (response.data.rt_cd !== '0') {
+        console.warn(`투자자 동향 조회 실패 [${stockCode}]:`, response.data.msg1);
+        return null;
+      }
+
+      const data = response.data.output;
+      if (!data || data.length === 0) return null;
+
+      // 최근 N일 데이터 집계
+      const recentData = data.slice(0, days);
+
+      let foreignNet = 0;   // 외국인 순매수
+      let institutionNet = 0; // 기관 순매수
+      let individualNet = 0;  // 개인 순매수
+
+      for (const day of recentData) {
+        foreignNet += parseInt(day.frgn_ntby_qty || 0);      // 외국인 순매수량
+        institutionNet += parseInt(day.orgn_ntby_qty || 0);  // 기관 순매수량
+        individualNet += parseInt(day.prsn_ntby_qty || 0);   // 개인 순매수량
+      }
+
+      return {
+        stockCode,
+        days,
+        foreign: {
+          netBuy: foreignNet,
+          trend: foreignNet > 0 ? 'BUY' : foreignNet < 0 ? 'SELL' : 'NEUTRAL',
+        },
+        institution: {
+          netBuy: institutionNet,
+          trend: institutionNet > 0 ? 'BUY' : institutionNet < 0 ? 'SELL' : 'NEUTRAL',
+        },
+        individual: {
+          netBuy: individualNet,
+          trend: individualNet > 0 ? 'BUY' : individualNet < 0 ? 'SELL' : 'NEUTRAL',
+        },
+      };
+    } catch (error) {
+      console.error(`투자자 동향 조회 오류 [${stockCode}]:`, error.message);
+      return null;
+    }
   }
 };
 

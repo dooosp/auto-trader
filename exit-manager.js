@@ -17,7 +17,7 @@ const exitManager = {
    */
   createPartialSellPlan(holding, currentPrice) {
     const avgPrice = holding.avgPrice;
-    const totalQuantity = holding.quantity;
+    const currentQuantity = holding.quantity;  // 현재 보유 수량 (이전 매도 반영됨)
     const profitRate = (currentPrice - avgPrice) / avgPrice;
 
     const exitConfig = config.exit || {};
@@ -38,17 +38,13 @@ const exitManager = {
       nextSell: null,
     };
 
-    let remainingRatio = 1;
     for (const level of partialSellLevels) {
       const levelId = `L${Math.round(level.profitRate * 100)}`;
       const alreadySold = soldLevels.includes(levelId);
 
-      if (!alreadySold) {
-        remainingRatio -= level.sellRatio;
-      }
-
       const targetPrice = Math.round(avgPrice * (1 + level.profitRate));
-      const quantity = Math.floor(totalQuantity * level.sellRatio);
+      // 현재 보유 수량 기준으로 계산
+      const quantity = Math.floor(currentQuantity * level.sellRatio);
 
       plan.levels.push({
         id: levelId,

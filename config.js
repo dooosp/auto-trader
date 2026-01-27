@@ -97,6 +97,58 @@ const config = {
     strictMode: false,          // true면 저항선 근처 매수 차단
   },
 
+  // ========================================
+  // 수익률 개선: 신규 지표 설정
+  // ========================================
+
+  // Stochastic Oscillator 설정
+  stochastic: {
+    enabled: true,
+    kPeriod: 14,                // %K 기간
+    dPeriod: 3,                 // %D 기간
+    oversold: 20,               // 과매도 기준
+    overbought: 80,             // 과매수 기준
+  },
+
+  // Williams %R 설정
+  williamsR: {
+    enabled: true,
+    period: 14,
+    oversold: -80,              // 과매도 기준
+    overbought: -20,            // 과매수 기준
+  },
+
+  // VWAP 설정
+  vwap: {
+    enabled: true,
+    period: 20,                 // 일봉 기준 기간
+    undervaluedThreshold: -3,   // 저평가 기준 (%)
+    overvaluedThreshold: 3,     // 고평가 기준 (%)
+  },
+
+  // ATR Squeeze 설정
+  atrSqueeze: {
+    enabled: true,
+    atrPeriod: 14,
+    avgPeriod: 20,
+    squeezeThreshold: 0.7,      // 수축 기준 (평균 대비)
+    expansionThreshold: 1.2,    // 확대 기준 (평균 대비)
+  },
+
+  // 캔들 패턴 설정
+  candlePatterns: {
+    enabled: true,
+    // 활성화할 패턴들
+    patterns: ['HAMMER', 'INVERTED_HAMMER', 'BULLISH_ENGULFING', 'BEARISH_ENGULFING', 'MORNING_STAR', 'DOJI'],
+  },
+
+  // 수급 분석 설정
+  supplyDemand: {
+    enabled: true,
+    days: 5,                    // 분석 기간 (일)
+    cacheTTL: 30,               // 캐시 유효 시간 (분)
+  },
+
   // Phase 4: 청산 전략 설정
   exit: {
     enabled: true,              // 분할 매도/트레일링 활성화

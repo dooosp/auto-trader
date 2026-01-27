@@ -5,6 +5,8 @@ const indicators = require('./indicators');
 const mtfAnalyzer = require('./mtf-analyzer');
 const marketAnalyzer = require('./market-analyzer');
 const srAnalyzer = require('./sr-analyzer');
+const candlePatterns = require('./candle-patterns');
+const supplyDemand = require('./supply-demand');
 
 const technicalAnalyzer = {
   /**
@@ -159,6 +161,25 @@ const technicalAnalyzer = {
       sr = srAnalyzer.analyze(candles);
     }
 
+    // ========================================
+    // 수익률 개선: 신규 지표 추가
+    // ========================================
+
+    // Stochastic Oscillator
+    const stochastic = indicators.Stochastic(candles);
+
+    // Williams %R
+    const williamsR = indicators.WilliamsR(candles);
+
+    // VWAP
+    const vwap = indicators.VWAP(candles);
+
+    // ATR Squeeze (변동성 수축/확대)
+    const atrSqueeze = indicators.ATRSqueeze(candles);
+
+    // 캔들 패턴 인식
+    const candlePattern = candlePatterns.analyze(candles);
+
     return {
       code: stockData.code,
       currentPrice,
@@ -203,6 +224,14 @@ const technicalAnalyzer = {
       mtf,
       // Phase 3: 지지/저항 분석 결과
       sr,
+      // 수익률 개선: 신규 지표
+      stochastic,
+      williamsR,
+      vwap,
+      atrSqueeze,
+      candlePattern,
+      // 수급 분석은 비동기이므로 별도 처리 (analyzeWithSupply에서 추가)
+      supplyDemand: null,
     };
   },
 
@@ -495,9 +524,9 @@ const technicalAnalyzer = {
       buyConditions.push('5일선 위');
     }
 
-    // 조건 5: 이평선 정배열 (5일 > 20일)
-    if (analysis.ma5AboveMA20) {
-      buyConditions.push('이평선 정배열');
+    // 조건 5: 이평선 완전 정배열 (5일 > 20일 > 60일)
+    if (analysis.ma5AboveMA20 && analysis.ma20 > (analysis.ma60 || 0)) {
+      buyConditions.push('이평선 완전정배열');
     }
 
     // 조건 6: 거래량 증가 (매수세)
@@ -530,6 +559,56 @@ const technicalAnalyzer = {
       buyConditions.push('호재 뉴스');
     }
 
+    // ========================================
+    // 신규 지표 조건 (수익률 개선)
+    // ========================================
+
+    // 조건 12: Stochastic 과매도 + 상향돌파
+    if (analysis.stochastic) {
+      if (analysis.stochastic.signal === 'OVERSOLD') {
+        buyConditions.push(`Stoch 과매도(${analysis.stochastic.k})`);
+      }
+      if (analysis.stochastic.crossover === 'BULLISH_CROSS') {
+        buyConditions.push('Stoch 골든크로스');
+      }
+    }
+
+    // 조건 13: Williams %R 과매도
+    if (analysis.williamsR && analysis.williamsR.signal === 'OVERSOLD') {
+      buyConditions.push(`Williams %R 과매도(${analysis.williamsR.value})`);
+    }
+
+    // 조건 14: VWAP 하단 (저평가)
+    if (analysis.vwap) {
+      if (analysis.vwap.signal === 'UNDERVALUED') {
+        buyConditions.push(`VWAP 저평가(${analysis.vwap.ratio}%)`);
+      } else if (analysis.vwap.signal === 'BELOW_VWAP') {
+        buyConditions.push('VWAP 하단');
+      }
+    }
+
+    // 조건 15: ATR Squeeze 신호 (변동성 수축 후 확대)
+    if (analysis.atrSqueeze) {
+      if (analysis.atrSqueeze.signal === 'SQUEEZE_RELEASE' || analysis.atrSqueeze.signal === 'BREAKOUT') {
+        buyConditions.push(`ATR ${analysis.atrSqueeze.signal}`);
+      }
+    }
+
+    // 조건 16: 캔들 패턴 (상승 신호)
+    if (analysis.candlePattern) {
+      if (analysis.candlePattern.signal === 'STRONG_BULLISH' || analysis.candlePattern.signal === 'BULLISH') {
+        const patternNames = analysis.candlePattern.patterns.map(p => p.name).join(',');
+        buyConditions.push(`캔들패턴(${patternNames})`);
+      }
+    }
+
+    // 조건 17: 수급 분석 (외국인/기관 순매수)
+    if (analysis.supplyDemand) {
+      if (analysis.supplyDemand.signal === 'STRONG_BUY' || analysis.supplyDemand.signal === 'BUY') {
+        buyConditions.push(`수급(${analysis.supplyDemand.signals.join(',')})`);
+      }
+    }
+
     // 다중 확인: 설정된 개수 이상의 조건이 충족되어야 매수
     if (buyConditions.length >= requiredBuyConditions) {
       // 우선순위 결정
@@ -559,59 +638,25 @@ const technicalAnalyzer = {
     };
   },
 
-  // 기존 호환성 유지 (사용 안함)
-  _legacyBuyCondition(analysis, trading, newsSentiment) {
-    const rsiThreshold = newsSentiment === 'POSITIVE' ? 40 : trading.buy.rsiBelow;
-    const rsiCondition = analysis.rsi && analysis.rsi < rsiThreshold;
+  /**
+   * 수급 분석 포함 종합 분석 (비동기)
+   * @param {Object} stockData - 종목 데이터
+   * @returns {Object} 수급 분석 포함된 분석 결과
+   */
+  async analyzeWithSupply(stockData) {
+    const analysis = this.analyze(stockData);
 
-    // 조건 2: 현재가 > 5일 이평선
-    const aboveMA5 = analysis.aboveMA5;
-
-    // 조건 3: 5일 이평선 > 20일 이평선 (상승 추세)
-    const maCondition = analysis.ma5AboveMA20;
-
-    // 모든 조건 충족 시 매수
-    if (rsiCondition && aboveMA5 && maCondition) {
-      const newsInfo = analysis.newsSentiment === 'POSITIVE' ? ', 호재 뉴스' : '';
-      return {
-        action: 'BUY',
-        reason: `매수 조건 충족 (RSI: ${analysis.rsi}${newsInfo})`,
-        analysis,
-        priority: 1,
-      };
+    // 수급 분석 추가 (config에서 활성화된 경우)
+    if (config.supplyDemand?.enabled !== false) {
+      try {
+        analysis.supplyDemand = await supplyDemand.analyze(stockData.code);
+      } catch (error) {
+        console.warn(`수급 분석 실패 [${stockData.code}]:`, error.message);
+        analysis.supplyDemand = { score: 0, signal: 'ERROR' };
+      }
     }
 
-    // 골든크로스 직후 + RSI 적정 범위
-    if (analysis.goldenCross && analysis.rsi < 50) {
-      return {
-        action: 'BUY',
-        reason: `골든크로스 발생 (RSI: ${analysis.rsi})`,
-        analysis,
-        priority: 2,
-      };
-    }
-
-    // 뉴스가 매우 긍정적이면 (점수 3 이상) 기술적 조건 일부 완화
-    if (analysis.newsScore >= 3 && aboveMA5 && analysis.rsi < 50) {
-      return {
-        action: 'BUY',
-        reason: `강한 호재 뉴스 (뉴스점수: ${analysis.newsScore}, RSI: ${analysis.rsi})`,
-        analysis,
-        priority: 3,
-      };
-    }
-
-    // 조건 미충족
-    const reasons = [];
-    if (!rsiCondition) reasons.push(`RSI ${analysis.rsi || 'N/A'}`);
-    if (!aboveMA5) reasons.push('5일선 하회');
-    if (!maCondition) reasons.push('5일선 < 20일선');
-
-    return {
-      action: 'HOLD',
-      reason: reasons.join(', '),
-      analysis,
-    };
+    return analysis;
   },
 
   /**

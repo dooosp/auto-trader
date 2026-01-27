@@ -386,6 +386,208 @@ const indicators = {
   },
 
   // ============================================
+  // Stochastic Oscillator
+  // ============================================
+
+  /**
+   * Stochastic Oscillator 계산
+   * %K = (현재가 - N일 최저) / (N일 최고 - N일 최저) × 100
+   * %D = %K의 M일 이동평균
+   * @param {Array} candles - [{high, low, close}, ...] 배열
+   * @param {number} kPeriod - %K 기간 (기본 14)
+   * @param {number} dPeriod - %D 기간 (기본 3)
+   */
+  Stochastic(candles, kPeriod = 14, dPeriod = 3) {
+    if (candles.length < kPeriod + dPeriod) {
+      return { k: null, d: null, signal: 'NEUTRAL', crossover: null };
+    }
+
+    // %K 배열 계산
+    const kValues = [];
+    for (let i = kPeriod - 1; i < candles.length; i++) {
+      const slice = candles.slice(i - kPeriod + 1, i + 1);
+      const highest = Math.max(...slice.map(c => c.high));
+      const lowest = Math.min(...slice.map(c => c.low));
+      const currentClose = candles[i].close;
+
+      const k = highest === lowest ? 50 : ((currentClose - lowest) / (highest - lowest)) * 100;
+      kValues.push(k);
+    }
+
+    // %D = %K의 SMA
+    const dValues = [];
+    for (let i = dPeriod - 1; i < kValues.length; i++) {
+      const d = kValues.slice(i - dPeriod + 1, i + 1).reduce((a, b) => a + b, 0) / dPeriod;
+      dValues.push(d);
+    }
+
+    const k = kValues[kValues.length - 1];
+    const d = dValues[dValues.length - 1];
+    const prevK = kValues[kValues.length - 2];
+    const prevD = dValues[dValues.length - 2];
+
+    // 신호 판단
+    let signal = 'NEUTRAL';
+    let crossover = null;
+
+    if (k < 20) signal = 'OVERSOLD';
+    else if (k > 80) signal = 'OVERBOUGHT';
+
+    // 크로스오버 확인
+    if (prevK <= prevD && k > d && k < 30) {
+      crossover = 'BULLISH_CROSS';  // 과매도 구간에서 %K가 %D 상향돌파
+    } else if (prevK >= prevD && k < d && k > 70) {
+      crossover = 'BEARISH_CROSS';  // 과매수 구간에서 %K가 %D 하향돌파
+    }
+
+    return {
+      k: Math.round(k * 100) / 100,
+      d: Math.round(d * 100) / 100,
+      signal,
+      crossover,
+    };
+  },
+
+  // ============================================
+  // Williams %R
+  // ============================================
+
+  /**
+   * Williams %R 계산
+   * %R = (N일 최고 - 현재가) / (N일 최고 - N일 최저) × -100
+   * @param {Array} candles - [{high, low, close}, ...] 배열
+   * @param {number} period - 기간 (기본 14)
+   */
+  WilliamsR(candles, period = 14) {
+    if (candles.length < period) {
+      return { value: null, signal: 'NEUTRAL' };
+    }
+
+    const slice = candles.slice(-period);
+    const highest = Math.max(...slice.map(c => c.high));
+    const lowest = Math.min(...slice.map(c => c.low));
+    const currentClose = candles[candles.length - 1].close;
+
+    const r = highest === lowest ? -50 : ((highest - currentClose) / (highest - lowest)) * -100;
+
+    // 신호 판단
+    let signal = 'NEUTRAL';
+    if (r < -80) signal = 'OVERSOLD';      // 과매도
+    else if (r > -20) signal = 'OVERBOUGHT'; // 과매수
+
+    return {
+      value: Math.round(r * 100) / 100,
+      signal,
+    };
+  },
+
+  // ============================================
+  // VWAP (Volume Weighted Average Price)
+  // ============================================
+
+  /**
+   * VWAP 계산
+   * VWAP = Σ(대표가격 × 거래량) / Σ(거래량)
+   * @param {Array} candles - [{high, low, close, volume}, ...] 배열
+   * @param {number} period - 기간 (기본 20, 일봉 기준)
+   */
+  VWAP(candles, period = 20) {
+    if (candles.length < period) {
+      return { vwap: null, ratio: null, signal: 'NEUTRAL' };
+    }
+
+    const slice = candles.slice(-period);
+    let sumPV = 0;  // 가격 × 거래량 합계
+    let sumV = 0;   // 거래량 합계
+
+    for (const c of slice) {
+      const typicalPrice = (c.high + c.low + c.close) / 3;
+      sumPV += typicalPrice * c.volume;
+      sumV += c.volume;
+    }
+
+    const vwap = sumV === 0 ? null : sumPV / sumV;
+    const currentPrice = candles[candles.length - 1].close;
+    const ratio = vwap ? (currentPrice / vwap - 1) * 100 : null;  // VWAP 대비 %
+
+    // 신호 판단
+    let signal = 'NEUTRAL';
+    if (ratio !== null) {
+      if (ratio < -3) signal = 'UNDERVALUED';       // VWAP 대비 3% 이상 저평가
+      else if (ratio < 0) signal = 'BELOW_VWAP';    // VWAP 하단
+      else if (ratio > 3) signal = 'OVERVALUED';    // VWAP 대비 3% 이상 고평가
+      else signal = 'ABOVE_VWAP';                   // VWAP 상단
+    }
+
+    return {
+      vwap: vwap ? Math.round(vwap) : null,
+      ratio: ratio !== null ? Math.round(ratio * 100) / 100 : null,
+      signal,
+    };
+  },
+
+  // ============================================
+  // ATR Squeeze (변동성 수축/확대)
+  // ============================================
+
+  /**
+   * ATR Squeeze 계산 (변동성 수축 후 확대 감지)
+   * @param {Array} candles - [{high, low, close}, ...] 배열
+   * @param {number} atrPeriod - ATR 기간 (기본 14)
+   * @param {number} avgPeriod - 평균 ATR 기간 (기본 20)
+   */
+  ATRSqueeze(candles, atrPeriod = 14, avgPeriod = 20) {
+    if (candles.length < atrPeriod + avgPeriod) {
+      return { ratio: null, state: 'UNKNOWN', signal: 'NEUTRAL' };
+    }
+
+    // 최근 ATR 히스토리 계산
+    const atrHistory = [];
+    for (let i = atrPeriod; i <= candles.length; i++) {
+      const slice = candles.slice(i - atrPeriod, i);
+      const result = this.ATR(slice, atrPeriod);
+      if (result.atr) atrHistory.push(result.atr);
+    }
+
+    if (atrHistory.length < avgPeriod) {
+      return { ratio: null, state: 'UNKNOWN', signal: 'NEUTRAL' };
+    }
+
+    const currentATR = atrHistory[atrHistory.length - 1];
+    const avgATR = this.SMA(atrHistory.slice(-avgPeriod), avgPeriod);
+    const ratio = currentATR / avgATR;
+
+    // 이전 비율 (추세 확인용)
+    const prevATR = atrHistory[atrHistory.length - 2];
+    const prevRatio = prevATR / avgATR;
+
+    // 상태 판단
+    let state = 'NORMAL';
+    let signal = 'NEUTRAL';
+
+    if (ratio < 0.7) {
+      state = 'SQUEEZE';  // 변동성 수축
+    } else if (ratio > 1.2) {
+      state = 'EXPANSION';  // 변동성 확대
+    }
+
+    // 수축 → 확대 전환 감지
+    if (prevRatio < 0.8 && ratio >= 0.8 && ratio < 1.2) {
+      signal = 'SQUEEZE_RELEASE';  // 수축에서 벗어나는 중
+    } else if (prevRatio < 1.0 && ratio >= 1.2) {
+      signal = 'BREAKOUT';  // 변동성 폭발
+    }
+
+    return {
+      currentATR: Math.round(currentATR),
+      avgATR: Math.round(avgATR),
+      ratio: Math.round(ratio * 100) / 100,
+      state,
+      signal,
+    };
+  },
+
+  // ============================================
   // 종합 분석
   // ============================================
 
@@ -410,6 +612,11 @@ const indicators = {
       atr: this.ATR(candles),
       volume: this.VolumeAnalysis(candles),
       fibonacci: this.FibonacciPosition(currentPrice, high20, low20),
+      // 새로 추가된 지표들
+      stochastic: this.Stochastic(candles),
+      williamsR: this.WilliamsR(candles),
+      vwap: this.VWAP(candles),
+      atrSqueeze: this.ATRSqueeze(candles),
       ma: {
         ma5: this.SMA(closes, 5),
         ma20: this.SMA(closes, 20),

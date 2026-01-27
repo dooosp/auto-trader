@@ -1,6 +1,38 @@
 const axios = require('axios');
 const config = require('./config');
 
+// 뉴스 캐시 (30분 TTL)
+const newsCache = {
+  data: {},      // { stockCode: { sentiment, timestamp } }
+  ttl: 30 * 60 * 1000,  // 30분
+
+  get(stockCode) {
+    const cached = this.data[stockCode];
+    if (cached && Date.now() - cached.timestamp < this.ttl) {
+      return cached.sentiment;
+    }
+    return null;
+  },
+
+  set(stockCode, sentiment) {
+    this.data[stockCode] = { sentiment, timestamp: Date.now() };
+  },
+
+  clear() {
+    this.data = {};
+  },
+
+  getStats() {
+    const now = Date.now();
+    let valid = 0, expired = 0;
+    for (const key in this.data) {
+      if (now - this.data[key].timestamp < this.ttl) valid++;
+      else expired++;
+    }
+    return { valid, expired, total: valid + expired };
+  }
+};
+
 const newsAnalyzer = {
   // 긍정 키워드
   positiveKeywords: [
@@ -84,20 +116,29 @@ const newsAnalyzer = {
   },
 
   /**
-   * 종목의 뉴스 감정 점수 종합
+   * 종목의 뉴스 감정 점수 종합 (캐시 적용)
    * @param {string} stockCode - 종목코드
    */
   async getNewsSentiment(stockCode) {
+    // 캐시 확인
+    const cached = newsCache.get(stockCode);
+    if (cached) {
+      return cached;
+    }
+
     const news = await this.fetchNews(stockCode, 5);
 
     if (news.length === 0) {
-      return {
+      const result = {
         code: stockCode,
         totalScore: 0,
         newsCount: 0,
         sentiment: 'NEUTRAL',
-        details: []
+        details: [],
+        cached: false
       };
+      newsCache.set(stockCode, result);
+      return result;
     }
 
     let totalScore = 0;
@@ -119,13 +160,33 @@ const newsAnalyzer = {
     if (totalScore >= 2) sentiment = 'POSITIVE';
     else if (totalScore <= -2) sentiment = 'NEGATIVE';
 
-    return {
+    const result = {
       code: stockCode,
       totalScore,
       newsCount: news.length,
       sentiment,
-      details
+      details,
+      cached: false
     };
+
+    // 캐시 저장
+    newsCache.set(stockCode, result);
+
+    return result;
+  },
+
+  /**
+   * 뉴스 캐시 통계
+   */
+  getCacheStats() {
+    return newsCache.getStats();
+  },
+
+  /**
+   * 뉴스 캐시 초기화
+   */
+  clearCache() {
+    newsCache.clear();
   },
 
   /**

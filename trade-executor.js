@@ -14,29 +14,66 @@ const tradeExecutor = {
   cooldownPath: './data/cooldown.json',
 
   /**
-   * 데이터 파일 로드
+   * 데이터 파일 로드 (백업 복구 지원)
    */
   loadData(filePath) {
     const fullPath = path.resolve(__dirname, filePath);
+    const backupPath = fullPath + '.backup';
+
     try {
       if (fs.existsSync(fullPath)) {
-        return JSON.parse(fs.readFileSync(fullPath, 'utf8'));
+        const content = fs.readFileSync(fullPath, 'utf8');
+        return JSON.parse(content);
       }
     } catch (error) {
-      console.error(`[Executor] 데이터 로드 실패 (${filePath}):`, error.message);
+      console.error(`[Executor] ⚠️ 데이터 파일 손상 (${filePath}):`, error.message);
+
+      // 백업에서 복구 시도
+      if (fs.existsSync(backupPath)) {
+        try {
+          console.log(`[Executor] 백업 파일에서 복구 시도...`);
+          const backupContent = fs.readFileSync(backupPath, 'utf8');
+          const data = JSON.parse(backupContent);
+
+          // 복구 성공 시 원본 파일 복원
+          fs.writeFileSync(fullPath, backupContent, 'utf8');
+          console.log(`[Executor] ✅ 백업에서 복구 완료`);
+          return data;
+        } catch (backupError) {
+          console.error(`[Executor] ❌ 백업 복구 실패:`, backupError.message);
+        }
+      }
+
+      // 손상 파일 보존
+      try {
+        const corruptedPath = fullPath + '.corrupted.' + Date.now();
+        fs.renameSync(fullPath, corruptedPath);
+        console.error(`[Executor] 손상된 파일 보존: ${corruptedPath}`);
+      } catch (e) {}
     }
+
     return null;
   },
 
   /**
-   * 데이터 파일 저장
+   * 데이터 파일 저장 (자동 백업)
    */
   saveData(filePath, data) {
     const fullPath = path.resolve(__dirname, filePath);
+    const backupPath = fullPath + '.backup';
     const dir = path.dirname(fullPath);
 
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
+    }
+
+    // 기존 파일을 백업
+    if (fs.existsSync(fullPath)) {
+      try {
+        fs.copyFileSync(fullPath, backupPath);
+      } catch (e) {
+        console.warn(`[Executor] 백업 생성 실패:`, e.message);
+      }
     }
 
     fs.writeFileSync(fullPath, JSON.stringify(data, null, 2), 'utf8');
@@ -449,8 +486,9 @@ const tradeExecutor = {
     };
 
     try {
-      // 1. 현재 포트폴리오 확인
-      const portfolio = this.loadPortfolio();
+      // 1. 현재 포트폴리오 확인 (함수 내 1회만 로드)
+      let portfolio = this.loadPortfolio();
+      let portfolioModified = false;
       console.log(`\n[포트폴리오] 보유 종목: ${portfolio.holdings.length}개`);
 
       // Phase 2: 시장 지수 분석
@@ -515,13 +553,12 @@ const tradeExecutor = {
             const currentPrice = stockData.current.price;
             const exitSignal = exitManager.checkExitSignal(holding, currentPrice);
 
-            // highestPrice 업데이트 (트레일링 스톱용)
+            // highestPrice 업데이트 (트레일링 스톱용) - 메모리에서 수정
             if (exitSignal.trailingStop.highestPrice > (holding.highestPrice || 0)) {
-              const updatedPortfolio = this.loadPortfolio();
-              const idx = updatedPortfolio.holdings.findIndex(h => h.code === holding.code);
+              const idx = portfolio.holdings.findIndex(h => h.code === holding.code);
               if (idx !== -1) {
-                updatedPortfolio.holdings[idx].highestPrice = exitSignal.trailingStop.highestPrice;
-                this.savePortfolio(updatedPortfolio);
+                portfolio.holdings[idx].highestPrice = exitSignal.trailingStop.highestPrice;
+                portfolioModified = true;
               }
             }
 
@@ -556,10 +593,9 @@ const tradeExecutor = {
           }
         }
 
-        // 기존 기술적 분석 기반 매도 신호
-        const updatedHoldings = this.loadPortfolio().holdings;
+        // 기존 기술적 분석 기반 매도 신호 (메모리에서 직접 사용)
         const sellSignals = technicalAnalyzer.checkSellSignals(
-          updatedHoldings,
+          portfolio.holdings,
           stockDataList,
           newsDataList,
           marketData,
@@ -585,7 +621,6 @@ const tradeExecutor = {
       console.log('\n[매수 신호 체크]');
 
       // Phase 2: 시장 상태에 따른 매수 제한
-      const updatedPortfolio = this.loadPortfolio();
       let skipBuying = false;
 
       if (config.coupling?.enabled && marketData) {
@@ -598,7 +633,7 @@ const tradeExecutor = {
       if (!skipBuying) {
         const buyCandidates = technicalAnalyzer.scanForBuyCandidates(
           stockDataList,
-          updatedPortfolio.holdings,
+          portfolio.holdings,
           newsDataList,
           marketData,
           sectorData
@@ -608,7 +643,7 @@ const tradeExecutor = {
           console.log('  매수 조건 충족 종목 없음');
         } else {
           // 최대 보유 종목 수 및 1회 실행당 최대 매수 제한 적용
-          const availableSlots = config.trading.maxHoldings - updatedPortfolio.holdings.length;
+          const availableSlots = config.trading.maxHoldings - portfolio.holdings.length;
           const maxBuyPerRun = config.trading.safety?.maxBuyPerRun || 2;
           const maxBuy = Math.min(availableSlots, maxBuyPerRun);
           const candidatesToBuy = buyCandidates.slice(0, maxBuy);
@@ -637,7 +672,12 @@ const tradeExecutor = {
         }
       }
 
-      // 6. 일별 수익률 기록
+      // 6. 포트폴리오 변경사항 저장 (highestPrice 업데이트 등)
+      if (portfolioModified) {
+        this.savePortfolio(portfolio);
+      }
+
+      // 7. 일별 수익률 기록 (executeBuy/executeSell의 변경사항 반영)
       const finalPortfolio = this.loadPortfolio();
       const balance = await kisApi.getBalance();
 
