@@ -313,6 +313,16 @@
         <div class="value" id="holdingsCount">-</div>
         <div class="sub" id="maxHoldings">-</div>
       </div>
+      <div class="card">
+        <h3>외국인 수급</h3>
+        <div class="value" id="foreignNet">-</div>
+        <div class="sub">3일 누적 순매수</div>
+      </div>
+      <div class="card">
+        <h3>기관 수급</h3>
+        <div class="value" id="institutionNet">-</div>
+        <div class="sub">3일 누적 순매수</div>
+      </div>
     </div>
 
     <div class="section">
@@ -517,6 +527,28 @@
       }
     }
 
+    // 수급 현황 로드
+    async function loadSupplyDemand() {
+      try {
+        const res = await fetch('/api/supply-demand');
+        const data = await res.json();
+
+        const foreignEl = document.getElementById('foreignNet');
+        const institutionEl = document.getElementById('institutionNet');
+
+        const foreign = data.summary?.foreign || 0;
+        const institution = data.summary?.institution || 0;
+
+        foreignEl.textContent = (foreign >= 0 ? '+' : '') + formatNumber(foreign) + '주';
+        foreignEl.className = 'value ' + (foreign >= 0 ? 'positive' : 'negative');
+
+        institutionEl.textContent = (institution >= 0 ? '+' : '') + formatNumber(institution) + '주';
+        institutionEl.className = 'value ' + (institution >= 0 ? 'positive' : 'negative');
+      } catch (error) {
+        console.error('Supply demand load error:', error);
+      }
+    }
+
     // 매매 기록 로드
     async function loadTrades() {
       try {
@@ -658,6 +690,7 @@
         loadTrades(),
         loadReturnsChart(),
         loadCandidates(),
+        loadSupplyDemand(),
       ]);
       document.getElementById('lastUpdate').textContent = new Date().toLocaleString('ko-KR');
     }

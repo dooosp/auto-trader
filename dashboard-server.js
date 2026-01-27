@@ -273,6 +273,50 @@ app.get('/api/buy-candidates', async (req, res) => {
   }
 });
 
+/**
+ * 보유 종목 수급 현황
+ */
+app.get('/api/supply-demand', async (req, res) => {
+  try {
+    const supplyDemand = require('./supply-demand');
+    const portfolio = loadData(config.dataPath.portfolio) || { holdings: [] };
+
+    if (!portfolio.holdings || portfolio.holdings.length === 0) {
+      return res.json({ stocks: [], summary: { foreign: 0, institution: 0 } });
+    }
+
+    const results = [];
+    let totalForeign = 0;
+    let totalInstitution = 0;
+
+    for (const holding of portfolio.holdings.slice(0, 5)) {
+      try {
+        const analysis = await supplyDemand.analyze(holding.code, 3);
+        if (analysis && analysis.details) {
+          results.push({
+            code: holding.code,
+            name: holding.name,
+            foreign: analysis.details.foreign?.netBuy || 0,
+            institution: analysis.details.institution?.netBuy || 0,
+            signal: analysis.signal,
+          });
+          totalForeign += analysis.details.foreign?.netBuy || 0;
+          totalInstitution += analysis.details.institution?.netBuy || 0;
+        }
+      } catch (e) {
+        // skip
+      }
+    }
+
+    res.json({
+      stocks: results,
+      summary: { foreign: totalForeign, institution: totalInstitution }
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // 서버 시작
 app.listen(PORT, () => {
   console.log('========================================');
