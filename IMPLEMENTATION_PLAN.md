@@ -1,9 +1,10 @@
-# IMPLEMENTATION_PLAN: 수익률 개선
+# IMPLEMENTATION_PLAN: 수익률 개선 + 대시보드 UI
 
-> **Status:** ✅ 구현 완료
+> **Status:** Phase 4 진행 중 (대시보드 UI)
 > **Protocol:** Standard (기존 프로젝트 기능 추가)
 > **Created:** 2026-01-27
-> **Completed:** 2026-01-27
+> **수익률 개선:** ✅ 완료
+> **대시보드 UI:** 🔄 진행 중
 
 ---
 

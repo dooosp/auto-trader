@@ -194,6 +194,85 @@ app.post('/api/sync', async (req, res) => {
   }
 });
 
+/**
+ * 보유 종목 분석 정보 (신규 지표 포함)
+ */
+app.get('/api/holdings-analysis', async (req, res) => {
+  try {
+    const technicalAnalyzer = require('./technical-analyzer');
+    const stockFetcher = require('./stock-fetcher');
+    const portfolio = loadData(config.dataPath.portfolio) || { holdings: [] };
+
+    if (!portfolio.holdings || portfolio.holdings.length === 0) {
+      return res.json({ holdings: [] });
+    }
+
+    const analysisResults = [];
+    for (const holding of portfolio.holdings) {
+      try {
+        const stockData = await stockFetcher.fetchStockData(holding.code);
+        if (stockData) {
+          const analysis = technicalAnalyzer.analyze(stockData);
+          analysisResults.push({
+            code: holding.code,
+            name: holding.name,
+            indicators: {
+              rsi: analysis.rsi,
+              stochastic: analysis.stochastic?.signal,
+              williamsR: analysis.williamsR?.signal,
+              vwap: analysis.vwap?.signal,
+              atrSqueeze: analysis.atrSqueeze?.state,
+              candlePattern: analysis.candlePattern?.signal,
+              macdTrend: analysis.macdTrend,
+            }
+          });
+        }
+      } catch (e) {
+        console.warn(`분석 실패 [${holding.code}]:`, e.message);
+      }
+    }
+
+    res.json({ holdings: analysisResults });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+/**
+ * 매수 대기 종목 (조건 충족 현황)
+ */
+app.get('/api/buy-candidates', async (req, res) => {
+  try {
+    const technicalAnalyzer = require('./technical-analyzer');
+    const stockFetcher = require('./stock-fetcher');
+
+    const candidates = [];
+    const watchList = config.watchList.slice(0, 10); // 상위 10개만
+
+    for (const stock of watchList) {
+      try {
+        const stockData = await stockFetcher.fetchStockData(stock.code);
+        if (stockData) {
+          const signal = technicalAnalyzer.generateSignal(stockData, null, null, null, null);
+          candidates.push({
+            code: stock.code,
+            name: stock.name,
+            action: signal.action,
+            conditionsMet: signal.conditionsMet || signal.conditions?.length || 0,
+            reason: signal.reason?.substring(0, 50),
+          });
+        }
+      } catch (e) {
+        // skip
+      }
+    }
+
+    res.json({ candidates });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // 서버 시작
 app.listen(PORT, () => {
   console.log('========================================');

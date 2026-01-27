@@ -221,6 +221,44 @@
       color: #888;
     }
 
+    /* 지표 배지 스타일 */
+    .badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-right: 4px;
+      margin-bottom: 2px;
+    }
+    .badge-buy { background: #d4edda; color: #155724; }
+    .badge-sell { background: #f8d7da; color: #721c24; }
+    .badge-neutral { background: #e9ecef; color: #6c757d; }
+    .badge-warning { background: #fff3cd; color: #856404; }
+
+    .indicators-cell {
+      max-width: 200px;
+    }
+
+    /* 매수 대기 섹션 */
+    .candidate-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    .candidate-row:last-child { border-bottom: none; }
+    .candidate-name { font-weight: 600; }
+    .candidate-score {
+      font-size: 0.85rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+    .score-high { background: #28a745; color: white; }
+    .score-mid { background: #ffc107; color: #333; }
+    .score-low { background: #e9ecef; color: #666; }
+
     .refresh-time {
       font-size: 0.8rem;
       color: #888;
@@ -283,8 +321,8 @@
         <thead>
           <tr>
             <th>종목명</th>
+            <th>지표</th>
             <th class="text-right">수량</th>
-            <th class="text-right">평균단가</th>
             <th class="text-right">현재가</th>
             <th class="text-right">평가손익</th>
             <th class="text-right">수익률</th>
@@ -294,6 +332,13 @@
           <tr><td colspan="6" class="loading">로딩 중...</td></tr>
         </tbody>
       </table>
+    </div>
+
+    <div class="section">
+      <h2>매수 대기 (조건 충족 현황)</h2>
+      <div id="candidatesBody">
+        <div class="loading">로딩 중...</div>
+      </div>
     </div>
 
     <div class="section">
@@ -382,23 +427,48 @@
       }
     }
 
-    // 보유 종목 로드
+    // 지표 배지 생성
+    function renderBadges(indicators) {
+      if (!indicators) return '';
+      const badges = [];
+      if (indicators.rsi <= 30) badges.push('<span class="badge badge-buy">RSI 과매도</span>');
+      if (indicators.rsi >= 70) badges.push('<span class="badge badge-sell">RSI 과매수</span>');
+      if (indicators.stochastic === 'OVERSOLD') badges.push('<span class="badge badge-buy">Stoch↓</span>');
+      if (indicators.williamsR === 'OVERSOLD') badges.push('<span class="badge badge-buy">WR↓</span>');
+      if (indicators.vwap === 'UNDERVALUED') badges.push('<span class="badge badge-buy">VWAP↓</span>');
+      if (indicators.vwap === 'OVERVALUED') badges.push('<span class="badge badge-sell">VWAP↑</span>');
+      if (indicators.atrSqueeze === 'SQUEEZE') badges.push('<span class="badge badge-warning">수축</span>');
+      if (indicators.candlePattern === 'BULLISH') badges.push('<span class="badge badge-buy">캔들↑</span>');
+      if (indicators.macdTrend === 'BULLISH') badges.push('<span class="badge badge-buy">MACD↑</span>');
+      if (indicators.macdTrend === 'BEARISH') badges.push('<span class="badge badge-sell">MACD↓</span>');
+      return badges.length > 0 ? badges.join('') : '<span class="badge badge-neutral">-</span>';
+    }
+
+    // 보유 종목 로드 (지표 포함)
     async function loadHoldings() {
       try {
-        const res = await fetch('/api/holdings');
-        const data = await res.json();
+        const [holdingsRes, analysisRes] = await Promise.all([
+          fetch('/api/holdings'),
+          fetch('/api/holdings-analysis')
+        ]);
+        const holdingsData = await holdingsRes.json();
+        const analysisData = await analysisRes.json();
         const tbody = document.getElementById('holdingsBody');
 
-        if (!data.holdings || data.holdings.length === 0) {
+        if (!holdingsData.holdings || holdingsData.holdings.length === 0) {
           tbody.innerHTML = '<tr><td colspan="6" class="empty">보유 종목이 없습니다.</td></tr>';
           return;
         }
 
-        tbody.innerHTML = data.holdings.map(h => `
+        // 분석 데이터 맵핑
+        const analysisMap = {};
+        (analysisData.holdings || []).forEach(a => { analysisMap[a.code] = a.indicators; });
+
+        tbody.innerHTML = holdingsData.holdings.map(h => `
           <tr>
-            <td>${h.name} (${h.code})</td>
+            <td>${h.name}<br><small style="color:#888">${h.code}</small></td>
+            <td class="indicators-cell">${renderBadges(analysisMap[h.code])}</td>
             <td class="text-right">${formatNumber(h.quantity)}주</td>
-            <td class="text-right">${formatMoney(h.avgPrice)}</td>
             <td class="text-right">${formatMoney(h.currentPrice)}</td>
             <td class="text-right ${h.profit >= 0 ? 'profit-positive' : 'profit-negative'}">
               ${formatMoney(h.profit)}
@@ -413,6 +483,37 @@
         console.error('Holdings load error:', error);
         document.getElementById('holdingsBody').innerHTML =
           '<tr><td colspan="6" class="empty">데이터를 불러올 수 없습니다.</td></tr>';
+      }
+    }
+
+    // 매수 대기 종목 로드
+    async function loadCandidates() {
+      try {
+        const res = await fetch('/api/buy-candidates');
+        const data = await res.json();
+        const container = document.getElementById('candidatesBody');
+
+        if (!data.candidates || data.candidates.length === 0) {
+          container.innerHTML = '<div class="empty">대기 종목 없음</div>';
+          return;
+        }
+
+        container.innerHTML = data.candidates.map(c => {
+          const scoreClass = c.conditionsMet >= 5 ? 'score-high' : c.conditionsMet >= 3 ? 'score-mid' : 'score-low';
+          const actionText = c.action === 'BUY' ? '매수' : '대기';
+          return `
+            <div class="candidate-row">
+              <div>
+                <span class="candidate-name">${c.name}</span>
+                <small style="color:#888">(${c.code})</small>
+              </div>
+              <span class="candidate-score ${scoreClass}">${c.conditionsMet}/17 ${actionText}</span>
+            </div>
+          `;
+        }).join('');
+      } catch (error) {
+        console.error('Candidates load error:', error);
+        document.getElementById('candidatesBody').innerHTML = '<div class="empty">로드 실패</div>';
       }
     }
 
@@ -556,6 +657,7 @@
         loadHoldings(),
         loadTrades(),
         loadReturnsChart(),
+        loadCandidates(),
       ]);
       document.getElementById('lastUpdate').textContent = new Date().toLocaleString('ko-KR');
     }
