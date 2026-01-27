@@ -1094,5 +1094,15 @@
     "amount": 426000,
     "orderNo": "0000018081",
     "timestamp": "2026-01-27T03:45:20.014Z"
+  },
+  {
+    "type": "BUY",
+    "code": "006400",
+    "name": "삼성SDI",
+    "quantity": 1,
+    "price": 389500,
+    "amount": 389500,
+    "orderNo": "0000020882",
+    "timestamp": "2026-01-27T04:44:16.963Z"
   }
 ]
