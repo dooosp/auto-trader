@@ -1104,5 +1104,19 @@
     "amount": 389500,
     "orderNo": "0000020882",
     "timestamp": "2026-01-27T04:44:16.963Z"
+  },
+  {
+    "type": "SELL",
+    "code": "006400",
+    "name": "삼성SDI",
+    "quantity": 1,
+    "price": 384500,
+    "amount": 384500,
+    "avgPrice": 390500,
+    "profit": -6000,
+    "profitRate": -1.54,
+    "reason": "다중 매도 (3/3): RSI 과매수(78.77), 5일선 이탈, 유동성 스윕 매도",
+    "orderNo": "0000011028",
+    "timestamp": "2026-01-29T01:42:30.558Z"
   }
 ]
