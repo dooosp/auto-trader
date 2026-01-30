@@ -28,7 +28,7 @@ const config = {
 
     // 매도 조건
     sell: {
-      rsiAbove: 70,           // RSI > 70 (과매수)
+      rsiAbove: 75,           // RSI > 75 (과매수 - 단기 과매수에서 너무 빠른 매도 방지)
       stopLoss: -0.05,        // 손절: -5% (대형주 일중 변동 감안)
       takeProfit: 0.10,       // 익절: +10%
       minProfitToSell: 0.03,  // 최소 익절 기준: +3% 미만이면 매도 안 함 (수수료 고려)
@@ -41,6 +41,8 @@ const config = {
       minHoldingHours: 24,              // 최소 보유 시간 (24시간) - 이 시간 전에는 매도 금지
       maxBuyPerRun: 2,                  // 1회 실행당 최대 매수 종목 수
       maxPerSector: 2,                  // 같은 업종 최대 보유 수
+      dailyMaxBuys: 4,                  // 일일 최대 매수 건수
+      dailyMaxSells: 4,                 // 일일 최대 매도 건수
 
       // 다중 확인 설정
       multiConfirm: {
@@ -247,6 +249,16 @@ const config = {
   // 대시보드 설정
   dashboard: {
     port: 3001,
+  },
+
+  // InvestQuant 연동 설정
+  investQuant: {
+    enabled: process.env.INVEST_QUANT_ENABLED === 'true',
+    baseUrl: process.env.INVEST_QUANT_URL || 'http://localhost:3003',
+    apiKey: process.env.INVEST_QUANT_API_KEY || '',
+    timeout: 5000,
+    minFundamentalScore: 40,
+    adjustPositionSize: true,
   },
 
   // 데이터 파일 경로

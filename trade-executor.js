@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const axios = require('axios');
 const kisApi = require('./kis-api');
 const stockFetcher = require('./stock-fetcher');
 const technicalAnalyzer = require('./technical-analyzer');
@@ -76,7 +77,10 @@ const tradeExecutor = {
       }
     }
 
-    fs.writeFileSync(fullPath, JSON.stringify(data, null, 2), 'utf8');
+    // 원자적 저장: 임시파일 → rename (깨짐 방지)
+    const tmpPath = fullPath + '.tmp.' + process.pid;
+    fs.writeFileSync(tmpPath, JSON.stringify(data, null, 2), 'utf8');
+    fs.renameSync(tmpPath, fullPath);
   },
 
   /**
@@ -201,14 +205,52 @@ const tradeExecutor = {
   },
 
   /**
-   * 매매 기록 저장
+   * 당일 매매 횟수 카운트
+   * @param {string} type - 'BUY' 또는 'SELL' (PARTIAL_SELL 포함)
+   * @returns {number} 당일 해당 유형 매매 건수
+   */
+  countTodayTrades(type) {
+    const trades = this.loadTrades();
+    const today = new Date().toISOString().slice(0, 10);
+    return trades.filter(t => {
+      const tradeDate = (t.timestamp || '').slice(0, 10);
+      if (type === 'SELL') {
+        return tradeDate === today && (t.type === 'SELL' || t.type === 'PARTIAL_SELL');
+      }
+      return tradeDate === today && t.type === type;
+    }).length;
+  },
+
+  /**
+   * 매매 기록 저장 (최대 5000건 유지, 초과 시 아카이브)
    */
   saveTrade(trade) {
+    const MAX_TRADES = 5000;
     const trades = this.loadTrades();
     trades.push({
       ...trade,
       timestamp: new Date().toISOString(),
     });
+
+    // 최대 건수 초과 시 오래된 기록 아카이브
+    if (trades.length > MAX_TRADES) {
+      const overflow = trades.length - MAX_TRADES;
+      const archived = trades.splice(0, overflow);
+      const archiveDir = path.resolve(__dirname, './data/archive');
+      if (!fs.existsSync(archiveDir)) fs.mkdirSync(archiveDir, { recursive: true });
+      const archivePath = path.join(archiveDir, `trades-${new Date().toISOString().slice(0, 10)}.json`);
+
+      // 기존 아카이브에 추가
+      let existing = [];
+      if (fs.existsSync(archivePath)) {
+        try { existing = JSON.parse(fs.readFileSync(archivePath, 'utf8')); } catch {}
+      }
+      const tmpPath = archivePath + '.tmp.' + process.pid;
+      fs.writeFileSync(tmpPath, JSON.stringify([...existing, ...archived], null, 2), 'utf8');
+      fs.renameSync(tmpPath, archivePath);
+      console.log(`[Executor] ${overflow}건 아카이브 → ${archivePath}`);
+    }
+
     this.saveData(config.dataPath.trades, trades);
   },
 
@@ -228,6 +270,32 @@ const tradeExecutor = {
     }
 
     this.saveData(config.dataPath.dailyReturns, returns);
+  },
+
+  /**
+   * InvestQuant 펀더멘털 자문 요청
+   * @param {string} stockCode - 종목코드
+   * @param {number} currentPrice - 현재가
+   * @returns {object|null} { approved, confidence, fundamentalScore, reason }
+   */
+  async consultInvestQuant(stockCode, currentPrice) {
+    const iq = config.investQuant;
+    if (!iq?.enabled) return null;
+
+    try {
+      const headers = iq.apiKey ? { 'x-api-key': iq.apiKey } : {};
+      const response = await axios.post(
+        `${iq.baseUrl}/api/advisory/buy`,
+        { stockCode, currentPrice },
+        { timeout: iq.timeout || 5000, headers }
+      );
+      const advice = response.data;
+      console.log(`[InvestQuant] 펀더멘털 점수: ${advice.fundamentalScore ?? 'N/A'} → ${advice.approved ? '승인' : '거부'} (${advice.reason})`);
+      return advice;
+    } catch (error) {
+      console.warn(`[InvestQuant] 자문 실패 (fallback 진행): ${error.message}`);
+      return null; // 실패 시 null → 기존 로직 fallback
+    }
   },
 
   /**
@@ -268,8 +336,21 @@ const tradeExecutor = {
       return null;
     }
 
-    // 매수 수량 계산
-    const quantity = Math.floor(config.trading.buyAmount / currentPrice);
+    // InvestQuant 펀더멘털 자문
+    let investQuantAdvice = null;
+    if (config.investQuant?.enabled) {
+      investQuantAdvice = await this.consultInvestQuant(stockCode, currentPrice);
+      if (investQuantAdvice && !investQuantAdvice.approved) {
+        console.log(`[Executor] InvestQuant 매수 거부: ${stockCode} - ${investQuantAdvice.reason}`);
+        return null;
+      }
+    }
+
+    // 매수 금액 결정 (InvestQuant 포지션사이징 우선, fallback: 기본금액)
+    const buyAmount = (config.investQuant?.adjustPositionSize && investQuantAdvice?.positionSize)
+      ? investQuantAdvice.positionSize
+      : config.trading.buyAmount;
+    const quantity = Math.floor(buyAmount / currentPrice);
     if (quantity < 1) {
       console.log(`[Executor] 매수 금액 부족: ${stockCode} (현재가: ${currentPrice})`);
       return null;
@@ -330,11 +411,13 @@ const tradeExecutor = {
       return null;
     }
 
-    // 최소 보유 시간 체크 (손절은 예외)
+    // 긴급매도 판정: 손절, 트레일링 스톱, 긴급 매도 등은 안전장치 우회
     const profitRate = (currentPrice - holding.avgPrice) / holding.avgPrice;
     const isStopLoss = profitRate <= (config.trading.sell.stopLoss || -0.05);
+    const urgentReasons = ['긴급 매도', '트레일링 스톱', 'NEGATIVE', '급락', '갭'];
+    const isUrgentSell = isStopLoss || urgentReasons.some(r => reason.includes(r));
 
-    if (!isStopLoss) {
+    if (!isUrgentSell) {
       // 최소 익절 필터: 수익률이 0~minProfitToSell 사이면 매도 차단 (수수료 고려)
       const minProfitToSell = config.trading.sell.minProfitToSell || 0.03;
       if (profitRate > 0 && profitRate < minProfitToSell) {
@@ -346,6 +429,21 @@ const tradeExecutor = {
       if (!holdingTimeCheck.allowed) {
         console.log(`[Executor] 매도 차단: ${holding.name} - ${holdingTimeCheck.reason}`);
         return null;
+      }
+    }
+
+    // InvestQuant 매도 자문 (긴급매도는 위에서 안전장치 우회됨)
+    if (config.investQuant?.enabled && !isUrgentSell) {
+      try {
+        const sellHeaders = config.investQuant.apiKey ? { 'x-api-key': config.investQuant.apiKey } : {};
+        const sellAdvice = await axios.post(
+          `${config.investQuant.baseUrl}/api/advisory/sell`,
+          { stockCode, currentPrice, avgPrice: holding.avgPrice, profitRate, reason, isUrgent: false },
+          { timeout: config.investQuant.timeout || 5000, headers: sellHeaders }
+        );
+        console.log(`[InvestQuant] 매도 자문: ${sellAdvice.data?.reason || 'N/A'}`);
+      } catch (error) {
+        console.warn(`[InvestQuant] 매도 자문 실패 (진행): ${error.message}`);
       }
     }
 
@@ -491,6 +589,18 @@ const tradeExecutor = {
       let portfolioModified = false;
       console.log(`\n[포트폴리오] 보유 종목: ${portfolio.holdings.length}개`);
 
+      // BUG-1 수정: 실행 중 매도된 종목 추적 (같은 실행에서 재매수 방지)
+      const soldThisRun = new Set();
+      // BUG-4 수정: 시작 시점 보유종목 수 스냅샷 (슬롯 계산 기준)
+      const initialHoldingsCount = portfolio.holdings.length;
+
+      // FIX-6: 일일 매매 횟수 체크
+      const dailyBuyCount = this.countTodayTrades('BUY');
+      const dailySellCount = this.countTodayTrades('SELL');
+      const dailyMaxBuys = config.trading.safety?.dailyMaxBuys || 4;
+      const dailyMaxSells = config.trading.safety?.dailyMaxSells || 4;
+      console.log(`[일일 매매] 매수: ${dailyBuyCount}/${dailyMaxBuys}, 매도: ${dailySellCount}/${dailyMaxSells}`);
+
       // Phase 2: 시장 지수 분석
       let marketData = null;
       let sectorData = null;
@@ -547,6 +657,12 @@ const tradeExecutor = {
           console.log('\n[Phase 4: 청산 전략 체크]');
 
           for (const holding of portfolio.holdings) {
+            // FIX-6: 일일 매도 제한 체크
+            if (dailySellCount + results.sells.length >= dailyMaxSells) {
+              console.log(`  일일 매도 제한 도달 (${dailyMaxSells}건) - 나머지 매도 스킵`);
+              break;
+            }
+
             const stockData = stockDataList.find(s => s.code === holding.code);
             if (!stockData) continue;
 
@@ -563,7 +679,6 @@ const tradeExecutor = {
             }
 
             if (exitSignal.action === 'PARTIAL_SELL') {
-              // 분할 매도
               console.log(`  - ${holding.name}: ${exitSignal.reason}`);
               const result = await this.executePartialSell(
                 holding.code,
@@ -574,10 +689,10 @@ const tradeExecutor = {
               );
               if (result) {
                 results.sells.push({ code: holding.code, name: holding.name, result, type: 'PARTIAL_SELL' });
+                soldThisRun.add(holding.code);
               }
               await stockFetcher.delay(1000);
             } else if (exitSignal.action === 'SELL' && exitSignal.exitType === 'TRAILING_STOP') {
-              // 트레일링 스톱 (전량 매도)
               console.log(`  - ${holding.name}: ${exitSignal.reason}`);
               const result = await this.executeSell(
                 holding.code,
@@ -587,6 +702,7 @@ const tradeExecutor = {
               );
               if (result) {
                 results.sells.push({ code: holding.code, name: holding.name, result, type: 'TRAILING_STOP' });
+                soldThisRun.add(holding.code);
               }
               await stockFetcher.delay(1000);
             }
@@ -603,6 +719,12 @@ const tradeExecutor = {
         );
 
         for (const signal of sellSignals) {
+          // FIX-6: 일일 매도 제한 체크
+          if (dailySellCount + results.sells.length >= dailyMaxSells) {
+            console.log(`  일일 매도 제한 도달 (${dailyMaxSells}건) - 나머지 매도 스킵`);
+            break;
+          }
+
           console.log(`  - ${signal.name}: ${signal.signal.reason}`);
           const result = await this.executeSell(
             signal.code,
@@ -612,6 +734,7 @@ const tradeExecutor = {
           );
           if (result) {
             results.sells.push({ ...signal, result });
+            soldThisRun.add(signal.code);
           }
           await stockFetcher.delay(1000);
         }
@@ -631,43 +754,62 @@ const tradeExecutor = {
       }
 
       if (!skipBuying) {
-        const buyCandidates = technicalAnalyzer.scanForBuyCandidates(
-          stockDataList,
-          portfolio.holdings,
-          newsDataList,
-          marketData,
-          sectorData
-        );
-
-        if (buyCandidates.length === 0) {
-          console.log('  매수 조건 충족 종목 없음');
+        // FIX-6: 일일 매수 제한 체크
+        if (dailyBuyCount >= dailyMaxBuys) {
+          console.log(`  일일 매수 제한 도달 (${dailyMaxBuys}건) - 매수 스킵`);
         } else {
-          // 최대 보유 종목 수 및 1회 실행당 최대 매수 제한 적용
-          const availableSlots = config.trading.maxHoldings - portfolio.holdings.length;
-          const maxBuyPerRun = config.trading.safety?.maxBuyPerRun || 2;
-          const maxBuy = Math.min(availableSlots, maxBuyPerRun);
-          const candidatesToBuy = buyCandidates.slice(0, maxBuy);
-          console.log(`  매수 후보 ${buyCandidates.length}개 중 최대 ${maxBuy}개 매수`);
+          const buyCandidates = technicalAnalyzer.scanForBuyCandidates(
+            stockDataList,
+            portfolio.holdings,
+            newsDataList,
+            marketData,
+            sectorData
+          );
 
-          for (const candidate of candidatesToBuy) {
-            // Phase 2: MTF/커플링 정보 포함 출력
-            let extraInfo = '';
-            if (candidate.signal.analysis?.mtf) {
-              extraInfo += ` [MTF: ${candidate.signal.analysis.mtf.mtfSignal}]`;
+          // BUG-1 수정: soldThisRun + 쿨다운 이중 필터
+          const filteredCandidates = buyCandidates.filter(c => {
+            if (soldThisRun.has(c.code)) {
+              console.log(`  - ${c.name}: 이번 실행에서 매도됨 → 매수 차단`);
+              return false;
             }
-            if (candidate.signal.analysis?.coupling) {
-              extraInfo += ` [커플링: ${candidate.signal.analysis.coupling.couplingSignal}]`;
+            const cooldownCheck = this.checkCooldown(c.code);
+            if (!cooldownCheck.allowed) {
+              console.log(`  - ${c.name}: ${cooldownCheck.reason} → 매수 차단`);
+              return false;
             }
+            return true;
+          });
 
-            console.log(`  - ${candidate.name}: ${candidate.signal.reason}${extraInfo}`);
-            const result = await this.executeBuy(
-              candidate.code,
-              candidate.signal.analysis.currentPrice
-            );
-            if (result) {
-              results.buys.push({ ...candidate, result });
+          if (filteredCandidates.length === 0) {
+            console.log('  매수 조건 충족 종목 없음');
+          } else {
+            // BUG-4 수정: 슬롯 계산을 시작 시점 스냅샷 기준으로
+            const availableSlots = config.trading.maxHoldings - initialHoldingsCount;
+            const maxBuyPerRun = config.trading.safety?.maxBuyPerRun || 2;
+            const remainingDailyBuys = dailyMaxBuys - dailyBuyCount;
+            const maxBuy = Math.min(availableSlots, maxBuyPerRun, remainingDailyBuys);
+            const candidatesToBuy = filteredCandidates.slice(0, maxBuy);
+            console.log(`  매수 후보 ${filteredCandidates.length}개 중 최대 ${maxBuy}개 매수`);
+
+            for (const candidate of candidatesToBuy) {
+              let extraInfo = '';
+              if (candidate.signal.analysis?.mtf) {
+                extraInfo += ` [MTF: ${candidate.signal.analysis.mtf.mtfSignal}]`;
+              }
+              if (candidate.signal.analysis?.coupling) {
+                extraInfo += ` [커플링: ${candidate.signal.analysis.coupling.couplingSignal}]`;
+              }
+
+              console.log(`  - ${candidate.name}: ${candidate.signal.reason}${extraInfo}`);
+              const result = await this.executeBuy(
+                candidate.code,
+                candidate.signal.analysis.currentPrice
+              );
+              if (result) {
+                results.buys.push({ ...candidate, result });
+              }
+              await stockFetcher.delay(1000);
             }
-            await stockFetcher.delay(1000);
           }
         }
       }
@@ -756,16 +898,30 @@ const tradeExecutor = {
     try {
       const balance = await kisApi.getBalance();
 
+      // BUG-1 수정: 기존 로컬 메타데이터 보존하도록 병합
+      const existingPortfolio = this.loadPortfolio();
+      const existingMap = {};
+      for (const h of (existingPortfolio.holdings || [])) {
+        existingMap[h.code] = h;
+      }
+
       const portfolio = {
-        holdings: balance.holdings.map(h => ({
-          code: h.code,
-          name: h.name,
-          quantity: h.quantity,
-          avgPrice: h.avgPrice,
-          currentPrice: h.currentPrice,
-          profit: h.profit,
-          profitRate: h.profitRate,
-        })),
+        holdings: balance.holdings.map(h => {
+          const existing = existingMap[h.code];
+          return {
+            code: h.code,
+            name: h.name,
+            quantity: h.quantity,
+            avgPrice: h.avgPrice,
+            currentPrice: h.currentPrice,
+            profit: h.profit,
+            profitRate: h.profitRate,
+            // 로컬 메타데이터 보존
+            buyDate: existing?.buyDate || null,
+            partialSells: existing?.partialSells || [],
+            highestPrice: existing?.highestPrice || null,
+          };
+        }),
         summary: balance.summary,
         lastUpdated: new Date().toISOString(),
       };
