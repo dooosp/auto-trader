@@ -1118,5 +1118,29 @@
     "reason": "다중 매도 (3/3): RSI 과매수(78.77), 5일선 이탈, 유동성 스윕 매도",
     "orderNo": "0000011028",
     "timestamp": "2026-01-29T01:42:30.558Z"
+  },
+  {
+    "type": "SELL",
+    "code": "035420",
+    "name": "NAVER",
+    "quantity": 1,
+    "price": 276500,
+    "amount": 276500,
+    "avgPrice": 288500,
+    "profit": -12000,
+    "profitRate": -4.16,
+    "reason": "[긴급] 악재 + 손실 (-4.16%)",
+    "orderNo": "0000017554",
+    "timestamp": "2026-01-30T04:06:22.833Z"
+  },
+  {
+    "type": "BUY",
+    "code": "003550",
+    "name": "LG",
+    "quantity": 5,
+    "price": 91800,
+    "amount": 459000,
+    "orderNo": "0000017556",
+    "timestamp": "2026-01-30T04:06:25.049Z"
   }
 ]
