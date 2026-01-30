@@ -5,29 +5,29 @@
       "name": "기아",
       "quantity": 3,
       "avgPrice": 158900,
-      "currentPrice": 154200,
-      "profit": -14100,
-      "profitRate": -2.96,
+      "currentPrice": 154500,
+      "profit": -13200,
+      "profitRate": -2.77,
       "highestPrice": 158900
     },
     {
-      "code": "035420",
-      "name": "NAVER",
-      "quantity": 1,
-      "avgPrice": 288500,
-      "currentPrice": 276750,
-      "profit": -11750,
-      "profitRate": -4.07,
-      "highestPrice": 288500
+      "code": "003550",
+      "name": "LG",
+      "quantity": 5,
+      "avgPrice": 91800,
+      "currentPrice": 92200,
+      "profit": 2000,
+      "profitRate": 0.44,
+      "highestPrice": 92200
     },
     {
       "code": "055550",
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 84180,
-      "currentPrice": 85400,
-      "profit": 6100,
-      "profitRate": 1.45,
+      "currentPrice": 85500,
+      "profit": 6600,
+      "profitRate": 1.57,
       "highestPrice": 85400
     },
     {
@@ -35,16 +35,16 @@
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 142000,
-      "currentPrice": 137500,
-      "profit": -13500,
-      "profitRate": -3.17,
+      "currentPrice": 137200,
+      "profit": -14400,
+      "profitRate": -3.38,
       "highestPrice": 142000
     }
   ],
   "summary": {
     "totalDeposit": 8149494,
-    "totalEvaluation": 10111526,
-    "totalProfit": -33250
+    "totalEvaluation": 10113134,
+    "totalProfit": -19000
   },
-  "lastUpdated": "2026-01-30T04:06:26.050Z"
+  "lastUpdated": "2026-01-30T05:43:38.181Z"
 }
