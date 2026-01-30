@@ -339,10 +339,11 @@ const technicalAnalyzer = {
 
       // === 다중 확인 매도 조건 (여러 조건 동시 충족 필요) ===
       const sellConditions = [];
-      const requiredSellConditions = multiConfirm.enabled ? (multiConfirm.requiredSellConditions || 2) : 1;
+      const requiredSellConditions = multiConfirm.enabled ? (multiConfirm.requiredSellConditions ?? 3) : 1;
 
-      // 조건 1: RSI 과매수 (70 이상)
-      if (analysis.rsi >= 70) {
+      // 조건 1: RSI 과매수 (config 기준)
+      const rsiSellThreshold = trading.sell.rsiAbove || 75;
+      if (analysis.rsi >= rsiSellThreshold) {
         sellConditions.push(`RSI 과매수(${analysis.rsi})`);
       }
 
@@ -388,6 +389,18 @@ const technicalAnalyzer = {
 
       // 다중 확인: 설정된 개수 이상의 조건이 충족되어야 매도
       if (sellConditions.length >= requiredSellConditions) {
+        // BUG-3 수정: minProfitToSell 게이트 (긴급 매도가 아닌 일반 매도에서도 최소 수익률 체크)
+        const minProfitToSell = trading.sell.minProfitToSell || 0.03;
+        if (profitRate > 0 && profitRate < minProfitToSell) {
+          return {
+            action: 'HOLD',
+            reason: `최소 익절 미달 (+${(profitRate * 100).toFixed(1)}% < +${minProfitToSell * 100}%) - 매도 조건 ${sellConditions.length}개 충족했으나 차단`,
+            analysis,
+            conditionsMet: sellConditions.length,
+            conditionsRequired: requiredSellConditions,
+          };
+        }
+
         return {
           action: 'SELL',
           reason: `다중 매도 (${sellConditions.length}/${requiredSellConditions}): ${sellConditions.join(', ')}`,

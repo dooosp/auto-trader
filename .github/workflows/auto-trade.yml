@@ -18,6 +18,10 @@ on:
           - screening
           - emergency
 
+concurrency:
+  group: auto-trade-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: write
 

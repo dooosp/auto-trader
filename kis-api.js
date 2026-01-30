@@ -1,5 +1,35 @@
 const axios = require('axios');
 const config = require('./config');
+const { sanitizeErrorMsg } = require('./utils/log-sanitize');
+const { assertStockCode, assertQuantity, assertPrice } = require('./validator');
+
+// axios 인스턴스: timeout + retry + circuit breaker
+const axiosInstance = axios.create({ timeout: 15000 });
+const { createCircuitBreaker } = require('./utils/circuit-breaker');
+const breaker = createCircuitBreaker({ failureThreshold: 5, cooldownMs: 30000 });
+
+async function withRetry(fn, maxRetries = 3, breakerKey = 'default') {
+  if (!breaker.canRequest(breakerKey)) {
+    throw new Error(`[KIS] 서킷 OPEN: ${breakerKey} - API 일시 차단 중`);
+  }
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const result = await fn();
+      breaker.success(breakerKey);
+      return result;
+    } catch (error) {
+      const status = error.response?.status;
+      const retryable = !status || status === 429 || status >= 500;
+      if (!retryable || attempt === maxRetries) {
+        breaker.failure(breakerKey);
+        throw error;
+      }
+      const delay = Math.min(1000 * Math.pow(2, attempt - 1), 8000);
+      console.warn(`[KIS] 재시도 ${attempt}/${maxRetries} (${status || 'timeout'}, ${delay}ms 후)`);
+      await new Promise(r => setTimeout(r, delay));
+    }
+  }
+}
 
 let accessToken = null;
 let tokenExpiry = null;
@@ -22,9 +52,9 @@ const kisApi = {
     };
 
     try {
-      const response = await axios.post(url, body, {
+      const response = await withRetry(() => axiosInstance.post(url, body, {
         headers: { 'Content-Type': 'application/json' }
-      });
+      }), 3, 'auth');
 
       accessToken = response.data.access_token;
       // 토큰 유효시간 설정 (보통 24시간, 안전하게 23시간으로 설정)
@@ -33,7 +63,7 @@ const kisApi = {
       console.log('[KIS] 토큰 발급 성공');
       return accessToken;
     } catch (error) {
-      console.error('[KIS] 토큰 발급 실패:', error.response?.data || error.message);
+      console.error('[KIS] 토큰 발급 실패:', sanitizeErrorMsg(error));
       throw error;
     }
   },
@@ -57,17 +87,18 @@ const kisApi = {
    * @param {string} stockCode - 종목코드 (6자리)
    */
   async getStockPrice(stockCode) {
+    stockCode = assertStockCode(stockCode);
     const trId = config.kis.useMock ? 'FHKST01010100' : 'FHKST01010100';
     const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/quotations/inquire-price`;
 
     try {
-      const response = await axios.get(url, {
+      const response = await withRetry(async () => axiosInstance.get(url, {
         headers: await this.getHeaders(trId),
         params: {
           FID_COND_MRKT_DIV_CODE: 'J',  // 주식
           FID_INPUT_ISCD: stockCode,
         }
-      });
+      }));
 
       const data = response.data.output;
       return {
@@ -81,7 +112,7 @@ const kisApi = {
         open: parseInt(data.stck_oprc),            // 시가
       };
     } catch (error) {
-      console.error(`[KIS] 현재가 조회 실패 (${stockCode}):`, error.response?.data || error.message);
+      console.error(`[KIS] 현재가 조회 실패 (${stockCode}):`, sanitizeErrorMsg(error));
       throw error;
     }
   },
@@ -92,6 +123,7 @@ const kisApi = {
    * @param {number} days - 조회 일수 (기본 60일)
    */
   async getStockHistory(stockCode, days = 60) {
+    stockCode = assertStockCode(stockCode);
     const trId = config.kis.useMock ? 'FHKST03010100' : 'FHKST03010100';
     const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice`;
 
@@ -103,7 +135,7 @@ const kisApi = {
     const formatDate = (d) => d.toISOString().slice(0, 10).replace(/-/g, '');
 
     try {
-      const response = await axios.get(url, {
+      const response = await withRetry(async () => axiosInstance.get(url, {
         headers: await this.getHeaders(trId),
         params: {
           FID_COND_MRKT_DIV_CODE: 'J',
@@ -113,7 +145,7 @@ const kisApi = {
           FID_PERIOD_DIV_CODE: 'D',  // 일봉
           FID_ORG_ADJ_PRC: '0',      // 수정주가
         }
-      });
+      }));
 
       const output = response.data.output2 || [];
 
@@ -130,7 +162,7 @@ const kisApi = {
           volume: parseInt(item.acml_vol),
         }));
     } catch (error) {
-      console.error(`[KIS] 일봉 조회 실패 (${stockCode}):`, error.response?.data || error.message);
+      console.error(`[KIS] 일봉 조회 실패 (${stockCode}):`, sanitizeErrorMsg(error));
       throw error;
     }
   },
@@ -142,6 +174,9 @@ const kisApi = {
    * @param {number} price - 가격 (0이면 시장가)
    */
   async buyStock(stockCode, quantity, price = 0) {
+    stockCode = assertStockCode(stockCode);
+    quantity = assertQuantity(quantity);
+    price = assertPrice(price);
     const trId = config.kis.useMock ? 'VTTC0802U' : 'TTTC0802U';
     const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/trading/order-cash`;
 
@@ -157,9 +192,9 @@ const kisApi = {
     };
 
     try {
-      const response = await axios.post(url, body, {
+      const response = await withRetry(async () => axiosInstance.post(url, body, {
         headers: await this.getHeaders(trId),
-      });
+      }), 3, 'order');
 
       if (response.data.rt_cd === '0') {
         console.log(`[KIS] 매수 주문 성공: ${stockCode} ${quantity}주`);
@@ -172,7 +207,7 @@ const kisApi = {
         throw new Error(response.data.msg1);
       }
     } catch (error) {
-      console.error(`[KIS] 매수 주문 실패 (${stockCode}):`, error.response?.data || error.message);
+      console.error(`[KIS] 매수 주문 실패 (${stockCode}):`, sanitizeErrorMsg(error));
       throw error;
     }
   },
@@ -184,6 +219,9 @@ const kisApi = {
    * @param {number} price - 가격 (0이면 시장가)
    */
   async sellStock(stockCode, quantity, price = 0) {
+    stockCode = assertStockCode(stockCode);
+    quantity = assertQuantity(quantity);
+    price = assertPrice(price);
     const trId = config.kis.useMock ? 'VTTC0801U' : 'TTTC0801U';
     const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/trading/order-cash`;
 
@@ -199,9 +237,9 @@ const kisApi = {
     };
 
     try {
-      const response = await axios.post(url, body, {
+      const response = await withRetry(async () => axiosInstance.post(url, body, {
         headers: await this.getHeaders(trId),
-      });
+      }), 3, 'order');
 
       if (response.data.rt_cd === '0') {
         console.log(`[KIS] 매도 주문 성공: ${stockCode} ${quantity}주`);
@@ -214,7 +252,7 @@ const kisApi = {
         throw new Error(response.data.msg1);
       }
     } catch (error) {
-      console.error(`[KIS] 매도 주문 실패 (${stockCode}):`, error.response?.data || error.message);
+      console.error(`[KIS] 매도 주문 실패 (${stockCode}):`, sanitizeErrorMsg(error));
       throw error;
     }
   },
@@ -229,7 +267,7 @@ const kisApi = {
     const [accountPrefix, accountSuffix] = config.kis.account.split('-');
 
     try {
-      const response = await axios.get(url, {
+      const response = await withRetry(async () => axiosInstance.get(url, {
         headers: await this.getHeaders(trId),
         params: {
           CANO: accountPrefix,
@@ -244,7 +282,7 @@ const kisApi = {
           CTX_AREA_FK100: '',
           CTX_AREA_NK100: '',
         }
-      });
+      }));
 
       const output1 = response.data.output1 || [];  // 보유 종목
       const output2 = response.data.output2?.[0] || {};  // 계좌 요약
@@ -266,7 +304,7 @@ const kisApi = {
         }
       };
     } catch (error) {
-      console.error('[KIS] 잔고 조회 실패:', error.response?.data || error.message);
+      console.error('[KIS] 잔고 조회 실패:', sanitizeErrorMsg(error));
       throw error;
     }
   },
@@ -282,7 +320,7 @@ const kisApi = {
     const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
 
     try {
-      const response = await axios.get(url, {
+      const response = await withRetry(async () => axiosInstance.get(url, {
         headers: await this.getHeaders(trId),
         params: {
           CANO: accountPrefix,
@@ -300,7 +338,7 @@ const kisApi = {
           CTX_AREA_FK100: '',
           CTX_AREA_NK100: '',
         }
-      });
+      }));
 
       const output = response.data.output1 || [];
 
@@ -317,7 +355,7 @@ const kisApi = {
         time: item.ord_tmd,
       }));
     } catch (error) {
-      console.error('[KIS] 주문 내역 조회 실패:', error.response?.data || error.message);
+      console.error('[KIS] 주문 내역 조회 실패:', sanitizeErrorMsg(error));
       throw error;
     }
   },
@@ -328,6 +366,7 @@ const kisApi = {
    * @param {number} weeks - 조회 주 수 (기본 52주)
    */
   async getWeeklyHistory(stockCode, weeks = 52) {
+    stockCode = assertStockCode(stockCode);
     const trId = config.kis.useMock ? 'FHKST03010100' : 'FHKST03010100';
     const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice`;
 
@@ -339,7 +378,7 @@ const kisApi = {
     const formatDate = (d) => d.toISOString().slice(0, 10).replace(/-/g, '');
 
     try {
-      const response = await axios.get(url, {
+      const response = await withRetry(async () => axiosInstance.get(url, {
         headers: await this.getHeaders(trId),
         params: {
           FID_COND_MRKT_DIV_CODE: 'J',
@@ -349,7 +388,7 @@ const kisApi = {
           FID_PERIOD_DIV_CODE: 'W',  // 주봉
           FID_ORG_ADJ_PRC: '0',
         }
-      });
+      }));
 
       const output = response.data.output2 || [];
 
@@ -365,7 +404,7 @@ const kisApi = {
           volume: parseInt(item.acml_vol),
         }));
     } catch (error) {
-      console.error(`[KIS] 주봉 조회 실패 (${stockCode}):`, error.response?.data || error.message);
+      console.error(`[KIS] 주봉 조회 실패 (${stockCode}):`, sanitizeErrorMsg(error));
       throw error;
     }
   },
@@ -379,13 +418,13 @@ const kisApi = {
     const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/quotations/inquire-index-price`;
 
     try {
-      const response = await axios.get(url, {
+      const response = await withRetry(async () => axiosInstance.get(url, {
         headers: await this.getHeaders(trId),
         params: {
           FID_COND_MRKT_DIV_CODE: 'U',
           FID_INPUT_ISCD: indexCode,
         }
-      });
+      }));
 
       const data = response.data.output;
       return {
@@ -399,7 +438,7 @@ const kisApi = {
         low: parseFloat(data.bstp_nmix_lwpr),             // 저가
       };
     } catch (error) {
-      console.error(`[KIS] 지수 조회 실패 (${indexCode}):`, error.response?.data || error.message);
+      console.error(`[KIS] 지수 조회 실패 (${indexCode}):`, sanitizeErrorMsg(error));
       throw error;
     }
   },
@@ -420,7 +459,7 @@ const kisApi = {
     const formatDate = (d) => d.toISOString().slice(0, 10).replace(/-/g, '');
 
     try {
-      const response = await axios.get(url, {
+      const response = await withRetry(async () => axiosInstance.get(url, {
         headers: await this.getHeaders(trId),
         params: {
           FID_COND_MRKT_DIV_CODE: 'U',
@@ -429,7 +468,7 @@ const kisApi = {
           FID_INPUT_DATE_2: formatDate(endDate),
           FID_PERIOD_DIV_CODE: 'D',
         }
-      });
+      }));
 
       const output = response.data.output2 || [];
 
@@ -445,7 +484,7 @@ const kisApi = {
           volume: parseInt(item.acml_vol || 0),
         }));
     } catch (error) {
-      console.error(`[KIS] 지수 일봉 조회 실패 (${indexCode}):`, error.response?.data || error.message);
+      console.error(`[KIS] 지수 일봉 조회 실패 (${indexCode}):`, sanitizeErrorMsg(error));
       throw error;
     }
   },
@@ -459,13 +498,13 @@ const kisApi = {
     const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/quotations/inquire-index-price`;
 
     try {
-      const response = await axios.get(url, {
+      const response = await withRetry(async () => axiosInstance.get(url, {
         headers: await this.getHeaders(trId),
         params: {
           FID_COND_MRKT_DIV_CODE: 'U',
           FID_INPUT_ISCD: sectorCode,
         }
-      });
+      }));
 
       const data = response.data.output;
       return {
@@ -475,7 +514,7 @@ const kisApi = {
         changeRate: parseFloat(data.bstp_nmix_prdy_ctrt),
       };
     } catch (error) {
-      console.error(`[KIS] 업종 조회 실패 (${sectorCode}):`, error.response?.data || error.message);
+      console.error(`[KIS] 업종 조회 실패 (${sectorCode}):`, sanitizeErrorMsg(error));
       return null; // 섹터 조회 실패는 무시
     }
   },
@@ -490,7 +529,7 @@ const kisApi = {
     const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/quotations/volume-rank`;
 
     try {
-      const response = await axios.get(url, {
+      const response = await withRetry(async () => axiosInstance.get(url, {
         headers: await this.getHeaders(trId),
         params: {
           FID_COND_MRKT_DIV_CODE: market,
@@ -505,7 +544,7 @@ const kisApi = {
           FID_VOL_CNT: '0',                // 최소 거래량
           FID_INPUT_DATE_1: '',
         }
-      });
+      }));
 
       const output = response.data.output || [];
 
@@ -518,7 +557,7 @@ const kisApi = {
         tradingValue: parseInt(item.acml_tr_pbmn), // 거래대금
       }));
     } catch (error) {
-      console.error(`[KIS] 거래량 상위 조회 실패:`, error.response?.data || error.message);
+      console.error(`[KIS] 거래량 상위 조회 실패:`, sanitizeErrorMsg(error));
       return [];
     }
   },
@@ -534,7 +573,7 @@ const kisApi = {
     const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/ranking/fluctuation`;
 
     try {
-      const response = await axios.get(url, {
+      const response = await withRetry(async () => axiosInstance.get(url, {
         headers: await this.getHeaders(trId),
         params: {
           FID_COND_MRKT_DIV_CODE: market,
@@ -548,7 +587,7 @@ const kisApi = {
           FID_INPUT_PRICE_2: '0',
           FID_VOL_CNT: '0',
         }
-      });
+      }));
 
       const output = response.data.output || [];
 
@@ -560,7 +599,7 @@ const kisApi = {
         volume: parseInt(item.acml_vol),
       }));
     } catch (error) {
-      console.error(`[KIS] 등락률 상위 조회 실패:`, error.response?.data || error.message);
+      console.error(`[KIS] 등락률 상위 조회 실패:`, sanitizeErrorMsg(error));
       return [];
     }
   },
@@ -575,7 +614,7 @@ const kisApi = {
     const url = `${config.kis.baseUrl}/uapi/domestic-stock/v1/quotations/capture-uplowprice`;
 
     try {
-      const response = await axios.get(url, {
+      const response = await withRetry(async () => axiosInstance.get(url, {
         headers: await this.getHeaders(trId),
         params: {
           FID_COND_MRKT_DIV_CODE: market,
@@ -589,7 +628,7 @@ const kisApi = {
           FID_INPUT_PRICE_2: '0',
           FID_VOL_CNT: '0',
         }
-      });
+      }));
 
       const output = response.data.output || [];
 
@@ -601,7 +640,7 @@ const kisApi = {
         volume: parseInt(item.acml_vol || 0),
       }));
     } catch (error) {
-      console.error(`[KIS] 시가총액 상위 조회 실패:`, error.response?.data || error.message);
+      console.error(`[KIS] 시가총액 상위 조회 실패:`, sanitizeErrorMsg(error));
       return [];
     }
   },
@@ -658,10 +697,10 @@ const kisApi = {
         FID_INPUT_ISCD: stockCode,
       };
 
-      const response = await axios.get(
+      const response = await withRetry(async () => axiosInstance.get(
         `${config.kis.baseUrl}/uapi/domestic-stock/v1/quotations/inquire-investor`,
         { headers, params }
-      );
+      ));
 
       if (response.data.rt_cd !== '0') {
         console.warn(`투자자 동향 조회 실패 [${stockCode}]:`, response.data.msg1);
