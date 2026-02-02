@@ -1152,5 +1152,25 @@
     "amount": 422000,
     "orderNo": "0000022352",
     "timestamp": "2026-01-30T05:43:37.176Z"
+  },
+  {
+    "type": "BUY",
+    "code": "036570",
+    "name": "엔씨소프트",
+    "quantity": 2,
+    "price": 222750,
+    "amount": 445500,
+    "orderNo": "0000009106",
+    "timestamp": "2026-02-02T01:49:18.073Z"
+  },
+  {
+    "type": "BUY",
+    "code": "068270",
+    "name": "셀트리온",
+    "quantity": 2,
+    "price": 206000,
+    "amount": 412000,
+    "orderNo": "0000009107",
+    "timestamp": "2026-02-02T01:49:19.333Z"
   }
 ]
