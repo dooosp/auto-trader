@@ -1172,5 +1172,33 @@
     "amount": 412000,
     "orderNo": "0000009107",
     "timestamp": "2026-02-02T01:49:19.333Z"
+  },
+  {
+    "type": "SELL",
+    "code": "000270",
+    "name": "기아",
+    "quantity": 3,
+    "price": 150100,
+    "amount": 450300,
+    "avgPrice": 158900,
+    "profit": -26400,
+    "profitRate": -5.54,
+    "reason": "[긴급] ATR 손절 (-5.54%, ATR: 6.77%)",
+    "orderNo": "0000014363",
+    "timestamp": "2026-02-02T04:22:14.942Z"
+  },
+  {
+    "type": "SELL",
+    "code": "105560",
+    "name": "KB금융",
+    "quantity": 3,
+    "price": 133300,
+    "amount": 399900,
+    "avgPrice": 142000,
+    "profit": -26100,
+    "profitRate": -6.13,
+    "reason": "[긴급] ATR 손절 (-6.13%, ATR: 3.72%)",
+    "orderNo": "0000014366",
+    "timestamp": "2026-02-02T04:22:16.209Z"
   }
 ]

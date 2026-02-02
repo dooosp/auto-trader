@@ -1,26 +1,82 @@
 {
   "holdings": [
     {
+      "code": "000270",
+      "name": "기아",
+      "quantity": 3,
+      "avgPrice": 158900,
+      "currentPrice": 150100,
+      "profit": -26400,
+      "profitRate": -5.54,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 158900
+    },
+    {
+      "code": "003550",
+      "name": "LG",
+      "quantity": 5,
+      "avgPrice": 91800,
+      "currentPrice": 88100,
+      "profit": -18500,
+      "profitRate": -4.03,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 91800
+    },
+    {
       "code": "036570",
       "name": "엔씨소프트",
       "quantity": 2,
-      "avgPrice": 222750,
+      "avgPrice": 222500,
+      "currentPrice": 218000,
+      "profit": -9000,
+      "profitRate": -2.02,
       "buyDate": "2026-02-02T01:49:18.072Z",
-      "orderNo": "0000009106"
+      "partialSells": [],
+      "highestPrice": 222500
+    },
+    {
+      "code": "055550",
+      "name": "신한지주",
+      "quantity": 5,
+      "avgPrice": 84180,
+      "currentPrice": 82900,
+      "profit": -6400,
+      "profitRate": -1.52,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 84180
     },
     {
       "code": "068270",
       "name": "셀트리온",
-      "quantity": 2,
-      "avgPrice": 206000,
+      "quantity": 4,
+      "avgPrice": 208375,
+      "currentPrice": 204000,
+      "profit": -17500,
+      "profitRate": -2.1,
       "buyDate": "2026-02-02T01:49:19.332Z",
-      "orderNo": "0000009107"
+      "partialSells": [],
+      "highestPrice": 208375
+    },
+    {
+      "code": "105560",
+      "name": "KB금융",
+      "quantity": 3,
+      "avgPrice": 142000,
+      "currentPrice": 133300,
+      "profit": -26100,
+      "profitRate": -6.13,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 142000
     }
   ],
   "summary": {
-    "totalDeposit": 0,
-    "totalEvaluation": 0,
-    "totalProfit": 0
+    "totalDeposit": 8532676,
+    "totalEvaluation": 10028074,
+    "totalProfit": -103900
   },
-  "lastUpdated": "2026-02-02T01:49:19.332Z"
+  "lastUpdated": "2026-02-02T04:22:17.217Z"
 }
