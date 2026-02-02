@@ -5,9 +5,9 @@
       "name": "LG",
       "quantity": 5,
       "avgPrice": 91800,
-      "currentPrice": 88000,
-      "profit": -19000,
-      "profitRate": -4.14,
+      "currentPrice": 87900,
+      "profit": -19500,
+      "profitRate": -4.25,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 91800
@@ -17,9 +17,9 @@
       "name": "엔씨소프트",
       "quantity": 2,
       "avgPrice": 222500,
-      "currentPrice": 221000,
-      "profit": -3000,
-      "profitRate": -0.67,
+      "currentPrice": 220000,
+      "profit": -5000,
+      "profitRate": -1.12,
       "buyDate": "2026-02-02T01:49:18.072Z",
       "partialSells": [],
       "highestPrice": 222500
@@ -51,8 +51,8 @@
   ],
   "summary": {
     "totalDeposit": 8532676,
-    "totalEvaluation": 10026665,
-    "totalProfit": -51900
+    "totalEvaluation": 10024165,
+    "totalProfit": -54400
   },
-  "lastUpdated": "2026-02-02T06:00:02.019Z"
+  "lastUpdated": "2026-02-02T07:14:02.074Z"
 }
