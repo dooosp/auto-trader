@@ -1,58 +1,70 @@
 {
   "holdings": [
     {
-      "code": "000270",
-      "name": "기아",
-      "quantity": 3,
-      "avgPrice": 158900,
-      "currentPrice": 154900,
-      "profit": -12000,
-      "profitRate": -2.52,
+      "code": "003550",
+      "name": "LG",
+      "quantity": 5,
+      "avgPrice": 91800,
+      "currentPrice": 91200,
+      "profit": -3000,
+      "profitRate": -0.65,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 158900
+      "highestPrice": 91800
     },
     {
-      "code": "035420",
-      "name": "NAVER",
-      "quantity": 1,
-      "avgPrice": 288500,
-      "currentPrice": 287000,
-      "profit": -1500,
-      "profitRate": -0.52,
+      "code": "036570",
+      "name": "엔씨소프트",
+      "quantity": 2,
+      "avgPrice": 222500,
+      "currentPrice": 214000,
+      "profit": -17000,
+      "profitRate": -3.82,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 288500
+      "highestPrice": 222500
     },
     {
       "code": "055550",
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 84180,
-      "currentPrice": 85100,
-      "profit": 4600,
-      "profitRate": 1.09,
+      "currentPrice": 87300,
+      "profit": 15600,
+      "profitRate": 3.71,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 86000
+      "highestPrice": 87400
     },
     {
-      "code": "105560",
-      "name": "KB금융",
-      "quantity": 3,
-      "avgPrice": 142000,
-      "currentPrice": 137800,
-      "profit": -12600,
-      "profitRate": -2.96,
+      "code": "068270",
+      "name": "셀트리온",
+      "quantity": 4,
+      "avgPrice": 208375,
+      "currentPrice": 207250,
+      "profit": -4500,
+      "profitRate": -0.54,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 142200
+      "highestPrice": 208375
+    },
+    {
+      "code": "086790",
+      "name": "하나금융지주",
+      "quantity": 4,
+      "avgPrice": 110100,
+      "currentPrice": 109600,
+      "profit": -2000,
+      "profitRate": -0.45,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 110100
     }
   ],
   "summary": {
-    "totalDeposit": 8149494,
-    "totalEvaluation": 10123276,
-    "totalProfit": -21500
+    "totalDeposit": 7927484,
+    "totalEvaluation": 10067605,
+    "totalProfit": -10900
   },
-  "lastUpdated": "2026-01-29T23:34:11.867Z"
+  "lastUpdated": "2026-02-03T05:55:53.558Z"
 }
