@@ -5,9 +5,9 @@
       "name": "LG",
       "quantity": 5,
       "avgPrice": 91800,
-      "currentPrice": 91200,
-      "profit": -3000,
-      "profitRate": -0.65,
+      "currentPrice": 91500,
+      "profit": -1500,
+      "profitRate": -0.33,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 91800
@@ -17,9 +17,9 @@
       "name": "엔씨소프트",
       "quantity": 2,
       "avgPrice": 222500,
-      "currentPrice": 214000,
-      "profit": -17000,
-      "profitRate": -3.82,
+      "currentPrice": 213500,
+      "profit": -18000,
+      "profitRate": -4.04,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 222500
@@ -29,21 +29,21 @@
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 84180,
-      "currentPrice": 87300,
-      "profit": 15600,
-      "profitRate": 3.71,
+      "currentPrice": 88000,
+      "profit": 19100,
+      "profitRate": 4.54,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 87400
+      "highestPrice": 88000
     },
     {
       "code": "068270",
       "name": "셀트리온",
       "quantity": 4,
       "avgPrice": 208375,
-      "currentPrice": 207250,
-      "profit": -4500,
-      "profitRate": -0.54,
+      "currentPrice": 207500,
+      "profit": -3500,
+      "profitRate": -0.42,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 208375
@@ -53,18 +53,18 @@
       "name": "하나금융지주",
       "quantity": 4,
       "avgPrice": 110100,
-      "currentPrice": 109600,
-      "profit": -2000,
-      "profitRate": -0.45,
+      "currentPrice": 110200,
+      "profit": 400,
+      "profitRate": 0.09,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 110100
+      "highestPrice": 110200
     }
   ],
   "summary": {
     "totalDeposit": 7927484,
-    "totalEvaluation": 10067605,
-    "totalProfit": -10900
+    "totalEvaluation": 10075005,
+    "totalProfit": -3500
   },
-  "lastUpdated": "2026-02-03T05:55:53.558Z"
+  "lastUpdated": "2026-02-03T06:45:02.568Z"
 }
