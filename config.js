@@ -256,7 +256,7 @@ const config = {
     enabled: process.env.INVEST_QUANT_ENABLED === 'true',
     baseUrl: process.env.INVEST_QUANT_URL || 'http://localhost:3003',
     apiKey: process.env.INVEST_QUANT_API_KEY || '',
-    timeout: 5000,
+    timeout: 15000,
     minFundamentalScore: 40,
     adjustPositionSize: true,
   },
