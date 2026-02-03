@@ -21,3 +21,4 @@ Thumbs.db
 
 # 백업 파일 (file-helper 원자적 저장 시 생성)
 *.backup
+data/
