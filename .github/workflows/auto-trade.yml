@@ -53,6 +53,9 @@ jobs:
           KIS_APP_SECRET: ${{ secrets.KIS_APP_SECRET }}
           KIS_ACCOUNT: ${{ secrets.KIS_ACCOUNT }}
           USE_MOCK: ${{ secrets.USE_MOCK }}
+          INVEST_QUANT_ENABLED: ${{ secrets.INVEST_QUANT_ENABLED }}
+          INVEST_QUANT_URL: ${{ secrets.INVEST_QUANT_URL }}
+          INVEST_QUANT_API_KEY: ${{ secrets.INVEST_QUANT_API_KEY }}
 
       - name: Commit watchlist
         run: |
@@ -89,6 +92,9 @@ jobs:
           KIS_APP_SECRET: ${{ secrets.KIS_APP_SECRET }}
           KIS_ACCOUNT: ${{ secrets.KIS_ACCOUNT }}
           USE_MOCK: ${{ secrets.USE_MOCK }}
+          INVEST_QUANT_ENABLED: ${{ secrets.INVEST_QUANT_ENABLED }}
+          INVEST_QUANT_URL: ${{ secrets.INVEST_QUANT_URL }}
+          INVEST_QUANT_API_KEY: ${{ secrets.INVEST_QUANT_API_KEY }}
 
       - name: Commit trade data
         run: |

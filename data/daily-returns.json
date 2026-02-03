@@ -80,51 +80,11 @@
     "marketCondition": "NEUTRAL"
   },
   {
-    "date": "2026-01-28",
-    "totalDeposit": 8146014,
-    "totalEvaluation": 10105294,
-    "totalProfit": -46800,
-    "holdingsCount": 5,
-    "buys": 0,
-    "sells": 0,
-    "marketCondition": "NEUTRAL"
-  },
-  {
     "date": "2026-01-29",
     "totalDeposit": 8149494,
     "totalEvaluation": 10123276,
     "totalProfit": -21500,
     "holdingsCount": 4,
-    "buys": 0,
-    "sells": 0,
-    "marketCondition": "NEUTRAL"
-  },
-  {
-    "date": "2026-01-30",
-    "totalDeposit": 8149494,
-    "totalEvaluation": 10090884,
-    "totalProfit": -41200,
-    "holdingsCount": 5,
-    "buys": 0,
-    "sells": 0,
-    "marketCondition": "NEUTRAL"
-  },
-  {
-    "date": "2026-02-02",
-    "totalDeposit": 8532676,
-    "totalEvaluation": 10024165,
-    "totalProfit": -54400,
-    "holdingsCount": 4,
-    "buys": 0,
-    "sells": 0,
-    "marketCondition": "NEUTRAL"
-  },
-  {
-    "date": "2026-02-03",
-    "totalDeposit": 7927484,
-    "totalEvaluation": 10053305,
-    "totalProfit": -25200,
-    "holdingsCount": 5,
     "buys": 0,
     "sells": 0,
     "marketCondition": "NEUTRAL"
