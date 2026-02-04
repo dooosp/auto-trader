@@ -2,41 +2,70 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
-// intelligence-loop 센티먼트 파일 경로
+// intelligence-loop 연결 (Railway API 우선, 로컬 파일 폴백)
+const LOOP_API_URL = process.env.INTELLIGENCE_LOOP_URL || 'https://intelligence-loop-production.up.railway.app';
 const LOOP_SENTIMENT_PATH = path.join(__dirname, 'data', 'news-sentiment.json');
 const LOOP_TTL_MS = 6 * 60 * 60 * 1000; // 6시간
 
+// API 전체 결과 캐시 (중복 호출 방지)
+let loopApiCache = { data: null, timestamp: 0 };
+const LOOP_API_CACHE_TTL = 5 * 60 * 1000; // 5분
+
+async function fetchLoopApi() {
+  if (loopApiCache.data && Date.now() - loopApiCache.timestamp < LOOP_API_CACHE_TTL) {
+    return loopApiCache.data;
+  }
+  try {
+    const res = await axios.get(`${LOOP_API_URL}/api/result`, { timeout: 10000 });
+    if (res.data && res.data.sentiment) {
+      loopApiCache = { data: res.data, timestamp: Date.now() };
+      return res.data;
+    }
+  } catch (_e) {
+    // API 실패 시 로컬 파일 폴백
+  }
+  return null;
+}
+
+function parseLoopStock(stockCode, stockData) {
+  return {
+    code: stockCode,
+    totalScore: stockData.score || stockData.traderScore || 0,
+    newsCount: stockData.articleCount || 0,
+    sentiment: stockData.sentiment || 'NEUTRAL',
+    confidence: stockData.confidence || 0,
+    riskPenalty: stockData.riskPenalty || 0,
+    netScore: stockData.netScore || stockData.quantScore || 50,
+    details: (stockData.articles || []).map(a => ({
+      title: a.title,
+      score: a.impact === 'POSITIVE' ? 1 : a.impact === 'NEGATIVE' ? -1 : 0,
+      keywords: [],
+    })),
+    source: 'intelligence-loop',
+    cached: false,
+  };
+}
+
 /**
- * intelligence-loop 센티먼트 파일에서 종목 데이터 읽기
- * @param {string} stockCode
- * @returns {Object|null} 센티먼트 데이터 또는 null (만료/없음)
+ * intelligence-loop 센티먼트 읽기 (Railway API → 로컬 파일 폴백)
  */
-function readLoopSentiment(stockCode) {
+async function readLoopSentiment(stockCode) {
+  // 1. Railway API 시도
+  const apiData = await fetchLoopApi();
+  if (apiData) {
+    const stockData = apiData.sentiment && apiData.sentiment[stockCode];
+    if (stockData) return parseLoopStock(stockCode, stockData);
+  }
+
+  // 2. 로컬 파일 폴백
   try {
     if (!fs.existsSync(LOOP_SENTIMENT_PATH)) return null;
-
     const raw = JSON.parse(fs.readFileSync(LOOP_SENTIMENT_PATH, 'utf8'));
     const fileAge = Date.now() - new Date(raw.timestamp).getTime();
-
-    if (fileAge > LOOP_TTL_MS) return null; // 만료
-
+    if (fileAge > LOOP_TTL_MS) return null;
     const stockData = raw.stocks && raw.stocks[stockCode];
     if (!stockData) return null;
-
-    return {
-      code: stockCode,
-      totalScore: stockData.score,
-      newsCount: stockData.articleCount || 0,
-      sentiment: stockData.sentiment,
-      confidence: stockData.confidence || 0,
-      details: (stockData.articles || []).map(a => ({
-        title: a.title,
-        score: a.impact === 'POSITIVE' ? 1 : a.impact === 'NEGATIVE' ? -1 : 0,
-        keywords: [],
-      })),
-      source: 'intelligence-loop',
-      cached: false,
-    };
+    return parseLoopStock(stockCode, stockData);
   } catch (_e) {
     return null;
   }
@@ -167,8 +196,8 @@ const newsAnalyzer = {
       return cached;
     }
 
-    // intelligence-loop 센티먼트 우선 읽기
-    const loopData = readLoopSentiment(stockCode);
+    // intelligence-loop 센티먼트 우선 읽기 (Railway API → 로컬 파일)
+    const loopData = await readLoopSentiment(stockCode);
     if (loopData) {
       newsCache.set(stockCode, loopData);
       return loopData;
