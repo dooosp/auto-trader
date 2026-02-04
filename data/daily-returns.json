@@ -1,0 +1,102 @@
+[
+  {
+    "date": "2026-01-17",
+    "totalDeposit": 10000000,
+    "totalEvaluation": 10000000,
+    "totalProfit": 0,
+    "holdingsCount": 0,
+    "buys": 0,
+    "sells": 0,
+    "marketCondition": "NEUTRAL"
+  },
+  {
+    "date": "2026-01-19",
+    "totalDeposit": 10000000,
+    "totalEvaluation": 9999990,
+    "totalProfit": 0,
+    "holdingsCount": 1,
+    "buys": 0,
+    "sells": 0,
+    "marketCondition": "NEUTRAL"
+  },
+  {
+    "date": "2026-01-20",
+    "totalDeposit": 10000000,
+    "totalEvaluation": 10020356,
+    "totalProfit": -13250,
+    "holdingsCount": 11,
+    "buys": 0,
+    "sells": 0,
+    "marketCondition": "NEUTRAL"
+  },
+  {
+    "date": "2026-01-21",
+    "totalDeposit": 9910990,
+    "totalEvaluation": 10081819,
+    "totalProfit": 19800,
+    "holdingsCount": 4,
+    "buys": 0,
+    "sells": 0,
+    "marketCondition": "NEUTRAL"
+  },
+  {
+    "date": "2026-01-22",
+    "totalDeposit": 5054656,
+    "totalEvaluation": 10101318,
+    "totalProfit": 33700,
+    "holdingsCount": 6,
+    "buys": 0,
+    "sells": 1,
+    "marketCondition": "NEUTRAL"
+  },
+  {
+    "date": "2026-01-23",
+    "totalDeposit": 8247669,
+    "totalEvaluation": 10140274,
+    "totalProfit": 29900,
+    "holdingsCount": 5,
+    "buys": 1,
+    "sells": 2,
+    "marketCondition": "NEUTRAL"
+  },
+  {
+    "date": "2026-01-26",
+    "totalDeposit": 7736004,
+    "totalEvaluation": 10112614,
+    "totalProfit": -21000,
+    "holdingsCount": 5,
+    "buys": 0,
+    "sells": 0,
+    "marketCondition": "NEUTRAL"
+  },
+  {
+    "date": "2026-01-27",
+    "totalDeposit": 8141376,
+    "totalEvaluation": 10133594,
+    "totalProfit": -18500,
+    "holdingsCount": 5,
+    "buys": 0,
+    "sells": 0,
+    "marketCondition": "NEUTRAL"
+  },
+  {
+    "date": "2026-01-29",
+    "totalDeposit": 8149494,
+    "totalEvaluation": 10123276,
+    "totalProfit": -21500,
+    "holdingsCount": 4,
+    "buys": 0,
+    "sells": 0,
+    "marketCondition": "NEUTRAL"
+  },
+  {
+    "date": "2026-02-03",
+    "totalDeposit": 7927484,
+    "totalEvaluation": 10075005,
+    "totalProfit": -3500,
+    "holdingsCount": 5,
+    "buys": 0,
+    "sells": 0,
+    "marketCondition": "NEUTRAL"
+  }
+]
