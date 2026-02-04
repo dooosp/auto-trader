@@ -1210,5 +1210,21 @@
     "amount": 441600,
     "orderNo": "0000009106",
     "timestamp": "2026-02-03T01:48:22.618Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "055550",
+    "name": "신한지주",
+    "quantity": 1,
+    "price": 90700,
+    "amount": 90700,
+    "avgPrice": 84180,
+    "profit": 6520,
+    "profitRate": 7.75,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 4,
+    "orderNo": "0000009205",
+    "timestamp": "2026-02-04T01:43:23.495Z"
   }
 ]
