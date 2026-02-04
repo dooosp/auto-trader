@@ -37,8 +37,8 @@ const config = {
     // 매매 안전장치
     safety: {
       enabled: true,                    // 안전장치 활성화
-      cooldownHours: 72,                // 같은 종목 매도 후 재매수 금지 시간 (72시간 = 3일)
-      minHoldingHours: 24,              // 최소 보유 시간 (24시간) - 이 시간 전에는 매도 금지
+      cooldownHours: 24,                // 같은 종목 매도 후 재매수 금지 시간 (24시간)
+      minHoldingHours: 4,               // 최소 보유 시간 (4시간) - 당일 churning 방지
       maxBuyPerRun: 2,                  // 1회 실행당 최대 매수 종목 수
       maxPerSector: 3,                  // 같은 업종 최대 보유 수
       dailyMaxBuys: 4,                  // 일일 최대 매수 건수
