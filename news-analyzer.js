@@ -1,5 +1,46 @@
 const axios = require('axios');
-const config = require('./config');
+const fs = require('fs');
+const path = require('path');
+
+// intelligence-loop 센티먼트 파일 경로
+const LOOP_SENTIMENT_PATH = path.join(__dirname, 'data', 'news-sentiment.json');
+const LOOP_TTL_MS = 6 * 60 * 60 * 1000; // 6시간
+
+/**
+ * intelligence-loop 센티먼트 파일에서 종목 데이터 읽기
+ * @param {string} stockCode
+ * @returns {Object|null} 센티먼트 데이터 또는 null (만료/없음)
+ */
+function readLoopSentiment(stockCode) {
+  try {
+    if (!fs.existsSync(LOOP_SENTIMENT_PATH)) return null;
+
+    const raw = JSON.parse(fs.readFileSync(LOOP_SENTIMENT_PATH, 'utf8'));
+    const fileAge = Date.now() - new Date(raw.timestamp).getTime();
+
+    if (fileAge > LOOP_TTL_MS) return null; // 만료
+
+    const stockData = raw.stocks && raw.stocks[stockCode];
+    if (!stockData) return null;
+
+    return {
+      code: stockCode,
+      totalScore: stockData.score,
+      newsCount: stockData.articleCount || 0,
+      sentiment: stockData.sentiment,
+      confidence: stockData.confidence || 0,
+      details: (stockData.articles || []).map(a => ({
+        title: a.title,
+        score: a.impact === 'POSITIVE' ? 1 : a.impact === 'NEGATIVE' ? -1 : 0,
+        keywords: [],
+      })),
+      source: 'intelligence-loop',
+      cached: false,
+    };
+  } catch (_e) {
+    return null;
+  }
+}
 
 // 뉴스 캐시 (30분 TTL)
 const newsCache = {
@@ -126,6 +167,14 @@ const newsAnalyzer = {
       return cached;
     }
 
+    // intelligence-loop 센티먼트 우선 읽기
+    const loopData = readLoopSentiment(stockCode);
+    if (loopData) {
+      newsCache.set(stockCode, loopData);
+      return loopData;
+    }
+
+    // fallback: 기존 키워드 매칭
     const news = await this.fetchNews(stockCode, 5);
 
     if (news.length === 0) {
