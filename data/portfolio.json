@@ -5,12 +5,24 @@
       "name": "LG",
       "quantity": 5,
       "avgPrice": 91800,
-      "currentPrice": 91500,
-      "profit": -1500,
-      "profitRate": -0.33,
+      "currentPrice": 93600,
+      "profit": 9000,
+      "profitRate": 1.96,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 91800
+      "highestPrice": 93400
+    },
+    {
+      "code": "005930",
+      "name": "삼성전자",
+      "quantity": 2,
+      "avgPrice": 162700,
+      "currentPrice": 163000,
+      "profit": 600,
+      "profitRate": 0.18,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 163000
     },
     {
       "code": "036570",
@@ -27,44 +39,44 @@
     {
       "code": "055550",
       "name": "신한지주",
-      "quantity": 5,
+      "quantity": 2,
       "avgPrice": 84180,
-      "currentPrice": 88000,
-      "profit": 19100,
-      "profitRate": 4.54,
+      "currentPrice": 89800,
+      "profit": 11240,
+      "profitRate": 6.68,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 88000
+      "highestPrice": 89900
     },
     {
       "code": "068270",
       "name": "셀트리온",
       "quantity": 4,
       "avgPrice": 208375,
-      "currentPrice": 207500,
-      "profit": -3500,
-      "profitRate": -0.42,
+      "currentPrice": 219000,
+      "profit": 42500,
+      "profitRate": 5.1,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 208375
+      "highestPrice": 219000
     },
     {
       "code": "086790",
       "name": "하나금융지주",
       "quantity": 4,
       "avgPrice": 110100,
-      "currentPrice": 110200,
-      "profit": 400,
-      "profitRate": 0.09,
+      "currentPrice": 115000,
+      "profit": 19600,
+      "profitRate": 4.45,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 110200
+      "highestPrice": 115000
     }
   ],
   "summary": {
-    "totalDeposit": 7927484,
-    "totalEvaluation": 10075005,
-    "totalProfit": -3500
+    "totalDeposit": 7479705,
+    "totalEvaluation": 10162491,
+    "totalProfit": 64940
   },
-  "lastUpdated": "2026-02-03T06:39:34.809Z"
+  "lastUpdated": "2026-02-05T01:44:45.118Z"
 }

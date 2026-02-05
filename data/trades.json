@@ -1258,5 +1258,37 @@
     "remainingQuantity": 2,
     "orderNo": "0000017181",
     "timestamp": "2026-02-04T05:45:37.727Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "055550",
+    "name": "신한지주",
+    "quantity": 1,
+    "price": 89900,
+    "amount": 89900,
+    "avgPrice": 84180,
+    "profit": 5720,
+    "profitRate": 6.79,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 1,
+    "orderNo": "0000008126",
+    "timestamp": "2026-02-05T01:44:42.814Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "068270",
+    "name": "셀트리온",
+    "quantity": 1,
+    "price": 219000,
+    "amount": 219000,
+    "avgPrice": 208375,
+    "profit": 10625,
+    "profitRate": 5.1,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 3,
+    "orderNo": "0000008127",
+    "timestamp": "2026-02-05T01:44:44.106Z"
   }
 ]
