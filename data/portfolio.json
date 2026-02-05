@@ -5,33 +5,45 @@
       "name": "LG",
       "quantity": 5,
       "avgPrice": 91800,
-      "currentPrice": 92700,
-      "profit": 4500,
-      "profitRate": 0.98,
+      "currentPrice": 92800,
+      "profit": 5000,
+      "profitRate": 1.09,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 93400
+    },
+    {
+      "code": "006400",
+      "name": "삼성SDI",
+      "quantity": 1,
+      "avgPrice": 386500,
+      "currentPrice": 385500,
+      "profit": -1000,
+      "profitRate": -0.26,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 386500
     },
     {
       "code": "055550",
       "name": "신한지주",
       "quantity": 6,
       "avgPrice": 88613,
-      "currentPrice": 90200,
-      "profit": 9520,
-      "profitRate": 1.79,
+      "currentPrice": 90900,
+      "profit": 13720,
+      "profitRate": 2.58,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 90200
+      "highestPrice": 90900
     },
     {
       "code": "068270",
       "name": "셀트리온",
       "quantity": 3,
       "avgPrice": 208375,
-      "currentPrice": 215500,
-      "profit": 21375,
-      "profitRate": 3.42,
+      "currentPrice": 217500,
+      "profit": 27375,
+      "profitRate": 4.38,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 219000
@@ -41,9 +53,9 @@
       "name": "하나금융지주",
       "quantity": 4,
       "avgPrice": 110100,
-      "currentPrice": 113700,
-      "profit": 14400,
-      "profitRate": 3.27,
+      "currentPrice": 114100,
+      "profit": 16000,
+      "profitRate": 3.63,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 115000
@@ -53,18 +65,18 @@
       "name": "우리금융지주",
       "quantity": 30,
       "avgPrice": 31751,
-      "currentPrice": 31750,
-      "profit": -50,
-      "profitRate": -0.01,
+      "currentPrice": 31900,
+      "profit": 4450,
+      "profitRate": 0.47,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 31800
+      "highestPrice": 31900
     }
   ],
   "summary": {
     "totalDeposit": 7479705,
-    "totalEvaluation": 10132323,
-    "totalProfit": 49745
+    "totalEvaluation": 10148073,
+    "totalProfit": 65545
   },
-  "lastUpdated": "2026-02-05T05:54:13.203Z"
+  "lastUpdated": "2026-02-05T06:53:50.216Z"
 }
