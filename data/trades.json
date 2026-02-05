@@ -1290,5 +1290,19 @@
     "remainingQuantity": 3,
     "orderNo": "0000008127",
     "timestamp": "2026-02-05T01:44:44.106Z"
+  },
+  {
+    "type": "SELL",
+    "code": "036570",
+    "name": "엔씨소프트",
+    "quantity": 2,
+    "price": 211000,
+    "amount": 422000,
+    "avgPrice": 222500,
+    "profit": -23000,
+    "profitRate": -5.17,
+    "reason": "[긴급] ATR 손절 (-5.17%, ATR: 4.76%)",
+    "orderNo": "0000015193",
+    "timestamp": "2026-02-05T04:11:52.506Z"
   }
 ]

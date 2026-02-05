@@ -5,33 +5,21 @@
       "name": "LG",
       "quantity": 5,
       "avgPrice": 91800,
-      "currentPrice": 93600,
-      "profit": 9000,
-      "profitRate": 1.96,
+      "currentPrice": 92500,
+      "profit": 3500,
+      "profitRate": 0.76,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 93400
-    },
-    {
-      "code": "005930",
-      "name": "삼성전자",
-      "quantity": 2,
-      "avgPrice": 162700,
-      "currentPrice": 163000,
-      "profit": 600,
-      "profitRate": 0.18,
-      "buyDate": null,
-      "partialSells": [],
-      "highestPrice": 163000
     },
     {
       "code": "036570",
       "name": "엔씨소프트",
       "quantity": 2,
       "avgPrice": 222500,
-      "currentPrice": 213500,
-      "profit": -18000,
-      "profitRate": -4.04,
+      "currentPrice": 211500,
+      "profit": -22000,
+      "profitRate": -4.94,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 222500
@@ -39,11 +27,11 @@
     {
       "code": "055550",
       "name": "신한지주",
-      "quantity": 2,
-      "avgPrice": 84180,
-      "currentPrice": 89800,
-      "profit": 11240,
-      "profitRate": 6.68,
+      "quantity": 6,
+      "avgPrice": 88613,
+      "currentPrice": 89450,
+      "profit": 5020,
+      "profitRate": 0.94,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 89900
@@ -51,11 +39,11 @@
     {
       "code": "068270",
       "name": "셀트리온",
-      "quantity": 4,
+      "quantity": 3,
       "avgPrice": 208375,
-      "currentPrice": 219000,
-      "profit": 42500,
-      "profitRate": 5.1,
+      "currentPrice": 217000,
+      "profit": 25875,
+      "profitRate": 4.14,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 219000
@@ -65,18 +53,30 @@
       "name": "하나금융지주",
       "quantity": 4,
       "avgPrice": 110100,
-      "currentPrice": 115000,
-      "profit": 19600,
-      "profitRate": 4.45,
+      "currentPrice": 113700,
+      "profit": 14400,
+      "profitRate": 3.27,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 115000
+    },
+    {
+      "code": "316140",
+      "name": "우리금융지주",
+      "quantity": 30,
+      "avgPrice": 31751,
+      "currentPrice": 31800,
+      "profit": 1450,
+      "profitRate": 0.15,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 31800
     }
   ],
   "summary": {
     "totalDeposit": 7479705,
-    "totalEvaluation": 10162491,
-    "totalProfit": 64940
+    "totalEvaluation": 10134717,
+    "totalProfit": 28245
   },
-  "lastUpdated": "2026-02-05T01:44:45.118Z"
+  "lastUpdated": "2026-02-05T04:11:53.521Z"
 }
