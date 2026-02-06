@@ -1314,5 +1314,33 @@
     "amount": 387500,
     "orderNo": "0000019514",
     "timestamp": "2026-02-05T05:54:12.178Z"
+  },
+  {
+    "type": "SELL",
+    "code": "006400",
+    "name": "삼성SDI",
+    "quantity": 1,
+    "price": 364500,
+    "amount": 364500,
+    "avgPrice": 386500,
+    "profit": -22000,
+    "profitRate": -5.69,
+    "reason": "[긴급] ATR 손절 (-5.69%, ATR: 7.66%)",
+    "orderNo": "0000011336",
+    "timestamp": "2026-02-06T01:44:05.645Z"
+  },
+  {
+    "type": "SELL",
+    "code": "003550",
+    "name": "LG",
+    "quantity": 5,
+    "price": 88900,
+    "amount": 444500,
+    "avgPrice": 91800,
+    "profit": -14500,
+    "profitRate": -3.16,
+    "reason": "다중 매도 (3/3): MACD 데드크로스, 5일선 이탈, 유동성 스윕 매도",
+    "orderNo": "0000011341",
+    "timestamp": "2026-02-06T01:44:08.962Z"
   }
 ]
