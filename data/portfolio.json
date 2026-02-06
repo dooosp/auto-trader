@@ -5,57 +5,33 @@
       "name": "기아",
       "quantity": 3,
       "avgPrice": 152933,
-      "currentPrice": 152600,
-      "profit": -1000,
-      "profitRate": -0.22,
+      "currentPrice": 151900,
+      "profit": -3100,
+      "profitRate": -0.68,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 152933
-    },
-    {
-      "code": "003550",
-      "name": "LG",
-      "quantity": 5,
-      "avgPrice": 91800,
-      "currentPrice": 88800,
-      "profit": -15000,
-      "profitRate": -3.27,
-      "buyDate": null,
-      "partialSells": [],
-      "highestPrice": 93400
     },
     {
       "code": "005380",
       "name": "현대차",
       "quantity": 1,
       "avgPrice": 467000,
-      "currentPrice": 462500,
-      "profit": -4500,
-      "profitRate": -0.96,
+      "currentPrice": 467000,
+      "profit": 0,
+      "profitRate": 0,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 467000
-    },
-    {
-      "code": "006400",
-      "name": "삼성SDI",
-      "quantity": 1,
-      "avgPrice": 386500,
-      "currentPrice": 364000,
-      "profit": -22500,
-      "profitRate": -5.82,
-      "buyDate": null,
-      "partialSells": [],
-      "highestPrice": 386500
     },
     {
       "code": "035420",
       "name": "NAVER",
       "quantity": 1,
       "avgPrice": 251500,
-      "currentPrice": 247000,
-      "profit": -4500,
-      "profitRate": -1.79,
+      "currentPrice": 246500,
+      "profit": -5000,
+      "profitRate": -1.99,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 251500
@@ -65,21 +41,21 @@
       "name": "신한지주",
       "quantity": 6,
       "avgPrice": 88613,
-      "currentPrice": 91400,
-      "profit": 16720,
-      "profitRate": 3.14,
+      "currentPrice": 92500,
+      "profit": 23320,
+      "profitRate": 4.39,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 91400
+      "highestPrice": 92500
     },
     {
       "code": "068270",
       "name": "셀트리온",
       "quantity": 3,
       "avgPrice": 208375,
-      "currentPrice": 218000,
-      "profit": 28875,
-      "profitRate": 4.62,
+      "currentPrice": 217750,
+      "profit": 28125,
+      "profitRate": 4.5,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 219000
@@ -89,9 +65,9 @@
       "name": "하나금융지주",
       "quantity": 4,
       "avgPrice": 110100,
-      "currentPrice": 112200,
-      "profit": 8400,
-      "profitRate": 1.91,
+      "currentPrice": 114400,
+      "profit": 17200,
+      "profitRate": 3.91,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 115000
@@ -106,25 +82,25 @@
       "profitRate": 0.58,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 150300
+      "highestPrice": 150400
     },
     {
       "code": "316140",
       "name": "우리금융지주",
       "quantity": 30,
       "avgPrice": 31751,
-      "currentPrice": 31600,
-      "profit": -4550,
-      "profitRate": -0.48,
+      "currentPrice": 32100,
+      "profit": 10450,
+      "profitRate": 1.1,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 31900
+      "highestPrice": 32100
     }
   ],
   "summary": {
     "totalDeposit": 7751331,
-    "totalEvaluation": 10087263,
-    "totalProfit": 4945
+    "totalEvaluation": 10117187,
+    "totalProfit": 73595
   },
-  "lastUpdated": "2026-02-06T01:44:10.970Z"
+  "lastUpdated": "2026-02-06T04:12:09.611Z"
 }
