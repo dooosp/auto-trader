@@ -29,9 +29,9 @@
       "name": "NAVER",
       "quantity": 1,
       "avgPrice": 251500,
-      "currentPrice": 246500,
-      "profit": -5000,
-      "profitRate": -1.99,
+      "currentPrice": 247000,
+      "profit": -4500,
+      "profitRate": -1.79,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 251500
@@ -41,21 +41,21 @@
       "name": "신한지주",
       "quantity": 6,
       "avgPrice": 88613,
-      "currentPrice": 92500,
-      "profit": 23320,
-      "profitRate": 4.39,
+      "currentPrice": 92900,
+      "profit": 25720,
+      "profitRate": 4.84,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 92500
+      "highestPrice": 93100
     },
     {
       "code": "068270",
       "name": "셀트리온",
       "quantity": 3,
       "avgPrice": 208375,
-      "currentPrice": 217750,
-      "profit": 28125,
-      "profitRate": 4.5,
+      "currentPrice": 218000,
+      "profit": 28875,
+      "profitRate": 4.62,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 219000
@@ -65,9 +65,9 @@
       "name": "하나금융지주",
       "quantity": 4,
       "avgPrice": 110100,
-      "currentPrice": 114400,
-      "profit": 17200,
-      "profitRate": 3.91,
+      "currentPrice": 113800,
+      "profit": 14800,
+      "profitRate": 3.36,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 115000
@@ -77,9 +77,9 @@
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 149333,
-      "currentPrice": 150200,
-      "profit": 2600,
-      "profitRate": 0.58,
+      "currentPrice": 148900,
+      "profit": -1300,
+      "profitRate": -0.29,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 150400
@@ -89,9 +89,9 @@
       "name": "우리금융지주",
       "quantity": 30,
       "avgPrice": 31751,
-      "currentPrice": 32100,
-      "profit": 10450,
-      "profitRate": 1.1,
+      "currentPrice": 32150,
+      "profit": 11950,
+      "profitRate": 1.25,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 32100
@@ -99,8 +99,8 @@
   ],
   "summary": {
     "totalDeposit": 7751331,
-    "totalEvaluation": 10117187,
-    "totalProfit": 73595
+    "totalEvaluation": 10116037,
+    "totalProfit": 72445
   },
-  "lastUpdated": "2026-02-06T04:12:09.611Z"
+  "lastUpdated": "2026-02-06T05:51:19.506Z"
 }

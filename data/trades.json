@@ -1342,5 +1342,37 @@
     "reason": "다중 매도 (3/3): MACD 데드크로스, 5일선 이탈, 유동성 스윕 매도",
     "orderNo": "0000011341",
     "timestamp": "2026-02-06T01:44:08.962Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "055550",
+    "name": "신한지주",
+    "quantity": 1,
+    "price": 93100,
+    "amount": 93100,
+    "avgPrice": 88613,
+    "profit": 4487,
+    "profitRate": 5.06,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 5,
+    "orderNo": "0000026978",
+    "timestamp": "2026-02-06T05:51:17.208Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "068270",
+    "name": "셀트리온",
+    "quantity": 1,
+    "price": 219000,
+    "amount": 219000,
+    "avgPrice": 208375,
+    "profit": 10625,
+    "profitRate": 5.1,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 2,
+    "orderNo": "0000026985",
+    "timestamp": "2026-02-06T05:51:18.492Z"
   }
 ]
