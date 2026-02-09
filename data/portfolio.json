@@ -5,9 +5,9 @@
       "name": "기아",
       "quantity": 3,
       "avgPrice": 152933,
-      "currentPrice": 152800,
-      "profit": -400,
-      "profitRate": -0.09,
+      "currentPrice": 153300,
+      "profit": 1100,
+      "profitRate": 0.24,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 153600
@@ -17,9 +17,9 @@
       "name": "현대차",
       "quantity": 1,
       "avgPrice": 467000,
-      "currentPrice": 478000,
-      "profit": 11000,
-      "profitRate": 2.36,
+      "currentPrice": 479500,
+      "profit": 12500,
+      "profitRate": 2.68,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 477000
@@ -29,9 +29,9 @@
       "name": "NAVER",
       "quantity": 1,
       "avgPrice": 251500,
-      "currentPrice": 250750,
-      "profit": -750,
-      "profitRate": -0.3,
+      "currentPrice": 250500,
+      "profit": -1000,
+      "profitRate": -0.4,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 252500
@@ -41,9 +41,9 @@
       "name": "신한지주",
       "quantity": 2,
       "avgPrice": 88613,
-      "currentPrice": 93400,
-      "profit": 9573,
-      "profitRate": 5.4,
+      "currentPrice": 93300,
+      "profit": 9373,
+      "profitRate": 5.29,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 94400
@@ -53,9 +53,9 @@
       "name": "셀트리온",
       "quantity": 3,
       "avgPrice": 222875,
-      "currentPrice": 230750,
-      "profit": 23625,
-      "profitRate": 3.53,
+      "currentPrice": 230500,
+      "profit": 22875,
+      "profitRate": 3.42,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 230500
@@ -65,9 +65,9 @@
       "name": "하나금융지주",
       "quantity": 3,
       "avgPrice": 110100,
-      "currentPrice": 117900,
-      "profit": 23400,
-      "profitRate": 7.08,
+      "currentPrice": 118500,
+      "profit": 25200,
+      "profitRate": 7.63,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 120200
@@ -77,9 +77,9 @@
       "name": "KB금융",
       "quantity": 12,
       "avgPrice": 150858,
-      "currentPrice": 151200,
-      "profit": 4100,
-      "profitRate": 0.23,
+      "currentPrice": 151400,
+      "profit": 6500,
+      "profitRate": 0.36,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 151700
@@ -99,8 +99,8 @@
   ],
   "summary": {
     "totalDeposit": 6687273,
-    "totalEvaluation": 10269461,
-    "totalProfit": 84289
+    "totalEvaluation": 10274961,
+    "totalProfit": 89789
   },
-  "lastUpdated": "2026-02-09T04:23:34.637Z"
+  "lastUpdated": "2026-02-09T06:03:59.695Z"
 }
