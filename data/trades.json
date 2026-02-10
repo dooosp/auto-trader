@@ -1470,5 +1470,21 @@
     "remainingQuantity": 0,
     "orderNo": "0000016517",
     "timestamp": "2026-02-10T05:01:15.734Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "086790",
+    "name": "하나금융지주",
+    "quantity": 1,
+    "price": 123000,
+    "amount": 123000,
+    "avgPrice": 110100,
+    "profit": 12900,
+    "profitRate": 11.72,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 1,
+    "orderNo": "0000019496",
+    "timestamp": "2026-02-10T06:15:36.162Z"
   }
 ]
