@@ -1438,5 +1438,37 @@
     "remainingQuantity": 5,
     "orderNo": "0000008727",
     "timestamp": "2026-02-09T01:51:39.385Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "086790",
+    "name": "하나금융지주",
+    "quantity": 1,
+    "price": 123900,
+    "amount": 123900,
+    "avgPrice": 110100,
+    "profit": 13800,
+    "profitRate": 12.53,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 2,
+    "orderNo": "0000016516",
+    "timestamp": "2026-02-10T05:01:14.520Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "316140",
+    "name": "우리금융지주",
+    "quantity": 1,
+    "price": 35950,
+    "amount": 35950,
+    "avgPrice": 31751,
+    "profit": 4199,
+    "profitRate": 13.22,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 0,
+    "orderNo": "0000016517",
+    "timestamp": "2026-02-10T05:01:15.734Z"
   }
 ]

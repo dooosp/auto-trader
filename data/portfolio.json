@@ -1,9 +1,82 @@
 {
-  "holdings": [],
+  "holdings": [
+    {
+      "code": "000270",
+      "name": "기아",
+      "quantity": 9,
+      "avgPrice": 154877,
+      "currentPrice": 155200,
+      "profit": 2900,
+      "profitRate": 0.21,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 155100
+    },
+    {
+      "code": "035420",
+      "name": "NAVER",
+      "quantity": 1,
+      "avgPrice": 251500,
+      "currentPrice": 256250,
+      "profit": 4750,
+      "profitRate": 1.89,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 256500
+    },
+    {
+      "code": "068270",
+      "name": "셀트리온",
+      "quantity": 3,
+      "avgPrice": 222875,
+      "currentPrice": 229500,
+      "profit": 19875,
+      "profitRate": 2.97,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 229500
+    },
+    {
+      "code": "086790",
+      "name": "하나금융지주",
+      "quantity": 3,
+      "avgPrice": 110100,
+      "currentPrice": 124000,
+      "profit": 41700,
+      "profitRate": 12.62,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 123900
+    },
+    {
+      "code": "105560",
+      "name": "KB금융",
+      "quantity": 12,
+      "avgPrice": 150858,
+      "currentPrice": 156800,
+      "profit": 71300,
+      "profitRate": 3.94,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 156800
+    },
+    {
+      "code": "316140",
+      "name": "우리금융지주",
+      "quantity": 1,
+      "avgPrice": 31751,
+      "currentPrice": 35950,
+      "profit": 4198,
+      "profitRate": 13.22,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 35950
+    }
+  ],
   "summary": {
-    "totalDeposit": 0,
-    "totalEvaluation": 0,
-    "totalProfit": 0
+    "totalDeposit": 6180075,
+    "totalEvaluation": 10394647,
+    "totalProfit": 144723
   },
-  "lastUpdated": "2026-02-10T02:00:24.728Z"
+  "lastUpdated": "2026-02-10T05:01:21.549Z"
 }
