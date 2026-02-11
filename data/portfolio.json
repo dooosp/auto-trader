@@ -5,33 +5,33 @@
       "name": "기아",
       "quantity": 9,
       "avgPrice": 154877,
-      "currentPrice": 159800,
-      "profit": 44300,
-      "profitRate": 3.18,
+      "currentPrice": 160600,
+      "profit": 51500,
+      "profitRate": 3.69,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 159800
+      "highestPrice": 160600
     },
     {
       "code": "035420",
       "name": "NAVER",
       "quantity": 1,
       "avgPrice": 251500,
-      "currentPrice": 257000,
-      "profit": 5500,
-      "profitRate": 2.19,
+      "currentPrice": 259500,
+      "profit": 8000,
+      "profitRate": 3.18,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 257000
+      "highestPrice": 259000
     },
     {
       "code": "068270",
       "name": "셀트리온",
-      "quantity": 3,
+      "quantity": 2,
       "avgPrice": 222875,
-      "currentPrice": 239000,
-      "profit": 48375,
-      "profitRate": 7.23,
+      "currentPrice": 238250,
+      "profit": 30750,
+      "profitRate": 6.9,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 239500
@@ -39,11 +39,11 @@
     {
       "code": "086790",
       "name": "하나금융지주",
-      "quantity": 1,
-      "avgPrice": 110100,
-      "currentPrice": 125800,
-      "profit": 15700,
-      "profitRate": 14.26,
+      "quantity": 3,
+      "avgPrice": 126066,
+      "currentPrice": 127000,
+      "profit": 2800,
+      "profitRate": 0.74,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 125900
@@ -51,11 +51,11 @@
     {
       "code": "105560",
       "name": "KB금융",
-      "quantity": 11,
+      "quantity": 5,
       "avgPrice": 150858,
-      "currentPrice": 160900,
-      "profit": 110458,
-      "profitRate": 6.66,
+      "currentPrice": 164700,
+      "profit": 69208,
+      "profitRate": 9.18,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 160900
@@ -63,8 +63,8 @@
   ],
   "summary": {
     "totalDeposit": 5862661,
-    "totalEvaluation": 10514461,
-    "totalProfit": 224333
+    "totalEvaluation": 10546961,
+    "totalProfit": 162258
   },
-  "lastUpdated": "2026-02-11T01:58:03.311Z"
+  "lastUpdated": "2026-02-11T04:29:57.638Z"
 }

@@ -1534,5 +1534,21 @@
     "remainingQuantity": 8,
     "orderNo": "0000009288",
     "timestamp": "2026-02-11T01:57:56.682Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "068270",
+    "name": "셀트리온",
+    "quantity": 1,
+    "price": 238500,
+    "amount": 238500,
+    "avgPrice": 222875,
+    "profit": 15625,
+    "profitRate": 7.01,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 1,
+    "orderNo": "0000015013",
+    "timestamp": "2026-02-11T04:29:52.914Z"
   }
 ]
