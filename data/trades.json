@@ -1486,5 +1486,53 @@
     "remainingQuantity": 1,
     "orderNo": "0000019496",
     "timestamp": "2026-02-10T06:15:36.162Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "068270",
+    "name": "셀트리온",
+    "quantity": 1,
+    "price": 239500,
+    "amount": 239500,
+    "avgPrice": 222875,
+    "profit": 16625,
+    "profitRate": 7.46,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 2,
+    "orderNo": "0000009284",
+    "timestamp": "2026-02-11T01:57:54.128Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "086790",
+    "name": "하나금융지주",
+    "quantity": 1,
+    "price": 125900,
+    "amount": 125900,
+    "avgPrice": 110100,
+    "profit": 15800,
+    "profitRate": 14.35,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 0,
+    "orderNo": "0000009285",
+    "timestamp": "2026-02-11T01:57:55.419Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "105560",
+    "name": "KB금융",
+    "quantity": 3,
+    "price": 160900,
+    "amount": 482700,
+    "avgPrice": 150858,
+    "profit": 30126,
+    "profitRate": 6.66,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 8,
+    "orderNo": "0000009288",
+    "timestamp": "2026-02-11T01:57:56.682Z"
   }
 ]

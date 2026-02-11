@@ -5,66 +5,66 @@
       "name": "기아",
       "quantity": 9,
       "avgPrice": 154877,
-      "currentPrice": 155300,
-      "profit": 3800,
-      "profitRate": 0.27,
+      "currentPrice": 159800,
+      "profit": 44300,
+      "profitRate": 3.18,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 155200
+      "highestPrice": 159800
     },
     {
       "code": "035420",
       "name": "NAVER",
       "quantity": 1,
       "avgPrice": 251500,
-      "currentPrice": 254500,
-      "profit": 3000,
-      "profitRate": 1.19,
+      "currentPrice": 257000,
+      "profit": 5500,
+      "profitRate": 2.19,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 256500
+      "highestPrice": 257000
     },
     {
       "code": "068270",
       "name": "셀트리온",
       "quantity": 3,
       "avgPrice": 222875,
-      "currentPrice": 228000,
-      "profit": 15375,
-      "profitRate": 2.3,
+      "currentPrice": 239000,
+      "profit": 48375,
+      "profitRate": 7.23,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 229500
+      "highestPrice": 239500
     },
     {
       "code": "086790",
       "name": "하나금융지주",
-      "quantity": 2,
+      "quantity": 1,
       "avgPrice": 110100,
-      "currentPrice": 123100,
-      "profit": 26000,
-      "profitRate": 11.81,
+      "currentPrice": 125800,
+      "profit": 15700,
+      "profitRate": 14.26,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 123900
+      "highestPrice": 125900
     },
     {
       "code": "105560",
       "name": "KB금융",
-      "quantity": 12,
+      "quantity": 11,
       "avgPrice": 150858,
-      "currentPrice": 156300,
-      "profit": 65300,
-      "profitRate": 3.61,
+      "currentPrice": 160900,
+      "profit": 110458,
+      "profitRate": 6.66,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 156800
+      "highestPrice": 160900
     }
   ],
   "summary": {
-    "totalDeposit": 6180075,
-    "totalEvaluation": 10381167,
-    "totalProfit": 113475
+    "totalDeposit": 5862661,
+    "totalEvaluation": 10514461,
+    "totalProfit": 224333
   },
-  "lastUpdated": "2026-02-10T06:15:38.836Z"
+  "lastUpdated": "2026-02-11T01:58:03.311Z"
 }
