@@ -1582,5 +1582,37 @@
     "remainingQuantity": 2,
     "orderNo": "0000007370",
     "timestamp": "2026-02-12T01:51:01.463Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "000270",
+    "name": "기아",
+    "quantity": 1,
+    "price": 164200,
+    "amount": 164200,
+    "avgPrice": 154877,
+    "profit": 9323,
+    "profitRate": 6.02,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 4,
+    "orderNo": "0000013360",
+    "timestamp": "2026-02-12T04:22:34.350Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "068270",
+    "name": "셀트리온",
+    "quantity": 1,
+    "price": 238000,
+    "amount": 238000,
+    "avgPrice": 222875,
+    "profit": 15125,
+    "profitRate": 6.79,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 0,
+    "orderNo": "0000013363",
+    "timestamp": "2026-02-12T04:22:35.604Z"
   }
 ]
