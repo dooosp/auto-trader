@@ -5,21 +5,21 @@
       "name": "기아",
       "quantity": 9,
       "avgPrice": 154877,
-      "currentPrice": 161600,
-      "profit": 60500,
-      "profitRate": 4.34,
+      "currentPrice": 164950,
+      "profit": 90650,
+      "profitRate": 6.5,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 160600
+      "highestPrice": 164900
     },
     {
       "code": "035420",
       "name": "NAVER",
       "quantity": 1,
       "avgPrice": 251500,
-      "currentPrice": 257500,
-      "profit": 6000,
-      "profitRate": 2.39,
+      "currentPrice": 258000,
+      "profit": 6500,
+      "profitRate": 2.58,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 259000
@@ -29,9 +29,9 @@
       "name": "셀트리온",
       "quantity": 1,
       "avgPrice": 222875,
-      "currentPrice": 239000,
-      "profit": 16125,
-      "profitRate": 7.23,
+      "currentPrice": 233500,
+      "profit": 10625,
+      "profitRate": 4.77,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 239500
@@ -41,30 +41,30 @@
       "name": "하나금융지주",
       "quantity": 3,
       "avgPrice": 126066,
-      "currentPrice": 126200,
-      "profit": 400,
-      "profitRate": 0.11,
+      "currentPrice": 128500,
+      "profit": 7300,
+      "profitRate": 1.93,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 125900
+      "highestPrice": 128500
     },
     {
       "code": "105560",
       "name": "KB금융",
-      "quantity": 5,
+      "quantity": 3,
       "avgPrice": 150858,
-      "currentPrice": 164100,
-      "profit": 66208,
-      "profitRate": 8.78,
+      "currentPrice": 167300,
+      "profit": 49324,
+      "profitRate": 10.9,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 160900
+      "highestPrice": 167400
     }
   ],
   "summary": {
-    "totalDeposit": 5862661,
-    "totalEvaluation": 10548805,
-    "totalProfit": 149233
+    "totalDeposit": 6045802,
+    "totalEvaluation": 10591057,
+    "totalProfit": 164399
   },
-  "lastUpdated": "2026-02-11T06:06:09.596Z"
+  "lastUpdated": "2026-02-12T01:51:08.014Z"
 }

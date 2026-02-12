@@ -1550,5 +1550,37 @@
     "remainingQuantity": 1,
     "orderNo": "0000015013",
     "timestamp": "2026-02-11T04:29:52.914Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "000270",
+    "name": "기아",
+    "quantity": 2,
+    "price": 164900,
+    "amount": 329800,
+    "avgPrice": 154877,
+    "profit": 20046,
+    "profitRate": 6.47,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 7,
+    "orderNo": "0000007367",
+    "timestamp": "2026-02-12T01:51:00.169Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "105560",
+    "name": "KB금융",
+    "quantity": 1,
+    "price": 167400,
+    "amount": 167400,
+    "avgPrice": 150858,
+    "profit": 16542,
+    "profitRate": 10.97,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 2,
+    "orderNo": "0000007370",
+    "timestamp": "2026-02-12T01:51:01.463Z"
   }
 ]
