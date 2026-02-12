@@ -5,9 +5,9 @@
       "name": "기아",
       "quantity": 4,
       "avgPrice": 154877,
-      "currentPrice": 164200,
-      "profit": 46611,
-      "profitRate": 6.02,
+      "currentPrice": 165000,
+      "profit": 40488,
+      "profitRate": 6.54,
       "buyDate": null,
       "partialSells": [
         "L5"
@@ -19,9 +19,9 @@
       "name": "NAVER",
       "quantity": 1,
       "avgPrice": 251500,
-      "currentPrice": 256500,
-      "profit": 5000,
-      "profitRate": 1.99,
+      "currentPrice": 257000,
+      "profit": 5500,
+      "profitRate": 2.19,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 259000
@@ -31,18 +31,26 @@
       "name": "하나금융지주",
       "quantity": 3,
       "avgPrice": 126066,
-      "currentPrice": 128300,
-      "profit": 6700,
-      "profitRate": 1.77,
+      "currentPrice": 129400,
+      "profit": 10000,
+      "profitRate": 2.64,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 128500
+    },
+    {
+      "code": "005930",
+      "name": "삼성전자",
+      "quantity": 2,
+      "avgPrice": 178000,
+      "buyDate": "2026-02-12T06:02:55.006Z",
+      "orderNo": "0000017198"
     }
   ],
   "summary": {
     "totalDeposit": 6045802,
-    "totalEvaluation": 10581536,
-    "totalProfit": 73936
+    "totalEvaluation": 10587282,
+    "totalProfit": 55988
   },
-  "lastUpdated": "2026-02-12T04:22:35.604Z"
+  "lastUpdated": "2026-02-12T06:02:55.006Z"
 }
