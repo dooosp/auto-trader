@@ -5,9 +5,9 @@
       "name": "기아",
       "quantity": 2,
       "avgPrice": 154877,
-      "currentPrice": 164000,
-      "profit": 18244,
-      "profitRate": 5.89,
+      "currentPrice": 164100,
+      "profit": 18444,
+      "profitRate": 5.95,
       "buyDate": null,
       "partialSells": [
         "L5"
@@ -19,9 +19,9 @@
       "name": "NAVER",
       "quantity": 1,
       "avgPrice": 251500,
-      "currentPrice": 252000,
-      "profit": 500,
-      "profitRate": 0.2,
+      "currentPrice": 252500,
+      "profit": 1000,
+      "profitRate": 0.4,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 259000
@@ -41,8 +41,8 @@
   ],
   "summary": {
     "totalDeposit": 7398805,
-    "totalEvaluation": 10578011,
-    "totalProfit": 23594
+    "totalEvaluation": 10578461,
+    "totalProfit": 24044
   },
-  "lastUpdated": "2026-02-13T05:55:55.107Z"
+  "lastUpdated": "2026-02-13T06:56:27.760Z"
 }
