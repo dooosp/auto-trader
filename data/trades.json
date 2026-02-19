@@ -1666,5 +1666,15 @@
     "remainingQuantity": 0,
     "orderNo": "0000016754",
     "timestamp": "2026-02-19T04:17:35.456Z"
+  },
+  {
+    "type": "BUY",
+    "code": "000270",
+    "name": "기아",
+    "quantity": 2,
+    "price": 170000,
+    "amount": 340000,
+    "orderNo": "0000022307",
+    "timestamp": "2026-02-19T05:57:12.355Z"
   }
 ]

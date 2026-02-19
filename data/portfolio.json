@@ -1,37 +1,25 @@
 {
   "holdings": [
     {
-      "code": "000270",
-      "name": "기아",
-      "quantity": 1,
-      "avgPrice": 154877,
-      "currentPrice": 170400,
-      "profit": 15522,
-      "profitRate": 10.02,
-      "buyDate": null,
-      "partialSells": [],
-      "highestPrice": 170400
-    },
-    {
       "code": "005930",
       "name": "삼성전자",
       "quantity": 2,
       "avgPrice": 188600,
-      "currentPrice": 188700,
-      "profit": 200,
-      "profitRate": 0.05,
+      "currentPrice": 189100,
+      "profit": 1000,
+      "profitRate": 0.27,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 188700
+      "highestPrice": 189100
     },
     {
       "code": "035420",
       "name": "NAVER",
       "quantity": 1,
       "avgPrice": 251500,
-      "currentPrice": 253500,
-      "profit": 2000,
-      "profitRate": 0.8,
+      "currentPrice": 253000,
+      "profit": 1500,
+      "profitRate": 0.6,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 253500
@@ -41,9 +29,9 @@
       "name": "하나금융지주",
       "quantity": 3,
       "avgPrice": 126066,
-      "currentPrice": 126400,
-      "profit": 1000,
-      "profitRate": 0.26,
+      "currentPrice": 127100,
+      "profit": 3100,
+      "profitRate": 0.82,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 127600
@@ -51,8 +39,8 @@
   ],
   "summary": {
     "totalDeposit": 8925232,
-    "totalEvaluation": 10585457,
-    "totalProfit": 18722
+    "totalEvaluation": 10587397,
+    "totalProfit": 5600
   },
-  "lastUpdated": "2026-02-19T04:17:38.685Z"
+  "lastUpdated": "2026-02-19T05:57:14.448Z"
 }
