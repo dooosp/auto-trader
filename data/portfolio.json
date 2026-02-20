@@ -5,21 +5,21 @@
       "name": "기아",
       "quantity": 2,
       "avgPrice": 170000,
-      "currentPrice": 170100,
-      "profit": 200,
-      "profitRate": 0.06,
+      "currentPrice": 170900,
+      "profit": 1800,
+      "profitRate": 0.53,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 170000
+      "highestPrice": 170900
     },
     {
       "code": "005930",
       "name": "삼성전자",
       "quantity": 2,
       "avgPrice": 188600,
-      "currentPrice": 189400,
-      "profit": 1600,
-      "profitRate": 0.42,
+      "currentPrice": 189700,
+      "profit": 2200,
+      "profitRate": 0.58,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 190000
@@ -51,8 +51,8 @@
   ],
   "summary": {
     "totalDeposit": 9614961,
-    "totalEvaluation": 10602557,
-    "totalProfit": 20800
+    "totalEvaluation": 10604957,
+    "totalProfit": 23200
   },
-  "lastUpdated": "2026-02-20T01:45:33.961Z"
+  "lastUpdated": "2026-02-20T04:12:24.016Z"
 }
