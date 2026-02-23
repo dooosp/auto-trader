@@ -17,9 +17,9 @@
       "name": "삼성전자",
       "quantity": 2,
       "avgPrice": 188600,
-      "currentPrice": 192300,
-      "profit": 7400,
-      "profitRate": 1.96,
+      "currentPrice": 192650,
+      "profit": 8100,
+      "profitRate": 2.15,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 195100
@@ -51,8 +51,8 @@
   ],
   "summary": {
     "totalDeposit": 9234857,
-    "totalEvaluation": 10607257,
-    "totalProfit": 25500
+    "totalEvaluation": 10607957,
+    "totalProfit": 26200
   },
-  "lastUpdated": "2026-02-23T04:20:30.935Z"
+  "lastUpdated": "2026-02-23T06:02:32.528Z"
 }
