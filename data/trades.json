@@ -1676,5 +1676,21 @@
     "amount": 340000,
     "orderNo": "0000022307",
     "timestamp": "2026-02-19T05:57:12.355Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "005930",
+    "name": "삼성전자",
+    "quantity": 1,
+    "price": 199600,
+    "amount": 199600,
+    "avgPrice": 188600,
+    "profit": 11000,
+    "profitRate": 5.83,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 1,
+    "orderNo": "0000013276",
+    "timestamp": "2026-02-24T04:15:37.004Z"
   }
 ]

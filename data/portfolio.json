@@ -5,33 +5,33 @@
       "name": "기아",
       "quantity": 2,
       "avgPrice": 170000,
-      "currentPrice": 172300,
-      "profit": 4600,
-      "profitRate": 1.35,
+      "currentPrice": 173500,
+      "profit": 7000,
+      "profitRate": 2.06,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 173050
+      "highestPrice": 173600
     },
     {
       "code": "005930",
       "name": "삼성전자",
       "quantity": 2,
       "avgPrice": 188600,
-      "currentPrice": 197300,
-      "profit": 17400,
-      "profitRate": 4.61,
+      "currentPrice": 199600,
+      "profit": 22000,
+      "profitRate": 5.83,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 197300
+      "highestPrice": 199600
     },
     {
       "code": "035420",
       "name": "NAVER",
       "quantity": 1,
       "avgPrice": 251500,
-      "currentPrice": 255000,
-      "profit": 3500,
-      "profitRate": 1.39,
+      "currentPrice": 255500,
+      "profit": 4000,
+      "profitRate": 1.59,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 258500
@@ -51,8 +51,8 @@
   ],
   "summary": {
     "totalDeposit": 9234857,
-    "totalEvaluation": 10607657,
-    "totalProfit": 25900
+    "totalEvaluation": 10615157,
+    "totalProfit": 33400
   },
-  "lastUpdated": "2026-02-24T01:47:12.116Z"
+  "lastUpdated": "2026-02-24T04:15:40.671Z"
 }
