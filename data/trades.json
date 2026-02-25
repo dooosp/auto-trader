@@ -1708,5 +1708,31 @@
     "remainingQuantity": 0,
     "orderNo": "0000016396",
     "timestamp": "2026-02-24T05:57:34.328Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "000270",
+    "name": "기아",
+    "quantity": 1,
+    "price": 197600,
+    "amount": 197600,
+    "avgPrice": 170000,
+    "profit": 27600,
+    "profitRate": 16.24,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 1,
+    "orderNo": "0000009438",
+    "timestamp": "2026-02-25T01:49:40.583Z"
+  },
+  {
+    "type": "BUY",
+    "code": "005930",
+    "name": "삼성전자",
+    "quantity": 2,
+    "price": 203000,
+    "amount": 406000,
+    "orderNo": "0000009440",
+    "timestamp": "2026-02-25T01:49:43.206Z"
   }
 ]
