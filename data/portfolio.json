@@ -1,6 +1,18 @@
 {
   "holdings": [
     {
+      "code": "000270",
+      "name": "기아",
+      "quantity": 2,
+      "avgPrice": 196600,
+      "currentPrice": 196100,
+      "profit": -1000,
+      "profitRate": -0.25,
+      "buyDate": "2026-02-25T05:58:41.592Z",
+      "partialSells": [],
+      "highestPrice": 196600
+    },
+    {
       "code": "005930",
       "name": "삼성전자",
       "quantity": 2,
@@ -29,26 +41,18 @@
       "name": "하나금융지주",
       "quantity": 3,
       "avgPrice": 126066,
-      "currentPrice": 126100,
-      "profit": 100,
-      "profitRate": 0.03,
+      "currentPrice": 126000,
+      "profit": -200,
+      "profitRate": -0.05,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 131300
-    },
-    {
-      "code": "000270",
-      "name": "기아",
-      "quantity": 2,
-      "avgPrice": 196600,
-      "buyDate": "2026-02-25T05:58:41.592Z",
-      "orderNo": "0000019948"
     }
   ],
   "summary": {
     "totalDeposit": 9234857,
-    "totalEvaluation": 10659220,
-    "totalProfit": 1600
+    "totalEvaluation": 10657870,
+    "totalProfit": 300
   },
-  "lastUpdated": "2026-02-25T05:58:41.592Z"
+  "lastUpdated": "2026-02-25T07:04:04.133Z"
 }
