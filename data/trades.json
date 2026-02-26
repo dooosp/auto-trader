@@ -1760,5 +1760,37 @@
     "amount": 393200,
     "orderNo": "0000019948",
     "timestamp": "2026-02-25T05:58:41.593Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "005930",
+    "name": "삼성전자",
+    "quantity": 1,
+    "price": 214250,
+    "amount": 214250,
+    "avgPrice": 203500,
+    "profit": 10750,
+    "profitRate": 5.28,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 1,
+    "orderNo": "0000010421",
+    "timestamp": "2026-02-26T01:45:13.854Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "035420",
+    "name": "NAVER",
+    "quantity": 1,
+    "price": 264500,
+    "amount": 264500,
+    "avgPrice": 251500,
+    "profit": 13000,
+    "profitRate": 5.17,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 0,
+    "orderNo": "0000010423",
+    "timestamp": "2026-02-26T01:45:15.135Z"
   }
 ]
