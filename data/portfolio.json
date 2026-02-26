@@ -5,33 +5,21 @@
       "name": "기아",
       "quantity": 2,
       "avgPrice": 196600,
-      "currentPrice": 200500,
-      "profit": 7800,
-      "profitRate": 1.98,
+      "currentPrice": 204500,
+      "profit": 15800,
+      "profitRate": 4.02,
       "buyDate": "2026-02-25T05:58:41.592Z",
       "partialSells": [],
-      "highestPrice": 200000
-    },
-    {
-      "code": "005930",
-      "name": "삼성전자",
-      "quantity": 1,
-      "avgPrice": 203500,
-      "currentPrice": 215000,
-      "profit": 11500,
-      "profitRate": 5.65,
-      "buyDate": null,
-      "partialSells": [],
-      "highestPrice": 215000
+      "highestPrice": 204500
     },
     {
       "code": "086790",
       "name": "하나금융지주",
       "quantity": 3,
       "avgPrice": 126066,
-      "currentPrice": 124500,
-      "profit": -4700,
-      "profitRate": -1.24,
+      "currentPrice": 124200,
+      "profit": -5600,
+      "profitRate": -1.48,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 131300
@@ -39,8 +27,8 @@
   ],
   "summary": {
     "totalDeposit": 9633310,
-    "totalEvaluation": 10693656,
-    "totalProfit": 14600
+    "totalEvaluation": 10700296,
+    "totalProfit": 10200
   },
-  "lastUpdated": "2026-02-26T04:13:56.692Z"
+  "lastUpdated": "2026-02-26T05:56:20.118Z"
 }
