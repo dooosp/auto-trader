@@ -3,23 +3,23 @@
     {
       "code": "000270",
       "name": "기아",
-      "quantity": 2,
+      "quantity": 1,
       "avgPrice": 196600,
-      "currentPrice": 207000,
-      "profit": 20800,
-      "profitRate": 5.29,
+      "currentPrice": 212000,
+      "profit": 15400,
+      "profitRate": 7.83,
       "buyDate": "2026-02-25T05:58:41.592Z",
       "partialSells": [],
-      "highestPrice": 206500
+      "highestPrice": 211000
     },
     {
       "code": "086790",
       "name": "하나금융지주",
       "quantity": 3,
       "avgPrice": 126066,
-      "currentPrice": 122800,
-      "profit": -9800,
-      "profitRate": -2.59,
+      "currentPrice": 122100,
+      "profit": -11900,
+      "profitRate": -3.15,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 131300
@@ -27,8 +27,8 @@
   ],
   "summary": {
     "totalDeposit": 9227670,
-    "totalEvaluation": 10700096,
-    "totalProfit": 10000
+    "totalEvaluation": 10702066,
+    "totalProfit": 3500
   },
-  "lastUpdated": "2026-02-27T04:10:17.889Z"
+  "lastUpdated": "2026-02-27T05:49:36.345Z"
 }
