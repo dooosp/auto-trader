@@ -1,25 +1,13 @@
 {
   "holdings": [
     {
-      "code": "000270",
-      "name": "기아",
-      "quantity": 1,
-      "avgPrice": 196600,
-      "currentPrice": 212000,
-      "profit": 15400,
-      "profitRate": 7.83,
-      "buyDate": "2026-02-25T05:58:41.592Z",
-      "partialSells": [],
-      "highestPrice": 211000
-    },
-    {
       "code": "086790",
       "name": "하나금융지주",
       "quantity": 3,
       "avgPrice": 126066,
-      "currentPrice": 122100,
-      "profit": -11900,
-      "profitRate": -3.15,
+      "currentPrice": 121800,
+      "profit": -12800,
+      "profitRate": -3.38,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 131300
@@ -27,8 +15,8 @@
   ],
   "summary": {
     "totalDeposit": 9227670,
-    "totalEvaluation": 10702066,
-    "totalProfit": 3500
+    "totalEvaluation": 10699714,
+    "totalProfit": -12800
   },
-  "lastUpdated": "2026-02-27T05:49:36.345Z"
+  "lastUpdated": "2026-02-27T06:45:32.266Z"
 }
