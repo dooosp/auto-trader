@@ -5,9 +5,9 @@
       "name": "기아",
       "quantity": 2,
       "avgPrice": 196600,
-      "currentPrice": 206000,
-      "profit": 18800,
-      "profitRate": 4.78,
+      "currentPrice": 198000,
+      "profit": 2800,
+      "profitRate": 0.71,
       "buyDate": "2026-02-25T05:58:41.592Z",
       "partialSells": [],
       "highestPrice": 206000
@@ -17,18 +17,18 @@
       "name": "하나금융지주",
       "quantity": 3,
       "avgPrice": 126066,
-      "currentPrice": 124900,
-      "profit": -3500,
-      "profitRate": -0.93,
+      "currentPrice": 120500,
+      "profit": -16700,
+      "profitRate": -4.42,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 131300
     }
   ],
   "summary": {
-    "totalDeposit": 9633310,
-    "totalEvaluation": 10705396,
-    "totalProfit": 15300
+    "totalDeposit": 9227670,
+    "totalEvaluation": 10676196,
+    "totalProfit": -13900
   },
-  "lastUpdated": "2026-02-26T06:55:51.856Z"
+  "lastUpdated": "2026-02-27T01:42:21.881Z"
 }
