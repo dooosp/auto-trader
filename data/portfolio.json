@@ -1,22 +1,9 @@
 {
-  "holdings": [
-    {
-      "code": "086790",
-      "name": "하나금융지주",
-      "quantity": 3,
-      "avgPrice": 126066,
-      "currentPrice": 121200,
-      "profit": -14600,
-      "profitRate": -3.86,
-      "buyDate": null,
-      "partialSells": [],
-      "highestPrice": 131300
-    }
-  ],
+  "holdings": [],
   "summary": {
     "totalDeposit": 9918696,
-    "totalEvaluation": 10697914,
-    "totalProfit": -14600
+    "totalEvaluation": 10699714,
+    "totalProfit": -12800
   },
-  "lastUpdated": "2026-03-03T01:47:23.388Z"
+  "lastUpdated": "2026-03-03T04:11:59.014Z"
 }

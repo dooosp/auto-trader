@@ -1840,5 +1840,19 @@
     "remainingQuantity": 0,
     "orderNo": "0000022003",
     "timestamp": "2026-02-27T05:49:32.820Z"
+  },
+  {
+    "type": "SELL",
+    "code": "086790",
+    "name": "하나금융지주",
+    "quantity": 3,
+    "price": 121900,
+    "amount": 365700,
+    "avgPrice": 126066,
+    "profit": -12498,
+    "profitRate": -3.3,
+    "reason": "[긴급] 악재 + 손실 (-3.30%)",
+    "orderNo": "0000032200",
+    "timestamp": "2026-03-03T04:11:59.015Z"
   }
 ]
