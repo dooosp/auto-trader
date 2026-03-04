@@ -4,15 +4,19 @@
       "code": "000270",
       "name": "기아",
       "quantity": 2,
-      "avgPrice": 168600,
+      "avgPrice": 168300,
+      "currentPrice": 162400,
+      "profit": -11800,
+      "profitRate": -3.51,
       "buyDate": "2026-03-04T01:43:34.597Z",
-      "orderNo": "0000018583"
+      "partialSells": [],
+      "highestPrice": 168300
     }
   ],
   "summary": {
     "totalDeposit": 10334314,
-    "totalEvaluation": 10699532,
-    "totalProfit": 0
+    "totalEvaluation": 10687692,
+    "totalProfit": -11800
   },
-  "lastUpdated": "2026-03-04T01:43:34.597Z"
+  "lastUpdated": "2026-03-04T04:06:30.859Z"
 }
