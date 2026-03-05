@@ -5,14 +5,18 @@
       "name": "기아",
       "quantity": 2,
       "avgPrice": 168000,
+      "currentPrice": 166400,
+      "profit": -3200,
+      "profitRate": -0.95,
       "buyDate": "2026-03-05T05:45:25.577Z",
-      "orderNo": "0000032085"
+      "partialSells": [],
+      "highestPrice": 168000
     }
   ],
   "summary": {
     "totalDeposit": 10699532,
-    "totalEvaluation": 10679419,
-    "totalProfit": 0
+    "totalEvaluation": 10676179,
+    "totalProfit": -3200
   },
-  "lastUpdated": "2026-03-05T05:45:25.577Z"
+  "lastUpdated": "2026-03-05T06:45:32.260Z"
 }
