@@ -1,9 +1,18 @@
 {
-  "holdings": [],
+  "holdings": [
+    {
+      "code": "000270",
+      "name": "기아",
+      "quantity": 2,
+      "avgPrice": 168000,
+      "buyDate": "2026-03-05T05:45:25.577Z",
+      "orderNo": "0000032085"
+    }
+  ],
   "summary": {
     "totalDeposit": 10699532,
     "totalEvaluation": 10679419,
     "totalProfit": 0
   },
-  "lastUpdated": "2026-03-05T04:07:59.510Z"
+  "lastUpdated": "2026-03-05T05:45:25.577Z"
 }
