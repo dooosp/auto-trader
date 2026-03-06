@@ -1,22 +1,9 @@
 {
-  "holdings": [
-    {
-      "code": "000270",
-      "name": "기아",
-      "quantity": 2,
-      "avgPrice": 168000,
-      "currentPrice": 166400,
-      "profit": -3200,
-      "profitRate": -0.95,
-      "buyDate": "2026-03-05T05:45:25.577Z",
-      "partialSells": [],
-      "highestPrice": 168000
-    }
-  ],
+  "holdings": [],
   "summary": {
-    "totalDeposit": 10699532,
-    "totalEvaluation": 10676179,
-    "totalProfit": -3200
+    "totalDeposit": 10679419,
+    "totalEvaluation": 10670579,
+    "totalProfit": -8800
   },
-  "lastUpdated": "2026-03-05T06:45:32.260Z"
+  "lastUpdated": "2026-03-06T01:47:41.923Z"
 }

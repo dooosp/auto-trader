@@ -1888,5 +1888,19 @@
     "amount": 336000,
     "orderNo": "0000032085",
     "timestamp": "2026-03-05T05:45:25.579Z"
+  },
+  {
+    "type": "SELL",
+    "code": "000270",
+    "name": "기아",
+    "quantity": 2,
+    "price": 163500,
+    "amount": 327000,
+    "avgPrice": 168000,
+    "profit": -9000,
+    "profitRate": -2.68,
+    "reason": "[긴급] 악재 + 손실 (-2.68%)",
+    "orderNo": "0000022469",
+    "timestamp": "2026-03-06T01:47:41.925Z"
   }
 ]
