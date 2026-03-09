@@ -1,9 +1,26 @@
 {
-  "holdings": [],
+  "holdings": [
+    {
+      "code": "005380",
+      "name": "현대차",
+      "quantity": 1,
+      "avgPrice": 495500,
+      "buyDate": "2026-03-09T01:47:55.596Z",
+      "orderNo": "0000015628"
+    },
+    {
+      "code": "096770",
+      "name": "SK이노베이션",
+      "quantity": 4,
+      "avgPrice": 119800,
+      "buyDate": "2026-03-09T01:47:56.903Z",
+      "orderNo": "0000015632"
+    }
+  ],
   "summary": {
-    "totalDeposit": 10679419,
+    "totalDeposit": 10343379,
     "totalEvaluation": 10669287,
     "totalProfit": 0
   },
-  "lastUpdated": "2026-03-06T06:40:28.839Z"
+  "lastUpdated": "2026-03-09T01:47:56.903Z"
 }
