@@ -5,21 +5,21 @@
       "name": "현대차",
       "quantity": 1,
       "avgPrice": 495000,
-      "currentPrice": 498500,
-      "profit": 3500,
-      "profitRate": 0.71,
+      "currentPrice": 502000,
+      "profit": 7000,
+      "profitRate": 1.41,
       "buyDate": "2026-03-09T01:47:55.596Z",
       "partialSells": [],
-      "highestPrice": 499000
+      "highestPrice": 503000
     },
     {
       "code": "096770",
       "name": "SK이노베이션",
       "quantity": 4,
       "avgPrice": 119800,
-      "currentPrice": 118200,
-      "profit": -6400,
-      "profitRate": -1.34,
+      "currentPrice": 118400,
+      "profit": -5600,
+      "profitRate": -1.17,
       "buyDate": "2026-03-09T01:47:56.903Z",
       "partialSells": [],
       "highestPrice": 119800
@@ -27,8 +27,8 @@
   ],
   "summary": {
     "totalDeposit": 10343379,
-    "totalEvaluation": 10666257,
-    "totalProfit": -2900
+    "totalEvaluation": 10670557,
+    "totalProfit": 1400
   },
-  "lastUpdated": "2026-03-09T04:14:20.926Z"
+  "lastUpdated": "2026-03-09T05:55:47.584Z"
 }
