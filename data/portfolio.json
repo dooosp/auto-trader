@@ -1,25 +1,25 @@
 {
   "holdings": [
     {
-      "code": "005380",
-      "name": "현대차",
-      "quantity": 1,
-      "avgPrice": 495000,
-      "currentPrice": 538000,
-      "profit": 43000,
-      "profitRate": 8.69,
-      "buyDate": "2026-03-09T01:47:55.596Z",
+      "code": "000270",
+      "name": "기아",
+      "quantity": 3,
+      "avgPrice": 161300,
+      "currentPrice": 157900,
+      "profit": -10200,
+      "profitRate": -2.11,
+      "buyDate": null,
       "partialSells": [],
-      "highestPrice": 538000
+      "highestPrice": 161300
     },
     {
       "code": "005930",
       "name": "삼성전자",
-      "quantity": 2,
+      "quantity": 1,
       "avgPrice": 172500,
-      "currentPrice": 189400,
-      "profit": 33800,
-      "profitRate": 9.8,
+      "currentPrice": 184700,
+      "profit": 12200,
+      "profitRate": 7.07,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 189300
@@ -29,18 +29,30 @@
       "name": "SK이노베이션",
       "quantity": 4,
       "avgPrice": 119800,
-      "currentPrice": 118700,
-      "profit": -4400,
-      "profitRate": -0.92,
+      "currentPrice": 117300,
+      "profit": -10000,
+      "profitRate": -2.09,
       "buyDate": "2026-03-09T01:47:56.903Z",
       "partialSells": [],
       "highestPrice": 119800
+    },
+    {
+      "code": "105560",
+      "name": "KB금융",
+      "quantity": 3,
+      "avgPrice": 149200,
+      "currentPrice": 146400,
+      "profit": -8400,
+      "profitRate": -1.88,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 149200
     }
   ],
   "summary": {
     "totalDeposit": 10669287,
-    "totalEvaluation": 10741517,
-    "totalProfit": 72400
+    "totalEvaluation": 10710156,
+    "totalProfit": -16500
   },
-  "lastUpdated": "2026-03-10T01:29:49.636Z"
+  "lastUpdated": "2026-03-10T04:06:35.895Z"
 }

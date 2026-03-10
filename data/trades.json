@@ -1984,5 +1984,31 @@
     "amount": 447300,
     "orderNo": "0000014818",
     "timestamp": "2026-03-10T01:29:48.635Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "005930",
+    "name": "삼성전자",
+    "quantity": 1,
+    "price": 184700,
+    "amount": 184700,
+    "avgPrice": 172500,
+    "profit": 12200,
+    "profitRate": 7.07,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 0,
+    "orderNo": "0000025533",
+    "timestamp": "2026-03-10T04:06:32.511Z"
+  },
+  {
+    "type": "BUY",
+    "code": "032830",
+    "name": "삼성생명",
+    "quantity": 2,
+    "price": 207000,
+    "amount": 414000,
+    "orderNo": "0000025534",
+    "timestamp": "2026-03-10T04:06:34.893Z"
   }
 ]
