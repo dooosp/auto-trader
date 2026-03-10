@@ -1932,5 +1932,57 @@
     "amount": 345200,
     "orderNo": "0000031736",
     "timestamp": "2026-03-09T05:55:46.578Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "005380",
+    "name": "현대차",
+    "quantity": 1,
+    "price": 538000,
+    "amount": 538000,
+    "avgPrice": 495000,
+    "profit": 43000,
+    "profitRate": 8.69,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 0,
+    "orderNo": "0000014815",
+    "timestamp": "2026-03-10T01:29:44.808Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "005930",
+    "name": "삼성전자",
+    "quantity": 1,
+    "price": 189300,
+    "amount": 189300,
+    "avgPrice": 172500,
+    "profit": 16800,
+    "profitRate": 9.74,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 1,
+    "orderNo": "0000014816",
+    "timestamp": "2026-03-10T01:29:46.045Z"
+  },
+  {
+    "type": "BUY",
+    "code": "000270",
+    "name": "기아",
+    "quantity": 3,
+    "price": 161300,
+    "amount": 483900,
+    "orderNo": "0000014817",
+    "timestamp": "2026-03-10T01:29:47.406Z"
+  },
+  {
+    "type": "BUY",
+    "code": "105560",
+    "name": "KB금융",
+    "quantity": 3,
+    "price": 149100,
+    "amount": 447300,
+    "orderNo": "0000014818",
+    "timestamp": "2026-03-10T01:29:48.635Z"
   }
 ]
