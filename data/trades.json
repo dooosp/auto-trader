@@ -2010,5 +2010,31 @@
     "amount": 414000,
     "orderNo": "0000025534",
     "timestamp": "2026-03-10T04:06:34.893Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "032830",
+    "name": "삼성생명",
+    "quantity": 1,
+    "price": 224000,
+    "amount": 224000,
+    "avgPrice": 207500,
+    "profit": 16500,
+    "profitRate": 7.95,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 1,
+    "orderNo": "0000011970",
+    "timestamp": "2026-03-11T01:30:00.793Z"
+  },
+  {
+    "type": "BUY",
+    "code": "055550",
+    "name": "신한지주",
+    "quantity": 5,
+    "price": 92400,
+    "amount": 462000,
+    "orderNo": "0000011973",
+    "timestamp": "2026-03-11T01:30:03.268Z"
   }
 ]
