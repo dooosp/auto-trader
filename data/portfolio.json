@@ -5,9 +5,9 @@
       "name": "기아",
       "quantity": 3,
       "avgPrice": 161300,
-      "currentPrice": 167100,
-      "profit": 17400,
-      "profitRate": 3.6,
+      "currentPrice": 166100,
+      "profit": 14400,
+      "profitRate": 2.98,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 166900
@@ -15,23 +15,35 @@
     {
       "code": "032830",
       "name": "삼성생명",
-      "quantity": 2,
+      "quantity": 1,
       "avgPrice": 207500,
-      "currentPrice": 224500,
-      "profit": 34000,
-      "profitRate": 8.19,
+      "currentPrice": 227500,
+      "profit": 20000,
+      "profitRate": 9.64,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 224000
+      "highestPrice": 227500
+    },
+    {
+      "code": "055550",
+      "name": "신한지주",
+      "quantity": 5,
+      "avgPrice": 92520,
+      "currentPrice": 93600,
+      "profit": 5400,
+      "profitRate": 1.17,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 93600
     },
     {
       "code": "096770",
       "name": "SK이노베이션",
       "quantity": 4,
       "avgPrice": 119800,
-      "currentPrice": 123100,
-      "profit": 13200,
-      "profitRate": 2.75,
+      "currentPrice": 122600,
+      "profit": 11200,
+      "profitRate": 2.34,
       "buyDate": "2026-03-09T01:47:56.903Z",
       "partialSells": [],
       "highestPrice": 123600
@@ -41,18 +53,18 @@
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 149200,
-      "currentPrice": 155500,
-      "profit": 18900,
-      "profitRate": 4.22,
+      "currentPrice": 156650,
+      "profit": 22350,
+      "profitRate": 4.99,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 155000
+      "highestPrice": 156600
     }
   ],
   "summary": {
     "totalDeposit": 9349917,
-    "totalEvaluation": 10822006,
-    "totalProfit": 83500
+    "totalEvaluation": 10827818,
+    "totalProfit": 73350
   },
-  "lastUpdated": "2026-03-11T01:30:04.270Z"
+  "lastUpdated": "2026-03-11T04:07:12.008Z"
 }

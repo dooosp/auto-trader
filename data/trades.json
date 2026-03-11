@@ -2036,5 +2036,31 @@
     "amount": 462000,
     "orderNo": "0000011973",
     "timestamp": "2026-03-11T01:30:03.268Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "032830",
+    "name": "삼성생명",
+    "quantity": 1,
+    "price": 227500,
+    "amount": 227500,
+    "avgPrice": 207500,
+    "profit": 20000,
+    "profitRate": 9.64,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 0,
+    "orderNo": "0000018819",
+    "timestamp": "2026-03-11T04:07:08.503Z"
+  },
+  {
+    "type": "BUY",
+    "code": "086790",
+    "name": "하나금융지주",
+    "quantity": 4,
+    "price": 116600,
+    "amount": 466400,
+    "orderNo": "0000018822",
+    "timestamp": "2026-03-11T04:07:11.006Z"
   }
 ]
