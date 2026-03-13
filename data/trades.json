@@ -2086,5 +2086,19 @@
     "amount": 488250,
     "orderNo": "0000016389",
     "timestamp": "2026-03-13T01:45:14.000Z"
+  },
+  {
+    "type": "SELL",
+    "code": "096770",
+    "name": "SK이노베이션",
+    "quantity": 4,
+    "price": 113600,
+    "amount": 454400,
+    "avgPrice": 119800,
+    "profit": -24800,
+    "profitRate": -5.18,
+    "reason": "[긴급] ATR 손절 (-5.18%, ATR: 9.24%)",
+    "orderNo": "0000028753",
+    "timestamp": "2026-03-13T04:09:34.545Z"
   }
 ]
