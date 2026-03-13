@@ -5,9 +5,9 @@
       "name": "기아",
       "quantity": 3,
       "avgPrice": 161300,
-      "currentPrice": 164400,
-      "profit": 9300,
-      "profitRate": 1.92,
+      "currentPrice": 163900,
+      "profit": 7800,
+      "profitRate": 1.61,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 167000
@@ -17,9 +17,9 @@
       "name": "기업은행",
       "quantity": 21,
       "avgPrice": 23250,
-      "currentPrice": 23200,
-      "profit": -1050,
-      "profitRate": -0.22,
+      "currentPrice": 23050,
+      "profit": -4200,
+      "profitRate": -0.86,
       "buyDate": "2026-03-13T01:45:13.999Z",
       "partialSells": [],
       "highestPrice": 23250
@@ -29,33 +29,21 @@
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 92520,
-      "currentPrice": 92200,
-      "profit": -1600,
-      "profitRate": -0.35,
+      "currentPrice": 90800,
+      "profit": -8600,
+      "profitRate": -1.86,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 93600
-    },
-    {
-      "code": "096770",
-      "name": "SK이노베이션",
-      "quantity": 4,
-      "avgPrice": 119800,
-      "currentPrice": 113600,
-      "profit": -24800,
-      "profitRate": -5.18,
-      "buyDate": "2026-03-09T01:47:56.903Z",
-      "partialSells": [],
-      "highestPrice": 123600
     },
     {
       "code": "105560",
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 149200,
-      "currentPrice": 150300,
-      "profit": 3300,
-      "profitRate": 0.74,
+      "currentPrice": 148700,
+      "profit": -1500,
+      "profitRate": -0.34,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 156600
@@ -63,8 +51,8 @@
   ],
   "summary": {
     "totalDeposit": 8434224,
-    "totalEvaluation": 10731276,
-    "totalProfit": -14850
+    "totalEvaluation": 10713458,
+    "totalProfit": -6500
   },
-  "lastUpdated": "2026-03-13T04:09:35.556Z"
+  "lastUpdated": "2026-03-13T05:44:12.524Z"
 }
