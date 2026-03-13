@@ -2062,5 +2062,29 @@
     "amount": 466400,
     "orderNo": "0000018822",
     "timestamp": "2026-03-11T04:07:11.006Z"
+  },
+  {
+    "type": "SELL",
+    "code": "086790",
+    "name": "하나금융지주",
+    "quantity": 4,
+    "price": 109900,
+    "amount": 439600,
+    "avgPrice": 116600,
+    "profit": -26800,
+    "profitRate": -5.75,
+    "reason": "[긴급] ATR 손절 (-5.75%, ATR: 5.93%)",
+    "orderNo": "0000016379",
+    "timestamp": "2026-03-13T01:45:11.635Z"
+  },
+  {
+    "type": "BUY",
+    "code": "024110",
+    "name": "기업은행",
+    "quantity": 21,
+    "price": 23250,
+    "amount": 488250,
+    "orderNo": "0000016389",
+    "timestamp": "2026-03-13T01:45:14.000Z"
   }
 ]

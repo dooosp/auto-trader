@@ -5,9 +5,9 @@
       "name": "기아",
       "quantity": 3,
       "avgPrice": 161300,
-      "currentPrice": 167000,
-      "profit": 17100,
-      "profitRate": 3.53,
+      "currentPrice": 164400,
+      "profit": 9300,
+      "profitRate": 1.92,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 167000
@@ -17,33 +17,21 @@
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 92520,
-      "currentPrice": 91900,
-      "profit": -3100,
-      "profitRate": -0.67,
+      "currentPrice": 90700,
+      "profit": -9100,
+      "profitRate": -1.97,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 93600
-    },
-    {
-      "code": "086790",
-      "name": "하나금융지주",
-      "quantity": 4,
-      "avgPrice": 116600,
-      "currentPrice": 112500,
-      "profit": -16400,
-      "profitRate": -3.52,
-      "buyDate": null,
-      "partialSells": [],
-      "highestPrice": 116600
     },
     {
       "code": "096770",
       "name": "SK이노베이션",
       "quantity": 4,
       "avgPrice": 119800,
-      "currentPrice": 121700,
-      "profit": 7600,
-      "profitRate": 1.59,
+      "currentPrice": 114800,
+      "profit": -20000,
+      "profitRate": -4.17,
       "buyDate": "2026-03-09T01:47:56.903Z",
       "partialSells": [],
       "highestPrice": 123600
@@ -53,18 +41,26 @@
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 149200,
-      "currentPrice": 149200,
-      "profit": 0,
-      "profitRate": 0,
+      "currentPrice": 148600,
+      "profit": -1800,
+      "profitRate": -0.4,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 156600
+    },
+    {
+      "code": "024110",
+      "name": "기업은행",
+      "quantity": 21,
+      "avgPrice": 23250,
+      "buyDate": "2026-03-13T01:45:13.999Z",
+      "orderNo": "0000016389"
     }
   ],
   "summary": {
-    "totalDeposit": 8912806,
-    "totalEvaluation": 10779124,
-    "totalProfit": 5200
+    "totalDeposit": 8434224,
+    "totalEvaluation": 10725524,
+    "totalProfit": -48400
   },
-  "lastUpdated": "2026-03-12T06:49:09.578Z"
+  "lastUpdated": "2026-03-13T01:45:13.999Z"
 }
