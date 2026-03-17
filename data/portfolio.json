@@ -5,9 +5,9 @@
       "name": "기아",
       "quantity": 3,
       "avgPrice": 161300,
-      "currentPrice": 168500,
-      "profit": 21600,
-      "profitRate": 4.46,
+      "currentPrice": 167300,
+      "profit": 18000,
+      "profitRate": 3.72,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 168700
@@ -17,9 +17,9 @@
       "name": "기업은행",
       "quantity": 21,
       "avgPrice": 23250,
-      "currentPrice": 23300,
-      "profit": 1050,
-      "profitRate": 0.22,
+      "currentPrice": 23200,
+      "profit": -1050,
+      "profitRate": -0.22,
       "buyDate": "2026-03-13T01:45:13.999Z",
       "partialSells": [],
       "highestPrice": 23350
@@ -29,9 +29,9 @@
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 92520,
-      "currentPrice": 91400,
-      "profit": -5600,
-      "profitRate": -1.21,
+      "currentPrice": 91200,
+      "profit": -6600,
+      "profitRate": -1.43,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 93600
@@ -41,9 +41,9 @@
       "name": "LG전자",
       "quantity": 4,
       "avgPrice": 115400,
-      "currentPrice": 115000,
-      "profit": -1600,
-      "profitRate": -0.35,
+      "currentPrice": 114500,
+      "profit": -3600,
+      "profitRate": -0.78,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 115400
@@ -53,9 +53,9 @@
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 149200,
-      "currentPrice": 151200,
-      "profit": 6000,
-      "profitRate": 1.34,
+      "currentPrice": 150700,
+      "profit": 4500,
+      "profitRate": 1.01,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 156600
@@ -63,8 +63,8 @@
   ],
   "summary": {
     "totalDeposit": 8837608,
-    "totalEvaluation": 10741348,
-    "totalProfit": 21450
+    "totalEvaluation": 10731148,
+    "totalProfit": 11250
   },
-  "lastUpdated": "2026-03-17T05:56:53.470Z"
+  "lastUpdated": "2026-03-17T06:58:20.679Z"
 }
