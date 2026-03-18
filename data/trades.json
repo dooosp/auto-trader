@@ -2152,5 +2152,31 @@
     "remainingQuantity": 1,
     "orderNo": "0000019241",
     "timestamp": "2026-03-18T04:23:08.215Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "000270",
+    "name": "기아",
+    "quantity": 1,
+    "price": 176100,
+    "amount": 176100,
+    "avgPrice": 161300,
+    "profit": 14800,
+    "profitRate": 9.18,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 0,
+    "orderNo": "0000026453",
+    "timestamp": "2026-03-18T06:00:54.809Z"
+  },
+  {
+    "type": "BUY",
+    "code": "006400",
+    "name": "삼성SDI",
+    "quantity": 1,
+    "price": 403500,
+    "amount": 403500,
+    "orderNo": "0000026454",
+    "timestamp": "2026-03-18T06:00:56.268Z"
   }
 ]
