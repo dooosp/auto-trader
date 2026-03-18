@@ -5,33 +5,33 @@
       "name": "기아",
       "quantity": 3,
       "avgPrice": 161300,
-      "currentPrice": 167300,
-      "profit": 18000,
-      "profitRate": 3.72,
+      "currentPrice": 173500,
+      "profit": 36600,
+      "profitRate": 7.56,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 168700
+      "highestPrice": 173500
     },
     {
       "code": "024110",
       "name": "기업은행",
       "quantity": 21,
       "avgPrice": 23250,
-      "currentPrice": 23200,
-      "profit": -1050,
-      "profitRate": -0.22,
+      "currentPrice": 23700,
+      "profit": 9450,
+      "profitRate": 1.94,
       "buyDate": "2026-03-13T01:45:13.999Z",
       "partialSells": [],
-      "highestPrice": 23350
+      "highestPrice": 23650
     },
     {
       "code": "055550",
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 92520,
-      "currentPrice": 91200,
-      "profit": -6600,
-      "profitRate": -1.43,
+      "currentPrice": 93700,
+      "profit": 5900,
+      "profitRate": 1.28,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 93600
@@ -41,21 +41,21 @@
       "name": "LG전자",
       "quantity": 4,
       "avgPrice": 115400,
-      "currentPrice": 114500,
-      "profit": -3600,
-      "profitRate": -0.78,
+      "currentPrice": 118200,
+      "profit": 11200,
+      "profitRate": 2.43,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 115400
+      "highestPrice": 118250
     },
     {
       "code": "105560",
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 149200,
-      "currentPrice": 150700,
-      "profit": 4500,
-      "profitRate": 1.01,
+      "currentPrice": 155100,
+      "profit": 17700,
+      "profitRate": 3.95,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 156600
@@ -63,8 +63,8 @@
   ],
   "summary": {
     "totalDeposit": 8837608,
-    "totalEvaluation": 10731148,
-    "totalProfit": 11250
+    "totalEvaluation": 10800748,
+    "totalProfit": 80850
   },
-  "lastUpdated": "2026-03-17T06:58:20.679Z"
+  "lastUpdated": "2026-03-18T01:51:43.422Z"
 }

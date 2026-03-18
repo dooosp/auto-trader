@@ -2110,5 +2110,31 @@
     "amount": 462000,
     "orderNo": "0000013404",
     "timestamp": "2026-03-17T01:47:28.328Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "000270",
+    "name": "기아",
+    "quantity": 1,
+    "price": 173500,
+    "amount": 173500,
+    "avgPrice": 161300,
+    "profit": 12200,
+    "profitRate": 7.56,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 2,
+    "orderNo": "0000011413",
+    "timestamp": "2026-03-18T01:51:40.081Z"
+  },
+  {
+    "type": "BUY",
+    "code": "036570",
+    "name": "엔씨소프트",
+    "quantity": 2,
+    "price": 229000,
+    "amount": 458000,
+    "orderNo": "0000011414",
+    "timestamp": "2026-03-18T01:51:41.416Z"
   }
 ]
