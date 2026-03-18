@@ -3,59 +3,71 @@
     {
       "code": "000270",
       "name": "기아",
-      "quantity": 3,
+      "quantity": 2,
       "avgPrice": 161300,
-      "currentPrice": 173500,
-      "profit": 36600,
-      "profitRate": 7.56,
+      "currentPrice": 174600,
+      "profit": 26600,
+      "profitRate": 8.25,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 173500
+      "highestPrice": 174500
     },
     {
       "code": "024110",
       "name": "기업은행",
       "quantity": 21,
       "avgPrice": 23250,
-      "currentPrice": 23700,
-      "profit": 9450,
-      "profitRate": 1.94,
+      "currentPrice": 23750,
+      "profit": 10500,
+      "profitRate": 2.15,
       "buyDate": "2026-03-13T01:45:13.999Z",
       "partialSells": [],
-      "highestPrice": 23650
+      "highestPrice": 23750
+    },
+    {
+      "code": "036570",
+      "name": "엔씨소프트",
+      "quantity": 2,
+      "avgPrice": 229500,
+      "currentPrice": 228000,
+      "profit": -3000,
+      "profitRate": -0.65,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 229500
     },
     {
       "code": "055550",
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 92520,
-      "currentPrice": 93700,
-      "profit": 5900,
-      "profitRate": 1.28,
+      "currentPrice": 94800,
+      "profit": 11400,
+      "profitRate": 2.46,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 93600
+      "highestPrice": 94800
     },
     {
       "code": "066570",
       "name": "LG전자",
       "quantity": 4,
       "avgPrice": 115400,
-      "currentPrice": 118200,
-      "profit": 11200,
-      "profitRate": 2.43,
+      "currentPrice": 118450,
+      "profit": 12200,
+      "profitRate": 2.64,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 118250
+      "highestPrice": 118500
     },
     {
       "code": "105560",
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 149200,
-      "currentPrice": 155100,
-      "profit": 17700,
-      "profitRate": 3.95,
+      "currentPrice": 155700,
+      "profit": 19500,
+      "profitRate": 4.36,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 156600
@@ -63,8 +75,8 @@
   ],
   "summary": {
     "totalDeposit": 8837608,
-    "totalEvaluation": 10800748,
-    "totalProfit": 80850
+    "totalEvaluation": 10808473,
+    "totalProfit": 77200
   },
-  "lastUpdated": "2026-03-18T01:51:43.422Z"
+  "lastUpdated": "2026-03-18T04:23:09.234Z"
 }

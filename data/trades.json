@@ -2136,5 +2136,21 @@
     "amount": 458000,
     "orderNo": "0000011414",
     "timestamp": "2026-03-18T01:51:41.416Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "000270",
+    "name": "기아",
+    "quantity": 1,
+    "price": 174500,
+    "amount": 174500,
+    "avgPrice": 161300,
+    "profit": 13200,
+    "profitRate": 8.18,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 1,
+    "orderNo": "0000019241",
+    "timestamp": "2026-03-18T04:23:08.215Z"
   }
 ]
