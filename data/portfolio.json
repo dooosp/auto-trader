@@ -1,28 +1,28 @@
 {
   "holdings": [
     {
-      "code": "000270",
-      "name": "기아",
+      "code": "006400",
+      "name": "삼성SDI",
       "quantity": 1,
-      "avgPrice": 161300,
-      "currentPrice": 176300,
-      "profit": 15000,
-      "profitRate": 9.3,
+      "avgPrice": 403500,
+      "currentPrice": 405000,
+      "profit": 1500,
+      "profitRate": 0.37,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 176100
+      "highestPrice": 405000
     },
     {
       "code": "024110",
       "name": "기업은행",
       "quantity": 21,
       "avgPrice": 23250,
-      "currentPrice": 23800,
-      "profit": 11550,
-      "profitRate": 2.37,
+      "currentPrice": 23850,
+      "profit": 12600,
+      "profitRate": 2.58,
       "buyDate": "2026-03-13T01:45:13.999Z",
       "partialSells": [],
-      "highestPrice": 23800
+      "highestPrice": 23850
     },
     {
       "code": "036570",
@@ -41,9 +41,9 @@
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 92520,
-      "currentPrice": 95500,
-      "profit": 14900,
-      "profitRate": 3.22,
+      "currentPrice": 95000,
+      "profit": 12400,
+      "profitRate": 2.68,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 95400
@@ -53,21 +53,21 @@
       "name": "LG전자",
       "quantity": 4,
       "avgPrice": 115400,
-      "currentPrice": 119300,
-      "profit": 15600,
-      "profitRate": 3.38,
+      "currentPrice": 120000,
+      "profit": 18400,
+      "profitRate": 3.99,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 119500
+      "highestPrice": 120000
     },
     {
       "code": "105560",
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 149200,
-      "currentPrice": 155800,
-      "profit": 19800,
-      "profitRate": 4.42,
+      "currentPrice": 154700,
+      "profit": 16500,
+      "profitRate": 3.69,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 156600
@@ -75,8 +75,8 @@
   ],
   "summary": {
     "totalDeposit": 8837608,
-    "totalEvaluation": 10822004,
-    "totalProfit": 77850
+    "totalEvaluation": 10820822,
+    "totalProfit": 62400
   },
-  "lastUpdated": "2026-03-18T06:00:57.269Z"
+  "lastUpdated": "2026-03-18T07:12:04.633Z"
 }
