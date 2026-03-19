@@ -5,9 +5,9 @@
       "name": "삼성SDI",
       "quantity": 1,
       "avgPrice": 403500,
-      "currentPrice": 405000,
-      "profit": 1500,
-      "profitRate": 0.37,
+      "currentPrice": 404000,
+      "profit": 500,
+      "profitRate": 0.12,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 405000
@@ -29,9 +29,9 @@
       "name": "엔씨소프트",
       "quantity": 2,
       "avgPrice": 229500,
-      "currentPrice": 230000,
-      "profit": 1000,
-      "profitRate": 0.22,
+      "currentPrice": 221500,
+      "profit": -16000,
+      "profitRate": -3.49,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 230000
@@ -41,9 +41,9 @@
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 92520,
-      "currentPrice": 95000,
-      "profit": 12400,
-      "profitRate": 2.68,
+      "currentPrice": 94800,
+      "profit": 11400,
+      "profitRate": 2.46,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 95400
@@ -53,9 +53,9 @@
       "name": "LG전자",
       "quantity": 4,
       "avgPrice": 115400,
-      "currentPrice": 120000,
-      "profit": 18400,
-      "profitRate": 3.99,
+      "currentPrice": 116200,
+      "profit": 3200,
+      "profitRate": 0.69,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 120000
@@ -65,18 +65,26 @@
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 149200,
-      "currentPrice": 154700,
-      "profit": 16500,
-      "profitRate": 3.69,
+      "currentPrice": 155500,
+      "profit": 18900,
+      "profitRate": 4.22,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 156600
+    },
+    {
+      "code": "000270",
+      "name": "기아",
+      "quantity": 2,
+      "avgPrice": 171800,
+      "buyDate": "2026-03-19T01:52:28.512Z",
+      "orderNo": "0000012681"
     }
   ],
   "summary": {
-    "totalDeposit": 8837608,
-    "totalEvaluation": 10820822,
-    "totalProfit": 62400
+    "totalDeposit": 8375948,
+    "totalEvaluation": 10789022,
+    "totalProfit": 30600
   },
-  "lastUpdated": "2026-03-18T07:12:04.633Z"
+  "lastUpdated": "2026-03-19T01:52:28.512Z"
 }
