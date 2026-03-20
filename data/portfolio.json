@@ -5,9 +5,9 @@
       "name": "기아",
       "quantity": 2,
       "avgPrice": 171900,
-      "currentPrice": 169600,
-      "profit": -4600,
-      "profitRate": -1.34,
+      "currentPrice": 169400,
+      "profit": -5000,
+      "profitRate": -1.45,
       "buyDate": "2026-03-19T01:52:28.512Z",
       "partialSells": [],
       "highestPrice": 171900
@@ -17,9 +17,9 @@
       "name": "삼성SDI",
       "quantity": 1,
       "avgPrice": 403500,
-      "currentPrice": 402500,
-      "profit": -1000,
-      "profitRate": -0.25,
+      "currentPrice": 400500,
+      "profit": -3000,
+      "profitRate": -0.74,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 406000
@@ -29,9 +29,9 @@
       "name": "기업은행",
       "quantity": 21,
       "avgPrice": 23250,
-      "currentPrice": 24150,
-      "profit": 18900,
-      "profitRate": 3.87,
+      "currentPrice": 24100,
+      "profit": 17850,
+      "profitRate": 3.66,
       "buyDate": "2026-03-13T01:45:13.999Z",
       "partialSells": [],
       "highestPrice": 24250
@@ -41,9 +41,9 @@
       "name": "엔씨소프트",
       "quantity": 2,
       "avgPrice": 229500,
-      "currentPrice": 227500,
-      "profit": -4000,
-      "profitRate": -0.87,
+      "currentPrice": 229500,
+      "profit": 0,
+      "profitRate": 0,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 230000
@@ -53,9 +53,9 @@
       "name": "신한지주",
       "quantity": 4,
       "avgPrice": 92520,
-      "currentPrice": 97100,
-      "profit": 18320,
-      "profitRate": 4.95,
+      "currentPrice": 96800,
+      "profit": 17120,
+      "profitRate": 4.63,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 97900
@@ -65,9 +65,9 @@
       "name": "LG전자",
       "quantity": 4,
       "avgPrice": 115400,
-      "currentPrice": 118300,
-      "profit": 11600,
-      "profitRate": 2.51,
+      "currentPrice": 118000,
+      "profit": 10400,
+      "profitRate": 2.25,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 120000
@@ -77,9 +77,9 @@
       "name": "KB금융",
       "quantity": 2,
       "avgPrice": 149200,
-      "currentPrice": 155700,
-      "profit": 13000,
-      "profitRate": 4.36,
+      "currentPrice": 155600,
+      "profit": 12800,
+      "profitRate": 4.29,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 157300
@@ -87,8 +87,8 @@
   ],
   "summary": {
     "totalDeposit": 8035872,
-    "totalEvaluation": 10823543,
-    "totalProfit": 52220
+    "totalEvaluation": 10821493,
+    "totalProfit": 50170
   },
-  "lastUpdated": "2026-03-20T04:09:56.329Z"
+  "lastUpdated": "2026-03-20T05:47:48.976Z"
 }
