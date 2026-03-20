@@ -2188,5 +2188,37 @@
     "amount": 343600,
     "orderNo": "0000012681",
     "timestamp": "2026-03-19T01:52:28.513Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "055550",
+    "name": "신한지주",
+    "quantity": 1,
+    "price": 97900,
+    "amount": 97900,
+    "avgPrice": 92520,
+    "profit": 5380,
+    "profitRate": 5.81,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 4,
+    "orderNo": "0000014303",
+    "timestamp": "2026-03-20T01:47:00.992Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "105560",
+    "name": "KB금융",
+    "quantity": 1,
+    "price": 157300,
+    "amount": 157300,
+    "avgPrice": 149200,
+    "profit": 8100,
+    "profitRate": 5.43,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 2,
+    "orderNo": "0000014306",
+    "timestamp": "2026-03-20T01:47:02.224Z"
   }
 ]
