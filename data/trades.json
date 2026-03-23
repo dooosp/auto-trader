@@ -2248,5 +2248,33 @@
     "reason": "다중 매도 (3/3): MACD 데드크로스, 5일선 이탈, 유동성 스윕 매도",
     "orderNo": "0000017440",
     "timestamp": "2026-03-23T01:53:11.653Z"
+  },
+  {
+    "type": "SELL",
+    "code": "006400",
+    "name": "삼성SDI",
+    "quantity": 1,
+    "price": 381500,
+    "amount": 381500,
+    "avgPrice": 403500,
+    "profit": -22000,
+    "profitRate": -5.45,
+    "reason": "[긴급] ATR 손절 (-5.45%, ATR: 6.56%)",
+    "orderNo": "0000026599",
+    "timestamp": "2026-03-23T04:26:51.713Z"
+  },
+  {
+    "type": "SELL",
+    "code": "036570",
+    "name": "엔씨소프트",
+    "quantity": 2,
+    "price": 217000,
+    "amount": 434000,
+    "avgPrice": 229500,
+    "profit": -25000,
+    "profitRate": -5.45,
+    "reason": "[긴급] ATR 손절 (-5.45%, ATR: 6.47%)",
+    "orderNo": "0000026602",
+    "timestamp": "2026-03-23T04:26:52.976Z"
   }
 ]
