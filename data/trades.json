@@ -2220,5 +2220,33 @@
     "remainingQuantity": 2,
     "orderNo": "0000014306",
     "timestamp": "2026-03-20T01:47:02.224Z"
+  },
+  {
+    "type": "SELL",
+    "code": "000270",
+    "name": "기아",
+    "quantity": 2,
+    "price": 160300,
+    "amount": 320600,
+    "avgPrice": 171900,
+    "profit": -23200,
+    "profitRate": -6.75,
+    "reason": "[긴급] ATR 손절 (-6.75%, ATR: 6.31%)",
+    "orderNo": "0000017439",
+    "timestamp": "2026-03-23T01:53:10.174Z"
+  },
+  {
+    "type": "SELL",
+    "code": "055550",
+    "name": "신한지주",
+    "quantity": 4,
+    "price": 91700,
+    "amount": 366800,
+    "avgPrice": 92520,
+    "profit": -3280,
+    "profitRate": -0.89,
+    "reason": "다중 매도 (3/3): MACD 데드크로스, 5일선 이탈, 유동성 스윕 매도",
+    "orderNo": "0000017440",
+    "timestamp": "2026-03-23T01:53:11.653Z"
   }
 ]
