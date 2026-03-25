@@ -5,9 +5,9 @@
       "name": "기업은행",
       "quantity": 21,
       "avgPrice": 23250,
-      "currentPrice": 23400,
-      "profit": 3150,
-      "profitRate": 0.65,
+      "currentPrice": 23425,
+      "profit": 3675,
+      "profitRate": 0.75,
       "buyDate": "2026-03-13T01:45:13.999Z",
       "partialSells": [],
       "highestPrice": 24250
@@ -29,9 +29,9 @@
       "name": "KB금융",
       "quantity": 2,
       "avgPrice": 149200,
-      "currentPrice": 150100,
-      "profit": 1800,
-      "profitRate": 0.6,
+      "currentPrice": 148900,
+      "profit": -600,
+      "profitRate": -0.2,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 157300
@@ -39,8 +39,8 @@
   ],
   "summary": {
     "totalDeposit": 9448088,
-    "totalEvaluation": 10697688,
-    "totalProfit": 1350
+    "totalEvaluation": 10695813,
+    "totalProfit": -525
   },
-  "lastUpdated": "2026-03-25T04:16:03.804Z"
+  "lastUpdated": "2026-03-25T05:57:39.039Z"
 }
