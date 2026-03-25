@@ -5,9 +5,9 @@
       "name": "기업은행",
       "quantity": 21,
       "avgPrice": 23250,
-      "currentPrice": 23150,
-      "profit": -2100,
-      "profitRate": -0.43,
+      "currentPrice": 23375,
+      "profit": 2625,
+      "profitRate": 0.54,
       "buyDate": "2026-03-13T01:45:13.999Z",
       "partialSells": [],
       "highestPrice": 24250
@@ -17,9 +17,9 @@
       "name": "LG전자",
       "quantity": 4,
       "avgPrice": 115400,
-      "currentPrice": 114300,
-      "profit": -4400,
-      "profitRate": -0.95,
+      "currentPrice": 116500,
+      "profit": 4400,
+      "profitRate": 0.95,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 120000
@@ -29,18 +29,18 @@
       "name": "KB금융",
       "quantity": 2,
       "avgPrice": 149200,
-      "currentPrice": 146900,
-      "profit": -4600,
-      "profitRate": -1.54,
+      "currentPrice": 152200,
+      "profit": 6000,
+      "profitRate": 2.01,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 157300
     }
   ],
   "summary": {
-    "totalDeposit": 7946693,
-    "totalEvaluation": 10685238,
-    "totalProfit": -11100
+    "totalDeposit": 9448088,
+    "totalEvaluation": 10709363,
+    "totalProfit": 13025
   },
-  "lastUpdated": "2026-03-24T07:02:12.569Z"
+  "lastUpdated": "2026-03-25T01:49:15.302Z"
 }
