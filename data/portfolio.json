@@ -1,13 +1,25 @@
 {
   "holdings": [
     {
+      "code": "006400",
+      "name": "삼성SDI",
+      "quantity": 1,
+      "avgPrice": 404250,
+      "currentPrice": 404500,
+      "profit": 250,
+      "profitRate": 0.06,
+      "buyDate": "2026-03-26T01:56:56.823Z",
+      "partialSells": [],
+      "highestPrice": 404500
+    },
+    {
       "code": "024110",
       "name": "기업은행",
       "quantity": 21,
       "avgPrice": 23250,
-      "currentPrice": 23550,
-      "profit": 6300,
-      "profitRate": 1.29,
+      "currentPrice": 23600,
+      "profit": 7350,
+      "profitRate": 1.51,
       "buyDate": "2026-03-13T01:45:13.999Z",
       "partialSells": [],
       "highestPrice": 24250
@@ -17,9 +29,9 @@
       "name": "LG전자",
       "quantity": 4,
       "avgPrice": 115400,
-      "currentPrice": 113700,
-      "profit": -6800,
-      "profitRate": -1.47,
+      "currentPrice": 112400,
+      "profit": -12000,
+      "profitRate": -2.6,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 120000
@@ -29,26 +41,18 @@
       "name": "KB금융",
       "quantity": 2,
       "avgPrice": 149200,
-      "currentPrice": 152200,
-      "profit": 6000,
-      "profitRate": 2.01,
+      "currentPrice": 152900,
+      "profit": 7400,
+      "profitRate": 2.48,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 157300
-    },
-    {
-      "code": "006400",
-      "name": "삼성SDI",
-      "quantity": 1,
-      "avgPrice": 404000,
-      "buyDate": "2026-03-26T01:56:56.823Z",
-      "orderNo": "0000018301"
     }
   ],
   "summary": {
     "totalDeposit": 9448088,
-    "totalEvaluation": 10701838,
-    "totalProfit": 5500
+    "totalEvaluation": 10699288,
+    "totalProfit": 3000
   },
-  "lastUpdated": "2026-03-26T01:56:56.823Z"
+  "lastUpdated": "2026-03-26T04:32:16.861Z"
 }
