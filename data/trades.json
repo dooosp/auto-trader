@@ -2310,5 +2310,19 @@
     "reason": "[긴급] ATR 손절 (-5.29%, ATR: 4.69%)",
     "orderNo": "0000017414",
     "timestamp": "2026-03-27T01:57:24.450Z"
+  },
+  {
+    "type": "SELL",
+    "code": "006400",
+    "name": "삼성SDI",
+    "quantity": 1,
+    "price": 399000,
+    "amount": 399000,
+    "avgPrice": 404250,
+    "profit": -5250,
+    "profitRate": -1.3,
+    "reason": "[긴급] 악재 + 손실 (-1.30%)",
+    "orderNo": "0000027735",
+    "timestamp": "2026-03-27T04:33:39.552Z"
   }
 ]
