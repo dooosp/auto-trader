@@ -2296,5 +2296,19 @@
     "amount": 452000,
     "orderNo": "0000029843",
     "timestamp": "2026-03-26T04:32:15.851Z"
+  },
+  {
+    "type": "SELL",
+    "code": "066570",
+    "name": "LG전자",
+    "quantity": 4,
+    "price": 109300,
+    "amount": 437200,
+    "avgPrice": 115400,
+    "profit": -24400,
+    "profitRate": -5.29,
+    "reason": "[긴급] ATR 손절 (-5.29%, ATR: 4.69%)",
+    "orderNo": "0000017414",
+    "timestamp": "2026-03-27T01:57:24.450Z"
   }
 ]
