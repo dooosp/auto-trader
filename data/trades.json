@@ -2324,5 +2324,53 @@
     "reason": "[긴급] 악재 + 손실 (-1.30%)",
     "orderNo": "0000027735",
     "timestamp": "2026-03-27T04:33:39.552Z"
+  },
+  {
+    "type": "SELL",
+    "code": "024110",
+    "name": "기업은행",
+    "quantity": 21,
+    "price": 22000,
+    "amount": 462000,
+    "avgPrice": 23250,
+    "profit": -26250,
+    "profitRate": -5.38,
+    "reason": "[긴급] ATR 손절 (-5.38%, ATR: 3.51%)",
+    "orderNo": "0000016158",
+    "timestamp": "2026-03-30T02:02:37.948Z"
+  },
+  {
+    "type": "SELL",
+    "code": "105560",
+    "name": "KB금융",
+    "quantity": 2,
+    "price": 146100,
+    "amount": 292200,
+    "avgPrice": 149200,
+    "profit": -6200,
+    "profitRate": -2.08,
+    "reason": "[긴급] 악재 + 손실 (-2.08%)",
+    "orderNo": "0000016161",
+    "timestamp": "2026-03-30T02:02:39.336Z"
+  },
+  {
+    "type": "BUY",
+    "code": "006400",
+    "name": "삼성SDI",
+    "quantity": 1,
+    "price": 407500,
+    "amount": 407500,
+    "orderNo": "0000016162",
+    "timestamp": "2026-03-30T02:02:40.605Z"
+  },
+  {
+    "type": "BUY",
+    "code": "032830",
+    "name": "삼성생명",
+    "quantity": 2,
+    "price": 217000,
+    "amount": 434000,
+    "orderNo": "0000016163",
+    "timestamp": "2026-03-30T02:02:41.932Z"
   }
 ]

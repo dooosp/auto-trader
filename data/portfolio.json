@@ -1,46 +1,38 @@
 {
   "holdings": [
     {
-      "code": "024110",
-      "name": "기업은행",
-      "quantity": 21,
-      "avgPrice": 23250,
-      "currentPrice": 23600,
-      "profit": 7350,
-      "profitRate": 1.51,
-      "buyDate": "2026-03-13T01:45:13.999Z",
-      "partialSells": [],
-      "highestPrice": 24250
-    },
-    {
       "code": "036570",
       "name": "엔씨소프트",
       "quantity": 2,
       "avgPrice": 226000,
-      "currentPrice": 229000,
-      "profit": 6000,
-      "profitRate": 1.33,
+      "currentPrice": 222500,
+      "profit": -7000,
+      "profitRate": -1.55,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 229500
     },
     {
-      "code": "105560",
-      "name": "KB금융",
+      "code": "006400",
+      "name": "삼성SDI",
+      "quantity": 1,
+      "avgPrice": 407500,
+      "buyDate": "2026-03-30T02:02:40.604Z",
+      "orderNo": "0000016162"
+    },
+    {
+      "code": "032830",
+      "name": "삼성생명",
       "quantity": 2,
-      "avgPrice": 149200,
-      "currentPrice": 152400,
-      "profit": 6400,
-      "profitRate": 2.14,
-      "buyDate": null,
-      "partialSells": [],
-      "highestPrice": 157300
+      "avgPrice": 217000,
+      "buyDate": "2026-03-30T02:02:41.931Z",
+      "orderNo": "0000016163"
     }
   ],
   "summary": {
-    "totalDeposit": 9448088,
-    "totalEvaluation": 10684548,
-    "totalProfit": 19750
+    "totalDeposit": 8591728,
+    "totalEvaluation": 10625023,
+    "totalProfit": -39775
   },
-  "lastUpdated": "2026-03-27T06:09:45.503Z"
+  "lastUpdated": "2026-03-30T02:02:41.931Z"
 }
