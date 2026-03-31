@@ -2372,5 +2372,19 @@
     "amount": 434000,
     "orderNo": "0000016163",
     "timestamp": "2026-03-30T02:02:41.932Z"
+  },
+  {
+    "type": "SELL",
+    "code": "032830",
+    "name": "삼성생명",
+    "quantity": 2,
+    "price": 211000,
+    "amount": 422000,
+    "avgPrice": 217000,
+    "profit": -12000,
+    "profitRate": -2.76,
+    "reason": "[긴급] 악재 + 손실 (-2.76%)",
+    "orderNo": "0000024820",
+    "timestamp": "2026-03-31T04:37:35.930Z"
   }
 ]
