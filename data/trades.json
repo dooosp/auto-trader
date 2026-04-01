@@ -2386,5 +2386,31 @@
     "reason": "[긴급] 악재 + 손실 (-2.76%)",
     "orderNo": "0000024820",
     "timestamp": "2026-03-31T04:37:35.930Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "006400",
+    "name": "삼성SDI",
+    "quantity": 1,
+    "price": 432000,
+    "amount": 432000,
+    "avgPrice": 407500,
+    "profit": 24500,
+    "profitRate": 6.01,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 0,
+    "orderNo": "0000024323",
+    "timestamp": "2026-04-01T05:21:08.314Z"
+  },
+  {
+    "type": "BUY",
+    "code": "032830",
+    "name": "삼성생명",
+    "quantity": 2,
+    "price": 227500,
+    "amount": 455000,
+    "orderNo": "0000024324",
+    "timestamp": "2026-04-01T05:21:09.630Z"
   }
 ]

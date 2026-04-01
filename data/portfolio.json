@@ -5,21 +5,21 @@
       "name": "삼성SDI",
       "quantity": 1,
       "avgPrice": 407500,
-      "currentPrice": 420500,
-      "profit": 13000,
-      "profitRate": 3.19,
+      "currentPrice": 431500,
+      "profit": 24000,
+      "profitRate": 5.89,
       "buyDate": "2026-03-30T02:02:40.604Z",
       "partialSells": [],
-      "highestPrice": 427000
+      "highestPrice": 432000
     },
     {
       "code": "036570",
       "name": "엔씨소프트",
       "quantity": 2,
       "avgPrice": 226000,
-      "currentPrice": 226000,
-      "profit": 0,
-      "profitRate": 0,
+      "currentPrice": 229000,
+      "profit": 6000,
+      "profitRate": 1.33,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 230000
@@ -27,8 +27,8 @@
   ],
   "summary": {
     "totalDeposit": 9335935,
-    "totalEvaluation": 10628544,
-    "totalProfit": 13000
+    "totalEvaluation": 10645544,
+    "totalProfit": 30000
   },
-  "lastUpdated": "2026-04-01T02:05:36.024Z"
+  "lastUpdated": "2026-04-01T05:21:10.632Z"
 }
