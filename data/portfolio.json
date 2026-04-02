@@ -1,13 +1,25 @@
 {
   "holdings": [
     {
+      "code": "006400",
+      "name": "삼성SDI",
+      "quantity": 1,
+      "avgPrice": 441500,
+      "currentPrice": 437500,
+      "profit": -4000,
+      "profitRate": -0.91,
+      "buyDate": "2026-04-02T01:54:54.217Z",
+      "partialSells": [],
+      "highestPrice": 441500
+    },
+    {
       "code": "032830",
       "name": "삼성생명",
       "quantity": 2,
       "avgPrice": 227500,
-      "currentPrice": 221500,
-      "profit": -12000,
-      "profitRate": -2.64,
+      "currentPrice": 218500,
+      "profit": -18000,
+      "profitRate": -3.96,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 227500
@@ -17,26 +29,18 @@
       "name": "엔씨소프트",
       "quantity": 2,
       "avgPrice": 226000,
-      "currentPrice": 217500,
-      "profit": -17000,
-      "profitRate": -3.76,
+      "currentPrice": 212500,
+      "profit": -27000,
+      "profitRate": -5.97,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 230000
-    },
-    {
-      "code": "006400",
-      "name": "삼성SDI",
-      "quantity": 1,
-      "avgPrice": 442500,
-      "buyDate": "2026-04-02T01:54:54.217Z",
-      "orderNo": "0000019750"
     }
   ],
   "summary": {
     "totalDeposit": 9756044,
-    "totalEvaluation": 10610310,
-    "totalProfit": -29000
+    "totalEvaluation": 10590250,
+    "totalProfit": -49000
   },
-  "lastUpdated": "2026-04-02T01:54:54.217Z"
+  "lastUpdated": "2026-04-02T04:28:09.804Z"
 }

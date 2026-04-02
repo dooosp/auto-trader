@@ -502,11 +502,11 @@
   {
     "date": "2026-04-02",
     "totalDeposit": 9756044,
-    "totalEvaluation": 10610250,
-    "totalProfit": -29000,
+    "totalEvaluation": 10590296,
+    "totalProfit": -35000,
     "holdingsCount": 3,
-    "buys": 1,
-    "sells": 0,
+    "buys": 0,
+    "sells": 1,
     "marketCondition": "NEUTRAL"
   }
 ]

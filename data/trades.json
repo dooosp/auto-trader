@@ -2422,5 +2422,19 @@
     "amount": 442500,
     "orderNo": "0000019750",
     "timestamp": "2026-04-02T01:54:54.218Z"
+  },
+  {
+    "type": "SELL",
+    "code": "036570",
+    "name": "엔씨소프트",
+    "quantity": 2,
+    "price": 212500,
+    "amount": 425000,
+    "avgPrice": 226000,
+    "profit": -27000,
+    "profitRate": -5.97,
+    "reason": "[긴급] ATR 손절 (-5.97%, ATR: 5.33%)",
+    "orderNo": "0000029488",
+    "timestamp": "2026-04-02T04:28:08.791Z"
   }
 ]
