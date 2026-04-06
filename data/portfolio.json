@@ -5,9 +5,9 @@
       "name": "삼성SDI",
       "quantity": 1,
       "avgPrice": 441500,
-      "currentPrice": 453000,
-      "profit": 11500,
-      "profitRate": 2.6,
+      "currentPrice": 453500,
+      "profit": 12000,
+      "profitRate": 2.72,
       "buyDate": "2026-04-02T01:54:54.217Z",
       "partialSells": [],
       "highestPrice": 458500
@@ -15,8 +15,8 @@
   ],
   "summary": {
     "totalDeposit": 10144421,
-    "totalEvaluation": 10597421,
-    "totalProfit": 11500
+    "totalEvaluation": 10597921,
+    "totalProfit": 12000
   },
-  "lastUpdated": "2026-04-06T05:18:39.375Z"
+  "lastUpdated": "2026-04-06T07:22:27.023Z"
 }
