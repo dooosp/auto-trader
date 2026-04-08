@@ -542,11 +542,11 @@
   {
     "date": "2026-04-08",
     "totalDeposit": 10144421,
-    "totalEvaluation": 10636853,
-    "totalProfit": 36000,
+    "totalEvaluation": 10643345,
+    "totalProfit": 0,
     "holdingsCount": 2,
     "buys": 0,
-    "sells": 1,
+    "sells": 2,
     "marketCondition": "NEUTRAL"
   }
 ]

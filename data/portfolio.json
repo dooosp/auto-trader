@@ -5,30 +5,30 @@
       "name": "삼성SDI",
       "quantity": 1,
       "avgPrice": 441500,
-      "currentPrice": 459500,
-      "profit": 18000,
-      "profitRate": 4.08,
+      "currentPrice": 468000,
+      "profit": 26500,
+      "profitRate": 6,
       "buyDate": "2026-04-02T01:54:54.217Z",
       "partialSells": [],
-      "highestPrice": 461500
+      "highestPrice": 468500
     },
     {
       "code": "032830",
       "name": "삼성생명",
-      "quantity": 2,
+      "quantity": 1,
       "avgPrice": 224000,
-      "currentPrice": 239500,
-      "profit": 31000,
-      "profitRate": 6.92,
+      "currentPrice": 241000,
+      "profit": 17000,
+      "profitRate": 7.59,
       "buyDate": "2026-04-07T01:59:03.003Z",
       "partialSells": [],
-      "highestPrice": 239500
+      "highestPrice": 241000
     }
   ],
   "summary": {
     "totalDeposit": 10144421,
-    "totalEvaluation": 10634861,
-    "totalProfit": 49000
+    "totalEvaluation": 10644353,
+    "totalProfit": 43500
   },
-  "lastUpdated": "2026-04-08T02:00:05.239Z"
+  "lastUpdated": "2026-04-08T04:41:26.913Z"
 }

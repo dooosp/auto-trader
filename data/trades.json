@@ -2476,5 +2476,37 @@
     "remainingQuantity": 1,
     "orderNo": "0000018489",
     "timestamp": "2026-04-08T02:00:04.218Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "006400",
+    "name": "삼성SDI",
+    "quantity": 1,
+    "price": 468500,
+    "amount": 468500,
+    "avgPrice": 441500,
+    "profit": 27000,
+    "profitRate": 6.12,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 0,
+    "orderNo": "0000027546",
+    "timestamp": "2026-04-08T04:41:24.605Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "032830",
+    "name": "삼성생명",
+    "quantity": 1,
+    "price": 241000,
+    "amount": 241000,
+    "avgPrice": 224000,
+    "profit": 17000,
+    "profitRate": 7.59,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 0,
+    "orderNo": "0000027549",
+    "timestamp": "2026-04-08T04:41:25.900Z"
   }
 ]
