@@ -1,9 +1,18 @@
 {
-  "holdings": [],
+  "holdings": [
+    {
+      "code": "005930",
+      "name": "삼성전자",
+      "quantity": 2,
+      "avgPrice": 203250,
+      "buyDate": "2026-04-09T01:52:13.521Z",
+      "orderNo": "0000017714"
+    }
+  ],
   "summary": {
-    "totalDeposit": 10144421,
+    "totalDeposit": 9696361,
     "totalEvaluation": 10643345,
     "totalProfit": 0
   },
-  "lastUpdated": "2026-04-08T06:19:02.734Z"
+  "lastUpdated": "2026-04-09T01:52:13.521Z"
 }

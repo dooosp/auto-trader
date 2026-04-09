@@ -2508,5 +2508,15 @@
     "remainingQuantity": 0,
     "orderNo": "0000027549",
     "timestamp": "2026-04-08T04:41:25.900Z"
+  },
+  {
+    "type": "BUY",
+    "code": "005930",
+    "name": "삼성전자",
+    "quantity": 2,
+    "price": 203250,
+    "amount": 406500,
+    "orderNo": "0000017714",
+    "timestamp": "2026-04-09T01:52:13.522Z"
   }
 ]
