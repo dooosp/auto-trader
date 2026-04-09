@@ -4,15 +4,19 @@
       "code": "005930",
       "name": "삼성전자",
       "quantity": 2,
-      "avgPrice": 203250,
+      "avgPrice": 203500,
+      "currentPrice": 202250,
+      "profit": -2500,
+      "profitRate": -0.61,
       "buyDate": "2026-04-09T01:52:13.521Z",
-      "orderNo": "0000017714"
+      "partialSells": [],
+      "highestPrice": 203500
     }
   ],
   "summary": {
     "totalDeposit": 9696361,
-    "totalEvaluation": 10643345,
-    "totalProfit": 0
+    "totalEvaluation": 10640795,
+    "totalProfit": -2500
   },
-  "lastUpdated": "2026-04-09T01:52:13.521Z"
+  "lastUpdated": "2026-04-09T04:31:54.509Z"
 }
