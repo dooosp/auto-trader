@@ -5,9 +5,9 @@
       "name": "삼성전자",
       "quantity": 2,
       "avgPrice": 203500,
-      "currentPrice": 208500,
-      "profit": 10000,
-      "profitRate": 2.46,
+      "currentPrice": 207000,
+      "profit": 7000,
+      "profitRate": 1.72,
       "buyDate": "2026-04-09T01:52:13.521Z",
       "partialSells": [],
       "highestPrice": 208750
@@ -17,9 +17,9 @@
       "name": "엔씨소프트",
       "quantity": 2,
       "avgPrice": 233250,
-      "currentPrice": 243000,
-      "profit": 19500,
-      "profitRate": 4.18,
+      "currentPrice": 242500,
+      "profit": 18500,
+      "profitRate": 3.97,
       "buyDate": "2026-04-09T06:19:34.410Z",
       "partialSells": [],
       "highestPrice": 243000
@@ -27,8 +27,8 @@
   ],
   "summary": {
     "totalDeposit": 10643345,
-    "totalEvaluation": 10672735,
-    "totalProfit": 29500
+    "totalEvaluation": 10668735,
+    "totalProfit": 25500
   },
-  "lastUpdated": "2026-04-10T02:04:51.910Z"
+  "lastUpdated": "2026-04-10T05:20:39.068Z"
 }
