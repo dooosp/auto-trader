@@ -5,26 +5,30 @@
       "name": "삼성전자",
       "quantity": 2,
       "avgPrice": 203500,
-      "currentPrice": 203500,
-      "profit": 0,
-      "profitRate": 0,
+      "currentPrice": 208500,
+      "profit": 10000,
+      "profitRate": 2.46,
       "buyDate": "2026-04-09T01:52:13.521Z",
       "partialSells": [],
-      "highestPrice": 203500
+      "highestPrice": 208750
     },
     {
       "code": "036570",
       "name": "엔씨소프트",
       "quantity": 2,
-      "avgPrice": 233500,
+      "avgPrice": 233250,
+      "currentPrice": 243000,
+      "profit": 19500,
+      "profitRate": 4.18,
       "buyDate": "2026-04-09T06:19:34.410Z",
-      "orderNo": "0000032720"
+      "partialSells": [],
+      "highestPrice": 243000
     }
   ],
   "summary": {
-    "totalDeposit": 9696361,
-    "totalEvaluation": 10643295,
-    "totalProfit": 0
+    "totalDeposit": 10643345,
+    "totalEvaluation": 10672735,
+    "totalProfit": 29500
   },
-  "lastUpdated": "2026-04-09T06:19:34.410Z"
+  "lastUpdated": "2026-04-10T02:04:51.910Z"
 }
