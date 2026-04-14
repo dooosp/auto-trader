@@ -2554,5 +2554,31 @@
     "amount": 488000,
     "orderNo": "0000015500",
     "timestamp": "2026-04-14T02:05:57.584Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "036570",
+    "name": "엔씨소프트",
+    "quantity": 1,
+    "price": 250250,
+    "amount": 250250,
+    "avgPrice": 233250,
+    "profit": 17000,
+    "profitRate": 7.29,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 0,
+    "orderNo": "0000024125",
+    "timestamp": "2026-04-14T05:19:54.571Z"
+  },
+  {
+    "type": "BUY",
+    "code": "086790",
+    "name": "하나금융지주",
+    "quantity": 4,
+    "price": 122000,
+    "amount": 488000,
+    "orderNo": "0000024128",
+    "timestamp": "2026-04-14T05:19:56.955Z"
   }
 ]
