@@ -2528,5 +2528,31 @@
     "amount": 467000,
     "orderNo": "0000032720",
     "timestamp": "2026-04-09T06:19:34.411Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "036570",
+    "name": "엔씨소프트",
+    "quantity": 1,
+    "price": 247500,
+    "amount": 247500,
+    "avgPrice": 233250,
+    "profit": 14250,
+    "profitRate": 6.11,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 1,
+    "orderNo": "0000015496",
+    "timestamp": "2026-04-14T02:05:55.207Z"
+  },
+  {
+    "type": "BUY",
+    "code": "032830",
+    "name": "삼성생명",
+    "quantity": 2,
+    "price": 244000,
+    "amount": 488000,
+    "orderNo": "0000015500",
+    "timestamp": "2026-04-14T02:05:57.584Z"
   }
 ]
