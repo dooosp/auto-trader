@@ -2654,5 +2654,31 @@
     "remainingQuantity": 0,
     "orderNo": "0000024127",
     "timestamp": "2026-04-15T05:20:28.485Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "036570",
+    "name": "NC",
+    "quantity": 1,
+    "price": 264500,
+    "amount": 264500,
+    "avgPrice": 247500,
+    "profit": 17000,
+    "profitRate": 6.87,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 1,
+    "orderNo": "0000015445",
+    "timestamp": "2026-04-16T02:10:09.650Z"
+  },
+  {
+    "type": "BUY",
+    "code": "005930",
+    "name": "삼성전자",
+    "quantity": 2,
+    "price": 217250,
+    "amount": 434500,
+    "orderNo": "0000015447",
+    "timestamp": "2026-04-16T02:10:11.141Z"
   }
 ]

@@ -5,30 +5,30 @@
       "name": "NC",
       "quantity": 2,
       "avgPrice": 247500,
-      "currentPrice": 247500,
-      "profit": 0,
-      "profitRate": 0,
+      "currentPrice": 264500,
+      "profit": 34000,
+      "profitRate": 6.87,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": null
+      "highestPrice": 264500
     },
     {
       "code": "086790",
       "name": "하나금융지주",
       "quantity": 4,
       "avgPrice": 122000,
-      "currentPrice": 121100,
-      "profit": -3600,
-      "profitRate": -0.74,
+      "currentPrice": 122500,
+      "profit": 2000,
+      "profitRate": 0.41,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 122100
+      "highestPrice": 122400
     }
   ],
   "summary": {
-    "totalDeposit": 9769735,
-    "totalEvaluation": 10716363,
-    "totalProfit": -3600
+    "totalDeposit": 9290549,
+    "totalEvaluation": 10755963,
+    "totalProfit": 36000
   },
-  "lastUpdated": "2026-04-15T07:23:49.769Z"
+  "lastUpdated": "2026-04-16T02:10:13.179Z"
 }
