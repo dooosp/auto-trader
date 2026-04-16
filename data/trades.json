@@ -2680,5 +2680,31 @@
     "amount": 434500,
     "orderNo": "0000015447",
     "timestamp": "2026-04-16T02:10:11.141Z"
+  },
+  {
+    "type": "PARTIAL_SELL",
+    "code": "036570",
+    "name": "NC",
+    "quantity": 1,
+    "price": 268000,
+    "amount": 268000,
+    "avgPrice": 247500,
+    "profit": 20500,
+    "profitRate": 8.28,
+    "reason": "분할 매도 L5 (+5% 도달)",
+    "levelId": "L5",
+    "remainingQuantity": 0,
+    "orderNo": "0000024687",
+    "timestamp": "2026-04-16T05:27:31.105Z"
+  },
+  {
+    "type": "BUY",
+    "code": "105560",
+    "name": "KB금융",
+    "quantity": 3,
+    "price": 161500,
+    "amount": 484500,
+    "orderNo": "0000024691",
+    "timestamp": "2026-04-16T05:27:33.456Z"
   }
 ]

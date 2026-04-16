@@ -1,16 +1,28 @@
 {
   "holdings": [
     {
-      "code": "036570",
-      "name": "NC",
+      "code": "005930",
+      "name": "삼성전자",
       "quantity": 2,
-      "avgPrice": 247500,
-      "currentPrice": 264500,
-      "profit": 34000,
-      "profitRate": 6.87,
+      "avgPrice": 217125,
+      "currentPrice": 216000,
+      "profit": -2250,
+      "profitRate": -0.52,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 264500
+      "highestPrice": 217125
+    },
+    {
+      "code": "036570",
+      "name": "NC",
+      "quantity": 1,
+      "avgPrice": 247500,
+      "currentPrice": 268500,
+      "profit": 21000,
+      "profitRate": 8.48,
+      "buyDate": null,
+      "partialSells": [],
+      "highestPrice": 268000
     },
     {
       "code": "086790",
@@ -27,8 +39,8 @@
   ],
   "summary": {
     "totalDeposit": 9290549,
-    "totalEvaluation": 10755963,
-    "totalProfit": 36000
+    "totalEvaluation": 10757095,
+    "totalProfit": 20750
   },
-  "lastUpdated": "2026-04-16T02:10:13.179Z"
+  "lastUpdated": "2026-04-16T05:27:34.458Z"
 }
