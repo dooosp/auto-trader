@@ -2706,5 +2706,25 @@
     "amount": 484500,
     "orderNo": "0000024691",
     "timestamp": "2026-04-16T05:27:33.456Z"
+  },
+  {
+    "type": "BUY",
+    "code": "036570",
+    "name": "엔씨소프트",
+    "quantity": 1,
+    "price": 266500,
+    "amount": 266500,
+    "orderNo": "0000016862",
+    "timestamp": "2026-04-17T02:06:43.451Z"
+  },
+  {
+    "type": "BUY",
+    "code": "055550",
+    "name": "신한지주",
+    "quantity": 5,
+    "price": 99900,
+    "amount": 499500,
+    "orderNo": "0000016865",
+    "timestamp": "2026-04-17T02:06:44.777Z"
   }
 ]
