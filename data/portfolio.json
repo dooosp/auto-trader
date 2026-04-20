@@ -5,9 +5,9 @@
       "name": "삼성전자",
       "quantity": 2,
       "avgPrice": 217125,
-      "currentPrice": 217500,
-      "profit": 750,
-      "profitRate": 0.17,
+      "currentPrice": 215750,
+      "profit": -2750,
+      "profitRate": -0.63,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 218000
@@ -17,21 +17,21 @@
       "name": "NC",
       "quantity": 1,
       "avgPrice": 266000,
-      "currentPrice": 267500,
-      "profit": 1500,
-      "profitRate": 0.56,
+      "currentPrice": 269500,
+      "profit": 3500,
+      "profitRate": 1.32,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 268000
+      "highestPrice": 270000
     },
     {
       "code": "055550",
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 99880,
-      "currentPrice": 100400,
-      "profit": 2600,
-      "profitRate": 0.52,
+      "currentPrice": 100200,
+      "profit": 1600,
+      "profitRate": 0.32,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 100300
@@ -41,9 +41,9 @@
       "name": "하나금융지주",
       "quantity": 4,
       "avgPrice": 122000,
-      "currentPrice": 123600,
-      "profit": 6400,
-      "profitRate": 1.31,
+      "currentPrice": 123500,
+      "profit": 6000,
+      "profitRate": 1.23,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 124100
@@ -53,9 +53,9 @@
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 161500,
-      "currentPrice": 162450,
-      "profit": 2850,
-      "profitRate": 0.59,
+      "currentPrice": 161500,
+      "profit": 0,
+      "profitRate": 0,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 162400
@@ -63,8 +63,8 @@
   ],
   "summary": {
     "totalDeposit": 9349958,
-    "totalEvaluation": 10770708,
-    "totalProfit": 14100
+    "totalEvaluation": 10764958,
+    "totalProfit": 8350
   },
-  "lastUpdated": "2026-04-20T02:11:24.193Z"
+  "lastUpdated": "2026-04-20T05:37:18.964Z"
 }
