@@ -5,9 +5,9 @@
       "name": "삼성전자",
       "quantity": 2,
       "avgPrice": 217125,
-      "currentPrice": 222000,
-      "profit": 9750,
-      "profitRate": 2.25,
+      "currentPrice": 220000,
+      "profit": 5750,
+      "profitRate": 1.32,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 225000
@@ -17,21 +17,21 @@
       "name": "NC",
       "quantity": 1,
       "avgPrice": 266000,
-      "currentPrice": 267500,
-      "profit": 1500,
-      "profitRate": 0.56,
+      "currentPrice": 282000,
+      "profit": 16000,
+      "profitRate": 6.02,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 276000
+      "highestPrice": 282500
     },
     {
       "code": "055550",
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 99880,
-      "currentPrice": 99900,
-      "profit": 100,
-      "profitRate": 0.02,
+      "currentPrice": 99600,
+      "profit": -1400,
+      "profitRate": -0.28,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 100300
@@ -41,21 +41,21 @@
       "name": "하나금융지주",
       "quantity": 4,
       "avgPrice": 122000,
-      "currentPrice": 127000,
-      "profit": 20000,
-      "profitRate": 4.1,
+      "currentPrice": 128200,
+      "profit": 24800,
+      "profitRate": 5.08,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 127000
+      "highestPrice": 128200
     },
     {
       "code": "105560",
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 161500,
-      "currentPrice": 158800,
-      "profit": -8100,
-      "profitRate": -1.67,
+      "currentPrice": 160600,
+      "profit": -2700,
+      "profitRate": -0.56,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 162400
@@ -63,8 +63,8 @@
   ],
   "summary": {
     "totalDeposit": 8584458,
-    "totalEvaluation": 10779858,
-    "totalProfit": 23250
+    "totalEvaluation": 10799058,
+    "totalProfit": 42450
   },
-  "lastUpdated": "2026-04-28T08:16:58.659Z"
+  "lastUpdated": "2026-04-29T02:32:16.704Z"
 }
