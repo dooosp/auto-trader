@@ -5,21 +5,21 @@
       "name": "삼성전자",
       "quantity": 2,
       "avgPrice": 217125,
-      "currentPrice": 267000,
-      "profit": 99750,
-      "profitRate": 22.97,
+      "currentPrice": 271500,
+      "profit": 108750,
+      "profitRate": 25.04,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 268000
+      "highestPrice": 271500
     },
     {
       "code": "036570",
       "name": "NC",
       "quantity": 1,
       "avgPrice": 266000,
-      "currentPrice": 253500,
-      "profit": -12500,
-      "profitRate": -4.7,
+      "currentPrice": 250500,
+      "profit": -15500,
+      "profitRate": -5.83,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 282500
@@ -29,9 +29,9 @@
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 99880,
-      "currentPrice": 99400,
-      "profit": -2400,
-      "profitRate": -0.48,
+      "currentPrice": 99300,
+      "profit": -2900,
+      "profitRate": -0.58,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 100300
@@ -41,21 +41,21 @@
       "name": "하나금융지주",
       "quantity": 4,
       "avgPrice": 122000,
-      "currentPrice": 128700,
-      "profit": 26800,
-      "profitRate": 5.49,
+      "currentPrice": 129100,
+      "profit": 28400,
+      "profitRate": 5.82,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 128700
+      "highestPrice": 129000
     },
     {
       "code": "105560",
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 161500,
-      "currentPrice": 161100,
-      "profit": -1200,
-      "profitRate": -0.25,
+      "currentPrice": 161400,
+      "profit": -300,
+      "profitRate": -0.06,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 162400
@@ -63,8 +63,8 @@
   ],
   "summary": {
     "totalDeposit": 8584458,
-    "totalEvaluation": 10867058,
-    "totalProfit": 110450
+    "totalEvaluation": 10875058,
+    "totalProfit": 118450
   },
-  "lastUpdated": "2026-05-07T02:29:28.540Z"
+  "lastUpdated": "2026-05-07T06:00:11.899Z"
 }
