@@ -17,9 +17,9 @@
       "name": "NC",
       "quantity": 1,
       "avgPrice": 266000,
-      "currentPrice": 250500,
-      "profit": -15500,
-      "profitRate": -5.83,
+      "currentPrice": 253000,
+      "profit": -13000,
+      "profitRate": -4.89,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 282500
@@ -29,9 +29,9 @@
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 99880,
-      "currentPrice": 99300,
-      "profit": -2900,
-      "profitRate": -0.58,
+      "currentPrice": 98900,
+      "profit": -4900,
+      "profitRate": -0.98,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 100300
@@ -41,9 +41,9 @@
       "name": "하나금융지주",
       "quantity": 4,
       "avgPrice": 122000,
-      "currentPrice": 129100,
-      "profit": 28400,
-      "profitRate": 5.82,
+      "currentPrice": 128800,
+      "profit": 27200,
+      "profitRate": 5.57,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 129000
@@ -53,9 +53,9 @@
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 161500,
-      "currentPrice": 161400,
-      "profit": -300,
-      "profitRate": -0.06,
+      "currentPrice": 161200,
+      "profit": -900,
+      "profitRate": -0.19,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 162400
@@ -63,8 +63,8 @@
   ],
   "summary": {
     "totalDeposit": 8584458,
-    "totalEvaluation": 10875058,
-    "totalProfit": 118450
+    "totalEvaluation": 10873758,
+    "totalProfit": 117150
   },
-  "lastUpdated": "2026-05-07T06:00:11.899Z"
+  "lastUpdated": "2026-05-07T08:31:43.648Z"
 }
