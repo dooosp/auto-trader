@@ -5,33 +5,33 @@
       "name": "삼성전자",
       "quantity": 2,
       "avgPrice": 217125,
-      "currentPrice": 348750,
-      "profit": 263250,
-      "profitRate": 60.62,
+      "currentPrice": 360500,
+      "profit": 286750,
+      "profitRate": 66.03,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 349000
+      "highestPrice": 360500
     },
     {
       "code": "036570",
       "name": "NC",
       "quantity": 1,
       "avgPrice": 266000,
-      "currentPrice": 307500,
-      "profit": 41500,
-      "profitRate": 15.6,
+      "currentPrice": 338000,
+      "profit": 72000,
+      "profitRate": 27.07,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 308000
+      "highestPrice": 338000
     },
     {
       "code": "055550",
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 99880,
-      "currentPrice": 94200,
-      "profit": -28400,
-      "profitRate": -5.69,
+      "currentPrice": 96400,
+      "profit": -17400,
+      "profitRate": -3.48,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 100300
@@ -41,9 +41,9 @@
       "name": "하나금융지주",
       "quantity": 4,
       "avgPrice": 122000,
-      "currentPrice": 114900,
-      "profit": -28400,
-      "profitRate": -5.82,
+      "currentPrice": 117000,
+      "profit": -20000,
+      "profitRate": -4.1,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 129000
@@ -53,9 +53,9 @@
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 161500,
-      "currentPrice": 153200,
-      "profit": -24900,
-      "profitRate": -5.14,
+      "currentPrice": 156600,
+      "profit": -14700,
+      "profitRate": -3.03,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 162400
@@ -63,8 +63,8 @@
   ],
   "summary": {
     "totalDeposit": 8584458,
-    "totalEvaluation": 10979658,
-    "totalProfit": 223050
+    "totalEvaluation": 11063258,
+    "totalProfit": 306650
   },
-  "lastUpdated": "2026-06-02T03:31:36.152Z"
+  "lastUpdated": "2026-06-02T08:24:56.260Z"
 }
