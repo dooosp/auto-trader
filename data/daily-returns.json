@@ -948,5 +948,15 @@
     "buys": 0,
     "sells": 0,
     "marketCondition": "NEUTRAL"
+  },
+  {
+    "date": "2026-06-04",
+    "totalDeposit": 8584458,
+    "totalEvaluation": 11094058,
+    "totalProfit": 337450,
+    "holdingsCount": 5,
+    "buys": 0,
+    "sells": 0,
+    "marketCondition": "NEUTRAL"
   }
 ]
