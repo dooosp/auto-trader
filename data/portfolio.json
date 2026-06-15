@@ -5,9 +5,9 @@
       "name": "삼성전자",
       "quantity": 2,
       "avgPrice": 217125,
-      "currentPrice": 322500,
-      "profit": 210750,
-      "profitRate": 48.53,
+      "currentPrice": 338250,
+      "profit": 242250,
+      "profitRate": 55.79,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 360500
@@ -17,9 +17,9 @@
       "name": "NC",
       "quantity": 1,
       "avgPrice": 266000,
-      "currentPrice": 263000,
-      "profit": -3000,
-      "profitRate": -1.13,
+      "currentPrice": 261000,
+      "profit": -5000,
+      "profitRate": -1.88,
       "buyDate": null,
       "partialSells": [],
       "highestPrice": 338000
@@ -29,42 +29,42 @@
       "name": "신한지주",
       "quantity": 5,
       "avgPrice": 99880,
-      "currentPrice": 99600,
-      "profit": -1400,
-      "profitRate": -0.28,
+      "currentPrice": 109200,
+      "profit": 46600,
+      "profitRate": 9.33,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 107500
+      "highestPrice": 109100
     },
     {
       "code": "086790",
       "name": "하나금융지주",
       "quantity": 4,
       "avgPrice": 122000,
-      "currentPrice": 121000,
-      "profit": -4000,
-      "profitRate": -0.82,
+      "currentPrice": 129900,
+      "profit": 31600,
+      "profitRate": 6.48,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 129000
+      "highestPrice": 129800
     },
     {
       "code": "105560",
       "name": "KB금융",
       "quantity": 3,
       "avgPrice": 161500,
-      "currentPrice": 161200,
-      "profit": -900,
-      "profitRate": -0.19,
+      "currentPrice": 172600,
+      "profit": 33300,
+      "profitRate": 6.87,
       "buyDate": null,
       "partialSells": [],
-      "highestPrice": 171600
+      "highestPrice": 172500
     }
   ],
   "summary": {
     "totalDeposit": 8584458,
-    "totalEvaluation": 10958058,
-    "totalProfit": 201450
+    "totalEvaluation": 11105358,
+    "totalProfit": 348750
   },
-  "lastUpdated": "2026-06-12T08:19:17.601Z"
+  "lastUpdated": "2026-06-15T03:43:06.012Z"
 }
