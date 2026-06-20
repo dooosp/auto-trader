@@ -299,6 +299,73 @@ const tradeExecutor = {
   },
 
   /**
+   * Graham Gate 가치투자 관문 평가
+   * @param {string} stockCode - 종목코드
+   * @param {string} stockName - 종목명
+   * @returns {object} { approved, reason, valueSnapshot, raw }
+   */
+  async consultGrahamGate(stockCode, stockName) {
+    const gateConfig = config.grahamGate;
+    if (!gateConfig?.enabled) {
+      return {
+        approved: false,
+        reason: 'Graham Gate disabled',
+        valueSnapshot: {
+          schemaVersion: 'valueSnapshot.v1',
+          stockCode,
+          stockName,
+          decision: 'REJECT',
+          reasons: ['Graham Gate disabled'],
+          evaluatedAt: new Date().toISOString(),
+        },
+      };
+    }
+
+    try {
+      const headers = gateConfig.apiKey ? { 'x-api-key': gateConfig.apiKey } : {};
+      const params = new URLSearchParams();
+      params.set('persist', gateConfig.persistSnapshots ? '1' : '0');
+      if (stockName) params.set('name', stockName);
+
+      const response = await axios.get(
+        `${gateConfig.baseUrl}/api/value/analyze/${encodeURIComponent(stockCode)}?${params.toString()}`,
+        { timeout: gateConfig.timeout || 20000, headers }
+      );
+      const raw = response.data || {};
+      const grahamGate = raw.grahamGate || {};
+      const valueSnapshot = grahamGate.valueSnapshot || raw.valueSnapshot || null;
+      const reasons = grahamGate.reasons || valueSnapshot?.reasons || [];
+      const reason = Array.isArray(reasons) && reasons.length > 0
+        ? reasons.join(', ')
+        : (grahamGate.reason || (grahamGate.passed ? 'Graham Gate passed' : 'Graham Gate failed'));
+
+      console.log(`[GrahamGate] ${stockName || stockCode}: ${grahamGate.passed ? '통과' : '거부'} (${reason})`);
+
+      return {
+        approved: grahamGate.passed === true,
+        reason,
+        valueSnapshot,
+        raw,
+      };
+    } catch (error) {
+      const reason = `Graham Gate unavailable: ${error.message}`;
+      console.warn(`[GrahamGate] 매수 차단: ${stockName || stockCode} - ${reason}`);
+      return {
+        approved: false,
+        reason,
+        valueSnapshot: {
+          schemaVersion: 'valueSnapshot.v1',
+          stockCode,
+          stockName,
+          decision: 'REJECT',
+          reasons: [reason],
+          evaluatedAt: new Date().toISOString(),
+        },
+      };
+    }
+  },
+
+  /**
    * 매수 실행
    * @param {string} stockCode - 종목코드
    * @param {number} currentPrice - 현재가
@@ -336,6 +403,21 @@ const tradeExecutor = {
       return null;
     }
 
+    const stockName = stockFetcher.getStockName(stockCode);
+    const grahamGate = await this.consultGrahamGate(stockCode, stockName);
+    if (!grahamGate.approved) {
+      this.saveTrade({
+        type: 'VALUE_REJECT',
+        code: stockCode,
+        name: stockName,
+        price: currentPrice,
+        reason: grahamGate.reason,
+        valueSnapshot: grahamGate.valueSnapshot,
+      });
+      console.log(`[Executor] Graham Gate 매수 거부: ${stockName} (${stockCode}) - ${grahamGate.reason}`);
+      return null;
+    }
+
     // InvestQuant 펀더멘털 자문
     let investQuantAdvice = null;
     if (config.investQuant?.enabled) {
@@ -361,8 +443,6 @@ const tradeExecutor = {
       const result = await kisApi.buyStock(stockCode, quantity, 0);  // 시장가
 
       if (result.success) {
-        const stockName = stockFetcher.getStockName(stockCode);
-
         // 포트폴리오 업데이트
         portfolio.holdings.push({
           code: stockCode,
@@ -383,10 +463,11 @@ const tradeExecutor = {
           price: currentPrice,
           amount: quantity * currentPrice,
           orderNo: result.orderNo,
+          valueSnapshot: grahamGate.valueSnapshot,
         });
 
         console.log(`[Executor] 매수 완료: ${stockName} ${quantity}주 @ ${currentPrice.toLocaleString()}원`);
-        return { success: true, quantity, price: currentPrice };
+        return { success: true, quantity, price: currentPrice, valueSnapshot: grahamGate.valueSnapshot };
       }
     } catch (error) {
       console.error(`[Executor] 매수 실패 (${stockCode}):`, error.message);

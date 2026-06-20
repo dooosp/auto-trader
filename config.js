@@ -261,6 +261,15 @@ const config = {
     adjustPositionSize: true,
   },
 
+  // Graham Gate 연동 설정 (통과하지 못하면 매수 금지)
+  grahamGate: {
+    enabled: process.env.GRAHAM_GATE_ENABLED !== 'false',
+    baseUrl: process.env.INVEST_INTELLIGENCE_URL || process.env.GRAHAM_GATE_URL || 'http://localhost:3000',
+    apiKey: process.env.GRAHAM_GATE_API_KEY || '',
+    timeout: 20000,
+    persistSnapshots: process.env.GRAHAM_GATE_PERSIST !== 'false',
+  },
+
   // 데이터 파일 경로
   dataPath: {
     trades: './data/trades.json',

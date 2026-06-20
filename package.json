@@ -9,6 +9,7 @@
     "dashboard": "node dashboard-server.js",
     "emergency": "node emergency-sell.js",
     "screening": "node run-screening.js",
+    "test": "node --test __tests__/*.test.js",
     "test-api": "node -e \"require('./kis-api.js').testConnection()\""
   },
   "keywords": ["stock", "trading", "automation", "kis"],
