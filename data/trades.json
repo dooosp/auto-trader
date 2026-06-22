@@ -2726,5 +2726,41 @@
     "amount": 499500,
     "orderNo": "0000016865",
     "timestamp": "2026-04-17T02:06:44.777Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "000660",
+    "name": "SK하이닉스",
+    "price": 2928000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "000660",
+      "stockName": "SK하이닉스",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-06-22T03:41:59.425Z"
+    },
+    "timestamp": "2026-06-22T03:41:59.426Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "066570",
+    "name": "LG전자",
+    "price": 234500,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "066570",
+      "stockName": "LG전자",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-06-22T03:42:00.428Z"
+    },
+    "timestamp": "2026-06-22T03:42:00.429Z"
   }
 ]
