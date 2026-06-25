@@ -2798,5 +2798,23 @@
       "evaluatedAt": "2026-06-22T09:45:18.131Z"
     },
     "timestamp": "2026-06-22T09:45:18.132Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "000660",
+    "name": "SK하이닉스",
+    "price": 2841000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "000660",
+      "stockName": "SK하이닉스",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-06-25T02:47:33.665Z"
+    },
+    "timestamp": "2026-06-25T02:47:33.666Z"
   }
 ]
