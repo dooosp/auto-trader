@@ -2870,5 +2870,41 @@
       "evaluatedAt": "2026-07-10T02:33:17.990Z"
     },
     "timestamp": "2026-07-10T02:33:17.991Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "105560",
+    "name": "KB금융",
+    "price": 168200,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "105560",
+      "stockName": "KB금융",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-07-24T02:12:54.807Z"
+    },
+    "timestamp": "2026-07-24T02:12:54.808Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "207940",
+    "name": "삼성바이오로직스",
+    "price": 1509500,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "207940",
+      "stockName": "삼성바이오로직스",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-07-24T02:12:55.811Z"
+    },
+    "timestamp": "2026-07-24T02:12:55.811Z"
   }
 ]
