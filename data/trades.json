@@ -3068,5 +3068,41 @@
       "evaluatedAt": "2026-07-31T02:15:30.322Z"
     },
     "timestamp": "2026-07-31T02:15:30.323Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "316140",
+    "name": "우리금융지주",
+    "price": 33600,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "316140",
+      "stockName": "우리금융지주",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-07-31T06:08:06.202Z"
+    },
+    "timestamp": "2026-07-31T06:08:06.203Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "105560",
+    "name": "KB금융",
+    "price": 168600,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "105560",
+      "stockName": "KB금융",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-07-31T06:08:07.207Z"
+    },
+    "timestamp": "2026-07-31T06:08:07.208Z"
   }
 ]
