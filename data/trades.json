@@ -3122,5 +3122,41 @@
       "evaluatedAt": "2026-08-03T02:15:49.095Z"
     },
     "timestamp": "2026-08-03T02:15:49.096Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "105560",
+    "name": "KB금융",
+    "price": 168400,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "105560",
+      "stockName": "KB금융",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-03T06:17:11.735Z"
+    },
+    "timestamp": "2026-08-03T06:17:11.735Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "086790",
+    "name": "하나금융지주",
+    "price": 126500,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "086790",
+      "stockName": "하나금융지주",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-03T06:17:12.737Z"
+    },
+    "timestamp": "2026-08-03T06:17:12.737Z"
   }
 ]
