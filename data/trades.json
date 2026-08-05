@@ -3266,5 +3266,41 @@
       "evaluatedAt": "2026-08-04T08:29:31.319Z"
     },
     "timestamp": "2026-08-04T08:29:31.320Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "316140",
+    "name": "우리금융지주",
+    "price": 34000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "316140",
+      "stockName": "우리금융지주",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-05T02:02:25.973Z"
+    },
+    "timestamp": "2026-08-05T02:02:25.973Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "207940",
+    "name": "삼성바이오로직스",
+    "price": 1489000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "207940",
+      "stockName": "삼성바이오로직스",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-05T02:02:26.977Z"
+    },
+    "timestamp": "2026-08-05T02:02:26.978Z"
   }
 ]
