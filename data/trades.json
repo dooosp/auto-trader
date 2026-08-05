@@ -3338,5 +3338,41 @@
       "evaluatedAt": "2026-08-05T05:23:19.747Z"
     },
     "timestamp": "2026-08-05T05:23:19.747Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "207940",
+    "name": "삼성바이오로직스",
+    "price": 1491000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "207940",
+      "stockName": "삼성바이오로직스",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-05T08:28:23.037Z"
+    },
+    "timestamp": "2026-08-05T08:28:23.038Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "068270",
+    "name": "셀트리온",
+    "price": 190300,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "068270",
+      "stockName": "셀트리온",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-05T08:28:24.040Z"
+    },
+    "timestamp": "2026-08-05T08:28:24.042Z"
   }
 ]
