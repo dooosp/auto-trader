@@ -3482,5 +3482,41 @@
       "evaluatedAt": "2026-08-07T04:52:22.715Z"
     },
     "timestamp": "2026-08-07T04:52:22.716Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "035720",
+    "name": "카카오",
+    "price": 39700,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "035720",
+      "stockName": "카카오",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-07T06:09:43.441Z"
+    },
+    "timestamp": "2026-08-07T06:09:43.442Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "316140",
+    "name": "우리금융지주",
+    "price": 34850,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "316140",
+      "stockName": "우리금융지주",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-07T06:09:44.445Z"
+    },
+    "timestamp": "2026-08-07T06:09:44.446Z"
   }
 ]
