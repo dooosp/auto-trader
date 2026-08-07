@@ -3428,5 +3428,23 @@
       "evaluatedAt": "2026-08-06T08:26:44.623Z"
     },
     "timestamp": "2026-08-06T08:26:44.623Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "316140",
+    "name": "우리금융지주",
+    "price": 34400,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "316140",
+      "stockName": "우리금융지주",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-07T02:25:54.507Z"
+    },
+    "timestamp": "2026-08-07T02:25:54.508Z"
   }
 ]
