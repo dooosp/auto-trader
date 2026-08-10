@@ -3590,5 +3590,23 @@
       "evaluatedAt": "2026-08-10T03:50:05.851Z"
     },
     "timestamp": "2026-08-10T03:50:05.852Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "207940",
+    "name": "삼성바이오로직스",
+    "price": 1571000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "207940",
+      "stockName": "삼성바이오로직스",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-10T05:24:02.463Z"
+    },
+    "timestamp": "2026-08-10T05:24:02.464Z"
   }
 ]
