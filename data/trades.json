@@ -3518,5 +3518,41 @@
       "evaluatedAt": "2026-08-07T06:09:44.445Z"
     },
     "timestamp": "2026-08-07T06:09:44.446Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "055550",
+    "name": "신한지주",
+    "price": 104400,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "055550",
+      "stockName": "신한지주",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-10T01:18:46.880Z"
+    },
+    "timestamp": "2026-08-10T01:18:46.881Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "207940",
+    "name": "삼성바이오로직스",
+    "price": 1545000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "207940",
+      "stockName": "삼성바이오로직스",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-10T01:18:47.883Z"
+    },
+    "timestamp": "2026-08-10T01:18:47.884Z"
   }
 ]
