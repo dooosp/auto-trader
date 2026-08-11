@@ -3644,5 +3644,41 @@
       "evaluatedAt": "2026-08-10T07:21:35.675Z"
     },
     "timestamp": "2026-08-10T07:21:35.676Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "035720",
+    "name": "카카오",
+    "price": 40500,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "035720",
+      "stockName": "카카오",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-11T01:17:09.790Z"
+    },
+    "timestamp": "2026-08-11T01:17:09.791Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "207940",
+    "name": "삼성바이오로직스",
+    "price": 1593000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "207940",
+      "stockName": "삼성바이오로직스",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-11T01:17:10.795Z"
+    },
+    "timestamp": "2026-08-11T01:17:10.796Z"
   }
 ]
