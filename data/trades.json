@@ -3860,5 +3860,41 @@
       "evaluatedAt": "2026-08-12T04:05:52.443Z"
     },
     "timestamp": "2026-08-12T04:05:52.443Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "055550",
+    "name": "신한지주",
+    "price": 104000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "055550",
+      "stockName": "신한지주",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-12T06:13:56.385Z"
+    },
+    "timestamp": "2026-08-12T06:13:56.386Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "068270",
+    "name": "셀트리온",
+    "price": 201500,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "068270",
+      "stockName": "셀트리온",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-12T06:13:57.389Z"
+    },
+    "timestamp": "2026-08-12T06:13:57.390Z"
   }
 ]
