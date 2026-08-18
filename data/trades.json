@@ -4022,5 +4022,41 @@
       "evaluatedAt": "2026-08-17T06:43:18.775Z"
     },
     "timestamp": "2026-08-17T06:43:18.776Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "035720",
+    "name": "카카오",
+    "price": 39000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "035720",
+      "stockName": "카카오",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-18T00:56:43.652Z"
+    },
+    "timestamp": "2026-08-18T00:56:43.653Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "055550",
+    "name": "신한지주",
+    "price": 105400,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "055550",
+      "stockName": "신한지주",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-18T00:56:44.656Z"
+    },
+    "timestamp": "2026-08-18T00:56:44.657Z"
   }
 ]
