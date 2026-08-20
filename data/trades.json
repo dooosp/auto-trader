@@ -4166,5 +4166,41 @@
       "evaluatedAt": "2026-08-20T02:19:09.767Z"
     },
     "timestamp": "2026-08-20T02:19:09.769Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "035420",
+    "name": "NAVER",
+    "price": 220000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "035420",
+      "stockName": "NAVER",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-20T03:47:34.259Z"
+    },
+    "timestamp": "2026-08-20T03:47:34.260Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "035720",
+    "name": "카카오",
+    "price": 39000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "035720",
+      "stockName": "카카오",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-20T03:47:35.264Z"
+    },
+    "timestamp": "2026-08-20T03:47:35.265Z"
   }
 ]
