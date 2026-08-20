@@ -4202,5 +4202,23 @@
       "evaluatedAt": "2026-08-20T03:47:35.264Z"
     },
     "timestamp": "2026-08-20T03:47:35.265Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "035420",
+    "name": "NAVER",
+    "price": 221500,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "035420",
+      "stockName": "NAVER",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-20T05:28:35.913Z"
+    },
+    "timestamp": "2026-08-20T05:28:35.914Z"
   }
 ]
