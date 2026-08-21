@@ -4238,5 +4238,23 @@
       "evaluatedAt": "2026-08-21T03:51:31.619Z"
     },
     "timestamp": "2026-08-21T03:51:31.620Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "086790",
+    "name": "하나금융지주",
+    "price": 128700,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "086790",
+      "stockName": "하나금융지주",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-21T05:31:30.862Z"
+    },
+    "timestamp": "2026-08-21T05:31:30.863Z"
   }
 ]
