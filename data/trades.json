@@ -4418,5 +4418,41 @@
       "evaluatedAt": "2026-08-26T04:38:58.675Z"
     },
     "timestamp": "2026-08-26T04:38:58.676Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "055550",
+    "name": "신한지주",
+    "price": 108800,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "055550",
+      "stockName": "신한지주",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-27T06:51:29.689Z"
+    },
+    "timestamp": "2026-08-27T06:51:29.690Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "086790",
+    "name": "하나금융지주",
+    "price": 133600,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "086790",
+      "stockName": "하나금융지주",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-27T06:51:30.693Z"
+    },
+    "timestamp": "2026-08-27T06:51:30.694Z"
   }
 ]
