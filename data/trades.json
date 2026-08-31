@@ -4526,5 +4526,41 @@
       "evaluatedAt": "2026-08-31T03:07:09.285Z"
     },
     "timestamp": "2026-08-31T03:07:09.286Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "006400",
+    "name": "삼성SDI",
+    "price": 577000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "006400",
+      "stockName": "삼성SDI",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-31T10:24:10.514Z"
+    },
+    "timestamp": "2026-08-31T10:24:10.515Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "207940",
+    "name": "삼성바이오로직스",
+    "price": 1518000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "207940",
+      "stockName": "삼성바이오로직스",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-08-31T10:24:11.518Z"
+    },
+    "timestamp": "2026-08-31T10:24:11.519Z"
   }
 ]
