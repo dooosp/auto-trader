@@ -4922,5 +4922,41 @@
       "evaluatedAt": "2026-09-09T02:43:36.733Z"
     },
     "timestamp": "2026-09-09T02:43:36.734Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "006400",
+    "name": "삼성SDI",
+    "price": 574000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "006400",
+      "stockName": "삼성SDI",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-09-09T07:47:34.214Z"
+    },
+    "timestamp": "2026-09-09T07:47:34.214Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "096770",
+    "name": "SK이노베이션",
+    "price": 153500,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "096770",
+      "stockName": "SK이노베이션",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-09-09T07:47:35.217Z"
+    },
+    "timestamp": "2026-09-09T07:47:35.217Z"
   }
 ]
