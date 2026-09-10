@@ -4958,5 +4958,23 @@
       "evaluatedAt": "2026-09-09T07:47:35.217Z"
     },
     "timestamp": "2026-09-09T07:47:35.217Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "096770",
+    "name": "SK이노베이션",
+    "price": 151800,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "096770",
+      "stockName": "SK이노베이션",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-09-10T02:46:29.436Z"
+    },
+    "timestamp": "2026-09-10T02:46:29.437Z"
   }
 ]
