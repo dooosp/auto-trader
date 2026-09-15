@@ -5030,5 +5030,41 @@
       "evaluatedAt": "2026-09-14T03:01:36.998Z"
     },
     "timestamp": "2026-09-14T03:01:37.000Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "316140",
+    "name": "우리금융지주",
+    "price": 36400,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "316140",
+      "stockName": "우리금융지주",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-09-15T03:03:24.205Z"
+    },
+    "timestamp": "2026-09-15T03:03:24.206Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "066570",
+    "name": "LG전자",
+    "price": 203000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "066570",
+      "stockName": "LG전자",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-09-15T03:03:25.209Z"
+    },
+    "timestamp": "2026-09-15T03:03:25.210Z"
   }
 ]
