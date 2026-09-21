@@ -5084,5 +5084,41 @@
       "evaluatedAt": "2026-09-18T07:54:52.183Z"
     },
     "timestamp": "2026-09-18T07:54:52.184Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "005930",
+    "name": "삼성전자",
+    "price": 272750,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "005930",
+      "stockName": "삼성전자",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-09-21T02:58:43.278Z"
+    },
+    "timestamp": "2026-09-21T02:58:43.279Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "105560",
+    "name": "KB금융",
+    "price": 178000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "105560",
+      "stockName": "KB금융",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-09-21T02:58:44.283Z"
+    },
+    "timestamp": "2026-09-21T02:58:44.284Z"
   }
 ]
