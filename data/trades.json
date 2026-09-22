@@ -5156,5 +5156,23 @@
       "evaluatedAt": "2026-09-21T08:33:12.418Z"
     },
     "timestamp": "2026-09-21T08:33:12.419Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "003550",
+    "name": "LG",
+    "price": 116500,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "003550",
+      "stockName": "LG",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-09-22T02:59:05.464Z"
+    },
+    "timestamp": "2026-09-22T02:59:05.465Z"
   }
 ]
