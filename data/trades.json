@@ -5228,5 +5228,23 @@
       "evaluatedAt": "2026-09-24T02:48:08.577Z"
     },
     "timestamp": "2026-09-24T02:48:08.578Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "055550",
+    "name": "신한지주",
+    "price": 110100,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "055550",
+      "stockName": "신한지주",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-09-24T08:05:26.844Z"
+    },
+    "timestamp": "2026-09-24T08:05:26.845Z"
   }
 ]
