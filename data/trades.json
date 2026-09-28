@@ -5318,5 +5318,41 @@
       "evaluatedAt": "2026-09-28T03:14:08.727Z"
     },
     "timestamp": "2026-09-28T03:14:08.728Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "066570",
+    "name": "LG전자",
+    "price": 214000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "066570",
+      "stockName": "LG전자",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-09-28T10:27:25.879Z"
+    },
+    "timestamp": "2026-09-28T10:27:25.881Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "003550",
+    "name": "LG",
+    "price": 113400,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "003550",
+      "stockName": "LG",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-09-28T10:27:26.884Z"
+    },
+    "timestamp": "2026-09-28T10:27:26.886Z"
   }
 ]
