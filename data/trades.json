@@ -5390,5 +5390,41 @@
       "evaluatedAt": "2026-09-30T03:39:39.348Z"
     },
     "timestamp": "2026-09-30T03:39:39.349Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "000660",
+    "name": "SK하이닉스",
+    "price": 1801000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "000660",
+      "stockName": "SK하이닉스",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-10-01T03:44:23.146Z"
+    },
+    "timestamp": "2026-10-01T03:44:23.148Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "316140",
+    "name": "우리금융지주",
+    "price": 33200,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "316140",
+      "stockName": "우리금융지주",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-10-01T03:44:24.152Z"
+    },
+    "timestamp": "2026-10-01T03:44:24.153Z"
   }
 ]
