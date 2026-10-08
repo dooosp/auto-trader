@@ -5552,5 +5552,23 @@
       "evaluatedAt": "2026-10-07T10:48:54.484Z"
     },
     "timestamp": "2026-10-07T10:48:54.486Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "051910",
+    "name": "LG화학",
+    "price": 279000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "051910",
+      "stockName": "LG화학",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-10-08T04:10:48.867Z"
+    },
+    "timestamp": "2026-10-08T04:10:48.868Z"
   }
 ]
