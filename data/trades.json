@@ -5570,5 +5570,23 @@
       "evaluatedAt": "2026-10-08T04:10:48.867Z"
     },
     "timestamp": "2026-10-08T04:10:48.868Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "006400",
+    "name": "삼성SDI",
+    "price": 567000,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "006400",
+      "stockName": "삼성SDI",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-10-09T04:12:25.187Z"
+    },
+    "timestamp": "2026-10-09T04:12:25.189Z"
   }
 ]
