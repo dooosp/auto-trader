@@ -5696,5 +5696,23 @@
       "evaluatedAt": "2026-10-16T02:48:57.724Z"
     },
     "timestamp": "2026-10-16T02:48:57.725Z"
+  },
+  {
+    "type": "VALUE_REJECT",
+    "code": "068270",
+    "name": "셀트리온",
+    "price": 193700,
+    "reason": "Graham Gate unavailable: Error",
+    "valueSnapshot": {
+      "schemaVersion": "valueSnapshot.v1",
+      "stockCode": "068270",
+      "stockName": "셀트리온",
+      "decision": "REJECT",
+      "reasons": [
+        "Graham Gate unavailable: Error"
+      ],
+      "evaluatedAt": "2026-10-16T07:50:13.803Z"
+    },
+    "timestamp": "2026-10-16T07:50:13.804Z"
   }
 ]
